@@ -1,23 +1,12 @@
-from recipe import Recipe
+from recipe_book import RecipeBook
+from confirm import confirm
 
-proceed = input('create new recipe/ (y/n): ')
-if proceed == 'y':
-    pass
-elif proceed == 'n':
-    exit()
-else:
-    print('please input y or n')
+#use function confirm() from confirm.py to check if use wants to proceed
+if confirm()==False: 
     exit()
 
-seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")
-
-recipes = list()
-for aline in seed_file:
-    if len(aline) > 1:
-        comps = aline.split(" | ")
-        recipes.append(Recipe(comps[0],comps[1],comps[2]))
-
-seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx", 'w')
+book = RecipeBook()
+book.populate_from_seed()
 
 new_name = input('enter recipe name: ')
 new_meal = input('enter recipe meal: ')
@@ -27,9 +16,5 @@ print(new_name)
 print(new_meal)
 print(new_ingrediants)
 
-recipes.append(Recipe(new_name, new_meal, new_ingrediants))
-
-for item in recipes:
-    seed_file.writelines(item.name + ' | ' + item.meal + ' | ' + item.ingredients + "\n")
-
-seed_file.close
+book.add_recipe(new_name, new_meal, new_ingrediants)
+book.write_in_seed()

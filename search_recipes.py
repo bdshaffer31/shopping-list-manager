@@ -1,12 +1,10 @@
 from recipe import Recipe
+from confirm import confirm
 
-proceed = input('search recipes/ (y/n): ')
-if proceed == 'y':
-    pass
-elif proceed == 'n':
-    exit()
-else:
-    print('please input y or n')
+#out of date as of 4/14
+
+#use function confirm() from confirm.py to check if use wants to proceed
+if confirm()==False: 
     exit()
 
 seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")

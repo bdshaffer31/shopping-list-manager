@@ -29,14 +29,14 @@ class RecipeBook:
         seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx", 'w')
         #write the ingredients first
         for item in self.ingredients:
-            seed_file.writelines(item.name + ' | ' + item.cost + ' | ' + item.location + "\n")
+            seed_file.writelines(item.name + ' | ' + item.cost + ' | ' + item.location + ' | \n')
         #then write the recipes
         seed_file.writelines("===== Recipes =====\n")
         for item in self.recipes:
             seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
             for ingr in item.ingredients: 
                 seed_file.writelines(ingr + ', ')
-            seed_file.writelines('\n')
+            seed_file.writelines(' | \n')
         seed_file.close
 
     def add_recipe(self, name, meal, ingredients):

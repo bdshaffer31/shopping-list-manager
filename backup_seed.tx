@@ -1,9 +1,38 @@
-oatmeal | breakfast | oats, brown sugar
+oats | 5.75 | cereal
 
-lasagna | dinner | noodles, sauce, zuchini
+brown sugar | 3.25 | baking
 
-grilled cheese | lunch | bread, cheese, tomato soup
+bread | 0.99 | bakery
 
-fajita | lunch | torilla, cheese, mushroom, spices
+peanut butter | 3.50 | nuts
 
-garlic bread | dinner | bread, butter, garlic salt, nutritional yeast
+jelly | 2.30 | condiments
+
+noodles | 3.00 | asian
+
+broth | 2.00 | soup
+
+green onion | 1.00 | produce
+
+bean sprouts | 2.00 | asian
+
+cheese | 4.00 | dairy
+
+butter | 2.00 | dairy
+
+lentils | 0.70 | bulk
+
+cereal | 2.75 | cereal
+milk | 2.50 | dairy
+===== Recipes =====
+oatmeal | breakfast | oats, brown sugar, 
+
+pb&j | lunch | bread, peanut butter, jelly, 
+
+ramen | lunch | noodles, broth, green onion, bean sprouts, 
+
+grilled cheese | lunch | bread, cheese, butter, 
+
+lentil soup | dinner | lentils, broth, 
+
+cereal | breakfast | cereal, milk, 

@@ -8,13 +8,22 @@ if confirm()==False:
 book = RecipeBook()
 book.populate_from_seed()
 
-new_name = input('enter recipe name: ')
-new_meal = input('enter recipe meal: ')
-new_ingrediants = input('enter recipe ingrediants: ')
+name = input('enter recipe name: ')
+meal = input('enter recipe meal: ')
+ingrediants = input('enter recipe ingrediants: ')
 
-print(new_name)
-print(new_meal)
-print(new_ingrediants)
+ingr_list = ingrediants.split(', ')
 
-book.add_recipe(new_name, new_meal, new_ingrediants)
-book.write_in_seed()
+#check if ingredient sharing name exists
+for ingr in ingr_list:
+    found = False
+    for item in book.ingredients:
+        if ingr == item.name: found = True 
+    if not found:
+        print('new ingredient ' + ingr + ' enter additional info')
+        cost = input('enter ingrediant cost: ')
+        location = input('enter ingrediant location: ')
+        book.add_ingredient(ingr, cost, location)
+
+book.add_recipe(name, meal, ingr_list)
+book.update_seed()

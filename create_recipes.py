@@ -1,8 +1,8 @@
 from recipe_book import RecipeBook
 from confirm import confirm
 
-#use function confirm() from confirm.py to check if use wants to proceed
-if confirm()==False: 
+#use function confirm() from confirm.py to check if user wants to proceed
+if confirm("create new recipe")==False: 
     exit()
 
 book = RecipeBook()

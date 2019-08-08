@@ -1,6 +1,6 @@
-def confirm():
+def confirm(text):
     while(True):
-        proceed = input('create new recipe/ (y/n): ')
+        proceed = input(str(text) + '? (y/n): ')
         if proceed == 'y':
             return True
         elif proceed == 'n':

@@ -21,7 +21,8 @@ class RecipeBook:
             else:
                 if len(aline) > 1 and not aline.isspace():
                     comps = aline.split(" | ")
-                    ingredient_list = comps[2].split(', ')
+                    raw_list = comps[2].split(',')
+                    ingredient_list = [item.strip() for item in raw_list if item.strip()]
                     self.add_recipe(comps[0], comps[1], ingredient_list)
 
     def update_seed(self):

@@ -4,7 +4,7 @@ from confirm import confirm
 #out of date as of 4/14
 
 #use function confirm() from confirm.py to check if use wants to proceed
-if confirm()==False: 
+if confirm("Search recipes")==False: 
     exit()
 
 seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")

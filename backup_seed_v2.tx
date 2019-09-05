@@ -30,24 +30,20 @@ cucumber | 0.99 | produce |
 pizza crust | 1.50 | bread | 
 spinach | 2.00 | produce | 
 basil | 2.50 | produce | 
-black beans | 0.99 | canned | 
-white rice | 3.00 | dry goods | 
-tomatoes | 0.60 | canned | 
 ===== Recipes =====
-oatmeal | breakfast | oats, brown sugar, | 
-pb&j | lunch | bread, peanut butter, jelly, | 
-ramen | lunch | noodles, broth, green onion, bean sprouts, | 
-grilled cheese | lunch | bread, cheese, butter, | 
-lentil soup | dinner | lentils, broth, | 
-cereal | breakfast | cereal, milk, | 
-bbq jackfruit | lunch | jackfruit, bbq sauce, buns, | 
-veggie burgers | lunch | veggie burger, lettuce, buns, tomato, | 
-White bean pasta | dinner | white beans, bowtie pasta, garlic, tomato, | 
-peanut butter bagel | breakfast | bagel, peanut butter, | 
-seitan wrap | lunch | wrap, seitan, tomato, lettuce, mustard, cucumber, | 
-pizza | lunch | pizza crust, cheese, spinach, basil, | 
-rice and beans | lunch | black beans, white rice, tomatoes, | 
-****  **** 
+oatmeal | breakfast | oats, brown sugar,  | 
+pb&j | lunch | bread, peanut butter, jelly,  | 
+ramen | lunch | noodles, broth, green onion, bean sprouts,  | 
+grilled cheese | lunch | bread, cheese, butter,  | 
+lentil soup | dinner | lentils, broth,  | 
+cereal | breakfast | cereal, milk,  | 
+bbq jackfruit | lunch | jackfruit, bbq sauce, buns,  | 
+veggie burgers | lunch | veggie burger, lettuce, buns, tomato,  | 
+White bean pasta | dinner | white beans, bowtie pasta, garlic, tomato,  | 
+peanut butter bagel | breakfast | bagel, peanut butter,  | 
+seitan wrap | lunch | wrap, seitan, tomato, lettuce, mustard, cucumber,  | 
+pizza | lunch | pizza crust, cheese, spinach, basil,  | 
+****Monday Menu****
 ===== Ingredients =====
 oats | 5.75 | cereal | 
 brown sugar | 3.25 | baking | 
@@ -55,6 +51,6 @@ bread | 0.99 | bakery |
 peanut butter | 3.50 | nuts | 
 jelly | 2.30 | condiments | 
 ===== Recipes =====
-oatmeal | breakfast | oats, brown sugar, | 
-pb&j | lunch | bread, peanut butter, jelly, | 
-******** 
+oatmeal | breakfast | oats, brown sugar,  | 
+pb&j | lunch | bread, peanut butter, jelly,  | 
+**** ****

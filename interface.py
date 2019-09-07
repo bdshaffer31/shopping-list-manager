@@ -10,23 +10,21 @@ class Interface:
     def run(self):
         while(True):
             action = input('input action: ')
-            if action == "help":
-                print("help \nexit \ndisplay_recipes \ncreate_recipe \ndisplay_by_meal")
-            elif action == "display_recipes":
+            if action == 'help':
+                print('help \nexit \ndisplay_recipes \ncreate_recipe \ndisplay_by_meal')
+            elif action == 'display_recipes':
                 self.display_recipes()
-            elif action == "create_recipe":
+            elif action == 'create_recipe':
                 self.create_recipe()
-            elif action == "exit":
+            elif action == 'display_meal':
+                self.display_meal()
+            elif action == 'exit':
                 break
+            else:
+                print('input not recognized, type \'help\' for a list')
 
     def create_recipe(self):
-        #use function confirm() from confirm.py to check if user wants to proceed
-        if confirm("create new recipe")==False: 
-            exit()
-
-        self.seeder.refresh_seed()
-        shelf = BookShelf() # empty book shelf to fill from seed
-        shelf = self.seeder.populate_bookshelf()
+        shelf = self.setup_and_seed('create new recipe')
 
         name = input('enter recipe name: ')
         meal = input('enter recipe meal: ').lower()
@@ -47,30 +45,32 @@ class Interface:
         self.seeder.update_seed(shelf)
     
     def display_meal(self):
-        pass
+        shelf = self.setup_and_seed('view recipe book contents')
+        meal = input('display all recipes for which meal:')
+        rec_list = shelf.master_list.find_recipes_by_meal(meal)
+        self.print_recipes(rec_list)
 
     def display_recipes(self):
-        print("made it to display recipes")
-        #use function confirm() from confirm.py to check if user wants to proceed
-        if confirm("view recipe book contents")==False: 
-            exit()
-
-        self.seeder.refresh_seed()
-        shelf = BookShelf() # empty book shelf to fill from seed
-        shelf = self.seeder.populate_bookshelf()
-
-        for rec in shelf.master_list.recipes:
-                print("- " + rec.name + " - ", end = "")
-                for ing in rec.ingredients:
-                    print(ing + ", ", end = "")
-                print()
+        shelf = self.setup_and_seed('view recipe book contents')
+        self.print_recipes(shelf.master_list.recipes)
         for book in shelf.recipe_books:
             print("* " + book.name + " * ")
-            for rec in book.recipes:
-                print("- " + rec.name + " - ", end = "")
-                for ing in rec.ingredients:
-                    print(ing + ", ", end = "")
-                print()
+            self.print_recipes(book.recipes)
 
     def edit_recipe(self):
         pass
+
+    def print_recipes(self, rec_list):
+        for rec in rec_list:
+            print("- " + rec.name + " - ", end = "")
+            for ing in rec.ingredients:
+                print(ing + ", ", end = "")
+            print()
+
+    def setup_and_seed(self, confirm_message):
+        #use function confirm() from confirm.py to check if user wants to proceed
+        if confirm(confirm_message)==False: 
+            exit()
+        self.seeder.refresh_seed()
+        shelf = self.seeder.populate_bookshelf()
+        return shelf

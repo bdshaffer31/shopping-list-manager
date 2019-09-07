@@ -6,5 +6,5 @@ class BookShelf:
         self.master_list = RecipeBook("master", [], [])
         self.recipe_books = []
               
-    def add_recipe_book(self, name, recipes, ingredients): #TODO add check if recipe already exists / needs , recipes, ingredients
-        self.recipe_books.append(RecipeBook(name, recipes, ingredients)) # needs , recipes, ingredients
+    def add_recipe_book(self, name, recipes, ingredients): #TODO add check if recipe already exists
+        self.recipe_books.append(RecipeBook(name, recipes, ingredients)) 

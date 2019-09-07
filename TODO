@@ -11,3 +11,7 @@
 -multiple meals per recipe
 -set list of meals availble
 -confirm should loop back into interface loop
+
+V 2.0
+-add 'servings' to ingredients (or maybe cost per serving instead)
+    -maybe recipes should roughly say how many servings they will take to keep inventory

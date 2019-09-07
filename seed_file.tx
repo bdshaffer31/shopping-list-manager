@@ -30,9 +30,11 @@ cucumber | 0.99 | produce |
 pizza crust | 1.50 | bread | 
 spinach | 2.00 | produce | 
 basil | 2.50 | produce | 
-black beans | 0.99 | canned | 
-white rice | 3.00 | dry goods | 
-tomatoes | 0.60 | canned | 
+potato | 3.00 | produce | 
+tortilla | 2.00 | bread | 
+rice | 2.00 |  | 
+hot sauce | 3.00 | sauce | 
+chickpea flour | 3.90 | bulk | 
 ===== Recipes =====
 oatmeal | breakfast | oats, brown sugar, | 
 pb&j | lunch | bread, peanut butter, jelly, | 
@@ -46,7 +48,8 @@ White bean pasta | dinner | white beans, bowtie pasta, garlic, tomato, |
 peanut butter bagel | breakfast | bagel, peanut butter, | 
 seitan wrap | lunch | wrap, seitan, tomato, lettuce, mustard, cucumber, | 
 pizza | lunch | pizza crust, cheese, spinach, basil, | 
-rice and beans | lunch | black beans, white rice, tomatoes, | 
+potato burrito  | lunch | potato, tortilla, rice, hot sauce, | 
+chickpea omlette | breakfast | chickpea flour, | 
 ****  **** 
 ===== Ingredients =====
 oats | 5.75 | cereal | 

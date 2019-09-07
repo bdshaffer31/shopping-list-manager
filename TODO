@@ -1,0 +1,13 @@
+-make it so there can't be tomato and tomatoes
+-add tags to recipes such as healthy, gluten free...
+-add ability to delete and edit recipes, ingredients, books
+-add ability to create recipe books (menus)
+-add ability to change selected book
+-naming of first recipe book is being lost
+-web scrape ingredients?
+-email / text today's menu?
+-intelligent refresh seed (not re-updating unchanged)
+-remove outdated run files (create, display etc)
+-multiple meals per recipe
+-set list of meals availble
+-confirm should loop back into interface loop

@@ -6,13 +6,16 @@ class Seeder:
     def __init__(self):
         self.seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")
 
+    def refresh_seed(self):
+        self.seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")
+        
     def populate_bookshelf(self):
         book_shelf = BookShelf()
         book_shelf = self.populate_master(book_shelf)
         book_shelf = self.populate_recipe_books(book_shelf)
         return book_shelf
 
-    def populate_master(self, book_shelf):
+    def populate_master(self, book_shelf): # possible to combine with populate recipe book?
         adding_recipes = True
         for aline in self.seed_file:
             if aline[0] == '*':
@@ -31,7 +34,7 @@ class Seeder:
                     book_shelf.master_list.add_recipe(comps[0], comps[1], ingredient_list)
         return book_shelf
 
-    def populate_recipe_books(self, book_shelf):
+    def populate_recipe_books(self, book_shelf): #possible to combine?
         active_book = RecipeBook("",[],[])
         adding_recipes = True
         for aline in self.seed_file:
@@ -59,29 +62,23 @@ class Seeder:
         #get ready to write in seed file
         seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx", 'w')
 
-        seed_file.writelines("===== Ingredients =====\n")
-        for item in book_shelf.master_list.ingredients:
-            seed_file.writelines(item.name + ' | ' + item.cost + ' | ' + item.location + ' | \n')
-        #then write the recipes
-        seed_file.writelines("===== Recipes =====\n")
-        for item in book_shelf.master_list.recipes:
-            seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
-            for ingr in item.ingredients: 
-                seed_file.writelines(ingr + ', ')
-            seed_file.writelines('| \n')
+        self.write_line_to_seed(book_shelf.master_list, seed_file)
 
         for book in book_shelf.recipe_books:
             seed_file.writelines('**** ' + book.name + ' **** \n')
             #write the ingredients first
-            seed_file.writelines("===== Ingredients =====\n")
-            for item in book.ingredients:
-                seed_file.writelines(item.name + ' | ' + item.cost + ' | ' + item.location + ' | \n')
-            #then write the recipes
-            seed_file.writelines("===== Recipes =====\n")
-            for item in book.recipes:
-                seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
-                for ingr in item.ingredients: 
-                    seed_file.writelines(ingr + ', ')
-                seed_file.writelines('| \n')
+            self.write_line_to_seed(book, seed_file)
         seed_file.writelines('******** \n')
         seed_file.close
+
+    def write_line_to_seed(self, book, seed_file):
+        seed_file.writelines("===== Ingredients =====\n")
+        for item in book.ingredients:
+            seed_file.writelines(item.name + ' | ' + item.cost + ' | ' + item.location + ' | \n')
+        #then write the recipes
+        seed_file.writelines("===== Recipes =====\n")
+        for item in book.recipes:
+            seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
+            for ingr in item.ingredients: 
+                seed_file.writelines(ingr + ', ')
+            seed_file.writelines('| \n')

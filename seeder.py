@@ -30,7 +30,10 @@ class Seeder:
                 if len(aline) > 1 and not aline.isspace():
                     comps = aline.split(" | ")
                     raw_list = comps[2].split(',')
-                    ingredient_list = [item.strip() for item in raw_list if item.strip()] #remove spaces and empty ingredients
+                    ing_name_list = [item.strip() for item in raw_list if item.strip()] #remove spaces and empty ingredients
+                    ingredient_list = []
+                    for ing_name in ing_name_list:
+                        ingredient_list.append(book_shelf.master_list.find_ing_by_name(ing_name))
                     book_shelf.master_list.add_recipe(comps[0], comps[1], ingredient_list)
         return book_shelf
 
@@ -54,7 +57,10 @@ class Seeder:
                 if len(aline) > 1 and not aline.isspace():
                     comps = aline.split(" | ")
                     raw_list = comps[2].split(',')
-                    ingredient_list = [item.strip() for item in raw_list if item.strip()] #remove spaces and empty ingredients
+                    ing_name_list = [item.strip() for item in raw_list if item.strip()] #remove spaces and empty ingredients
+                    ingredient_list = []
+                    for ing_name in ing_name_list:
+                        ingredient_list.append(active_book.find_ing_by_name(ing_name))
                     active_book.add_recipe(comps[0], comps[1], ingredient_list)
         return book_shelf
 
@@ -80,5 +86,5 @@ class Seeder:
         for item in book.recipes:
             seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
             for ingr in item.ingredients: 
-                seed_file.writelines(ingr + ', ')
+                seed_file.writelines(ingr.name + ', ')
             seed_file.writelines('| \n')

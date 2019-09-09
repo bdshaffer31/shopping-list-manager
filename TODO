@@ -11,6 +11,7 @@
 -multiple meals per recipe
 -set list of meals availble
 -confirm should loop back into interface loop
+-recipes should own ingredients not just strings with names xd
 
 V 2.0
 -add 'servings' to ingredients (or maybe cost per serving instead)

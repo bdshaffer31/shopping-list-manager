@@ -11,13 +11,15 @@ class Interface:
         while(True):
             action = input('input action: ')
             if action == 'help':
-                print('help \nexit \ndisplay_recipes \ncreate_recipe \ndisplay_by_meal')
+                print('help \nexit \ndisplay_recipes \ncreate_recipe \ndisplay_by_meal \nadd_daily_menu')
             elif action == 'display_recipes':
                 self.display_recipes()
             elif action == 'create_recipe':
                 self.create_recipe()
             elif action == 'display_meal':
                 self.display_meal()
+            elif action == 'add_daily_menu':
+                self.add_random_daily_menu()
             elif action == 'exit':
                 break
             else:
@@ -57,6 +59,14 @@ class Interface:
             print("* " + book.name + " * ")
             self.print_recipes(book.recipes)
 
+    def add_random_daily_menu(self):
+        shelf = self.setup_and_seed('create random daily menu')
+        daily_menu = shelf.create_ran_daily_rb()
+        for recipe in daily_menu.recipes:
+            print(' - ' + recipe.name)
+        shelf.recipe_books.append(daily_menu)
+        self.seeder.update_seed(shelf)
+
     def edit_recipe(self):
         pass
 
@@ -64,7 +74,7 @@ class Interface:
         for rec in rec_list:
             print("- " + rec.name + " - ", end = "")
             for ing in rec.ingredients:
-                print(ing + ", ", end = "")
+                print(ing.name + ", ", end = "")
             print()
 
     def setup_and_seed(self, confirm_message):

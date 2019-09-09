@@ -9,15 +9,16 @@ class RecipeBook:
         self.ingredients = ingredients
 
     def add_recipe(self, name, meal, ingredients): #TODO add check if recipe already exists
-        self.recipes.append(Recipe(name, meal, ingredients))
+        recipe = Recipe(name, meal, ingredients)
+        self.recipes.append(recipe)
 
     def add_ingredient(self, name, cost, location): #TODO add check if ingredient already exists
         self.ingredients.append(Ingredient(name, cost, location))
 
-    def find_ing_by_name(self, ingredient_name):
-        for item in self.ingredients:
-            if ingredient_name == item.name: return True
-        return False #if it hasn't returned true by now
+    def find_ing_by_name(self, ingredient_name): # this was changed and that broke some things 
+        for ing in self.ingredients:
+            if ingredient_name == ing.name: return ing
+        return False #if it hasn't returned the ingredient by now
 
     def find_recipes_by_meal(self, meal): #used to be split into breakfast, lunch, dinner, now flexible (better?)
         recipe_list = []

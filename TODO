@@ -7,12 +7,15 @@
 -web scrape ingredients?
 -email / text today's menu?
 -intelligent refresh seed (not re-updating unchanged)
--remove outdated run files (create, display etc)
 -multiple meals per recipe
 -set list of meals availble
--confirm should loop back into interface loop
+-split up interfaces for ingredients, recipes, books etc
 -recipes should own ingredients not just strings with names xd
-
-V 2.0
+    - or should they point to a common ingredient (currently is strange with edits)
 -add 'servings' to ingredients (or maybe cost per serving instead)
     -maybe recipes should roughly say how many servings they will take to keep inventory
+-cast handeling of inputs
+-codify locations
+-use inheritance for interfaces (should all be based from generic class)
+-split master and recipe_books 
+

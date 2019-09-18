@@ -1,5 +1,7 @@
 from seeder import Seeder
 from book_shelf import BookShelf
+from ingredient import Ingredient
+from recipe_interface import RecipeInterface
 from confirm import confirm
 
 class Interface:
@@ -11,7 +13,8 @@ class Interface:
         while(True):
             action = input('input action: ')
             if action == 'help':
-                print('help \nexit \ndisplay_recipes \ncreate_recipe \ndisplay_by_meal \nadd_daily_menu')
+                print('-help \n-exit \n-display_recipes \n-create_recipe \n-display_meal',
+                '\n-add_daily_menu \n-display_recipe_costs \n-edit_ingredient')
             elif action == 'display_recipes':
                 self.display_recipes()
             elif action == 'create_recipe':
@@ -20,28 +23,38 @@ class Interface:
                 self.display_meal()
             elif action == 'add_daily_menu':
                 self.add_random_daily_menu()
+            elif action == 'display_recipe_costs':
+                self.display_recipe_costs()
+            elif action == 'select_recipe':
+                self.select_recipe()
+            elif action == 'select_ingredient':
+                self.select_ingredient()
             elif action == 'exit':
                 break
             else:
                 print('input not recognized, type \'help\' for a list')
 
-    def create_recipe(self):
+    def create_recipe(self): 
         shelf = self.setup_and_seed('create new recipe')
 
         name = input('enter recipe name: ')
         meal = input('enter recipe meal: ').lower()
-        ingrediants = input('enter recipe ingrediants: ')
+        ingredients = input('enter recipe ingredients: ')
 
-        ingr_list = ingrediants.split(', ')
+        ingr_name_list = ingredients.split(', ')
+        ingr_list = []
 
         #check if ingredient sharing name exists
-        for ingr in ingr_list:
-            found = shelf.master_list.find_ingredient(ingr)
+        for ingr in ingr_name_list:
+            found = shelf.master_list.find_ing_by_name(ingr)
             if not found:
                 print('new ingredient ' + ingr + ' enter additional info')
-                cost = input('enter ingrediant cost: ')
-                location = input('enter ingrediant location: ')
+                cost = input('enter ingredient cost: ')
+                location = input('enter ingredient location: ')
                 shelf.master_list.add_ingredient(ingr, cost, location)
+                ingr_list.append(Ingredient(ingr, cost, location))
+            else:
+                ingr_list.append(found)
 
         shelf.master_list.add_recipe(name, meal, ingr_list)
         self.seeder.update_seed(shelf)
@@ -55,9 +68,10 @@ class Interface:
     def display_recipes(self):
         shelf = self.setup_and_seed('view recipe book contents')
         self.print_recipes(shelf.master_list.recipes)
-        for book in shelf.recipe_books:
-            print("* " + book.name + " * ")
-            self.print_recipes(book.recipes)
+
+    def display_recipe_costs(self):
+        shelf = self.setup_and_seed('view recipe book contents')
+        self.print_costs(shelf.master_list.recipes)
 
     def add_random_daily_menu(self):
         shelf = self.setup_and_seed('create random daily menu')
@@ -69,6 +83,25 @@ class Interface:
 
     def edit_recipe(self):
         pass
+
+    def edit_ingredient(self):
+        pass
+
+    def select_recipe(self):
+        shelf = self.setup_and_seed('select recipe')
+        recipe_name = input('select which recipe:')
+        recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name ]
+        recipe = recipe[0]
+        print(recipe.name)
+        rec_interface = RecipeInterface(recipe)
+        rec_interface.run()
+
+    def select_ingredient(self):
+        pass
+
+    def print_costs(self, rec_list):
+        for rec in rec_list:
+            print("- " + rec.name + " - $" + str(rec.cost()))
 
     def print_recipes(self, rec_list):
         for rec in rec_list:

@@ -35,21 +35,12 @@ class RecipeInterface:
             else:
                 print('input not recognized, type \'help\' for a list')
 
-    def edit_name(self): # needs cleaned up significantly
+    def edit_name(self): # needs cleaned up significantly map or list comprehension?
         shelf = self.setup_and_seed('edit recipe name')
 
         old_name = self.recipe.name
         new_name = input('change name to:')
-        for rec in shelf.master_list.recipes:
-            if rec.name == old_name:
-                rec.name = new_name
-        for rec_book in shelf.recipe_books:
-            rec_list=[]
-            for rec in rec_book.recipes:
-                if rec == old_name:
-                    rec = new_name
-                rec_list.append(rec)
-            rec_book.recipes = rec_list
+        shelf.change_rec_name(old_name, new_name)
 
         self.recipe.name = new_name
         self.seeder.update_seed(shelf)
@@ -57,11 +48,8 @@ class RecipeInterface:
     def edit_meal(self):
         shelf = self.setup_and_seed('edit recipe meal')
 
-        old_meal = self.recipe.meal
         new_meal = input('change name to:')
-        for rec in shelf.master_list.recipes:
-            if rec.name == old_meal:
-                rec.name = new_meal
+        shelf.change_rec_meal(self.recipe.name, new_meal)
 
         self.recipe.name = new_meal
         self.seeder.update_seed(shelf)
@@ -80,13 +68,26 @@ class RecipeInterface:
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
                 shelf.master_list.add_ingredient(ingr, cost, location)
-                self.recipe.ingrediants.append(Ingredient(ingr, cost, location))
+                self.recipe.ingredients.append(Ingredient(ingr, cost, location))
             else:
                 self.recipe.ingredients.append(found)
+
+        for rec in shelf.master_list.recipes:
+            if rec.name == self.recipe.name:
+                rec.ingredients = self.recipe.ingredients
 
         self.seeder.update_seed(shelf)
 
     def remove_ingredient(self):
+        shelf = self.setup_and_seed('remove ingredient')
+        ing_name = input('ingredient to remove')
+        for rec in shelf.master_list.recipes:
+            if rec.name == self.recipe.name:
+                rec.ingredients = [ing for ing in rec.ingredients if ing.name != ing_name]
+        
+        self.seeder.update_seed(shelf)
+
+    def delete_recipe(self):
         pass
 
     def select_ingredient(self):
@@ -97,9 +98,6 @@ class RecipeInterface:
         print(ingredient.name)
         ing_interface = IngredientInterface(ingredient)
         ing_interface.run()
-
-    def delete_recipe(self):
-        pass
 
     def setup_and_seed(self, confirm_message):
         #use function confirm() from confirm.py to check if user wants to proceed

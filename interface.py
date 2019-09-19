@@ -76,8 +76,8 @@ class Interface:
     def add_random_daily_menu(self):
         shelf = self.setup_and_seed('create random daily menu')
         daily_menu = shelf.create_ran_daily_rb()
-        for recipe in daily_menu.recipes:
-            print(' - ' + recipe.name)
+        for recipe_name in daily_menu.recipes:
+            print(' - ' + recipe_name)
         shelf.recipe_books.append(daily_menu)
         self.seeder.update_seed(shelf)
 

@@ -18,3 +18,5 @@
 -codify locations
 -use inheritance for interfaces (should all be based from generic class) 
 -select recipe should catch the misses
+-enums can be ingredients and selection is made later (ex. protien, condiment, topping)
+-delete confirm lmao

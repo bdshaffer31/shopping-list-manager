@@ -35,7 +35,7 @@ class Seeder:
                     ingredient_list = []
                     for ing_name in ing_name_list:
                         ingredient_list.append(book_shelf.master_list.find_ing_by_name(ing_name))
-                    book_shelf.master_list.add_recipe(comps[0], comps[1], ingredient_list)
+                    book_shelf.master_list.add_recipe(comps[0].strip(), comps[1].strip(), ingredient_list)
         return book_shelf
 
     def populate_recipe_books(self, book_shelf):
@@ -51,7 +51,7 @@ class Seeder:
                 pass
             else:
                 if len(aline) > 1 and not aline.isspace():
-                    active_book.recipes.append(aline)
+                    active_book.recipes.append(aline.strip())
         return book_shelf
 
     def update_seed(self, book_shelf): #TODO fix this for master_db vs recipe_book
@@ -82,4 +82,4 @@ class Seeder:
     def write_book_to_seed(self, book, seed_file):
         seed_file.writelines("===== Recipes =====\n")
         for item in book.recipes:
-            seed_file.writelines(item) 
+            seed_file.writelines(item + '\n') 

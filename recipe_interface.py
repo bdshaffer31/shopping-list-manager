@@ -4,6 +4,7 @@ from seeder import Seeder
 from book_shelf import BookShelf
 from ingredient import Ingredient
 from confirm import confirm
+from ingredient_interface import IngredientInterface
 
 class RecipeInterface:
 
@@ -34,15 +35,36 @@ class RecipeInterface:
             else:
                 print('input not recognized, type \'help\' for a list')
 
-    def edit_name(self):
+    def edit_name(self): # needs cleaned up significantly
         shelf = self.setup_and_seed('edit recipe name')
 
-        name = input('change name to:')
-        self.recipe.name = name
-        shelf.seeder.update_seed(shelf)
+        old_name = self.recipe.name
+        new_name = input('change name to:')
+        for rec in shelf.master_list.recipes:
+            if rec.name == old_name:
+                rec.name = new_name
+        for rec_book in shelf.recipe_books:
+            rec_list=[]
+            for rec in rec_book.recipes:
+                if rec == old_name:
+                    rec = new_name
+                rec_list.append(rec)
+            rec_book.recipes = rec_list
+
+        self.recipe.name = new_name
+        self.seeder.update_seed(shelf)
 
     def edit_meal(self):
-        pass
+        shelf = self.setup_and_seed('edit recipe meal')
+
+        old_meal = self.recipe.meal
+        new_meal = input('change name to:')
+        for rec in shelf.master_list.recipes:
+            if rec.name == old_meal:
+                rec.name = new_meal
+
+        self.recipe.name = new_meal
+        self.seeder.update_seed(shelf)
 
     def add_ingredient(self):
         shelf = self.setup_and_seed('add ingredients')
@@ -68,7 +90,13 @@ class RecipeInterface:
         pass
 
     def select_ingredient(self):
-        pass
+        shelf = self.setup_and_seed('select ingredient')
+        ing_name = input('select which ingredient:')
+        ingredient = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name ]
+        ingredient = ingredient[0]
+        print(ingredient.name)
+        ing_interface = IngredientInterface(ingredient)
+        ing_interface.run()
 
     def delete_recipe(self):
         pass

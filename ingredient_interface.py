@@ -6,12 +6,13 @@ from book_shelf import BookShelf
 from ingredient import Ingredient
 from confirm import confirm
 
-class RecipeInterface:
+class IngredientInterface:
 
-    def __init__(self):
+    def __init__(self, ingredient):
         self.seeder = Seeder()
+        self.ingredient = ingredient
 
-    def run(self, recipe):
+    def run(self):
         while(True):
             action = input('input action: ')
             if action == 'help':

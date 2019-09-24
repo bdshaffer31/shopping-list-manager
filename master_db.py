@@ -19,6 +19,11 @@ class MasterDB:
             if ingredient_name == ing.name: return ing
         return False #if it hasn't returned the ingredient by now
 
+    def find_rec_by_name(self, rec_name): # this was changed and that broke some things 
+        for rec in self.recipes:
+            if rec_name == rec.name: return rec
+        return False #if it hasn't returned the ingredient by now
+
     def find_recipes_by_meal(self, meal): #used to be split into breakfast, lunch, dinner, now flexible (better?)
         recipe_list = []
         for rec in self.recipes:

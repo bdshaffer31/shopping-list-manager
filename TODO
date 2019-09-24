@@ -18,3 +18,5 @@
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
 -make confirm using *arg so that if there is a message it will, if not it wont
 -delete ingredient / recipe needs to go through all recipes / recipe books too
+-use *arg to make select recipe have option to go straight to add ingredients
+-BUG when adding multiple(?) ingredients to recipe (bool has no attribte name)

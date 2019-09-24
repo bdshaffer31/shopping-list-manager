@@ -1,4 +1,4 @@
-from interface import Interface
+from shelf_interface import ShelfInterface
 
-interface = Interface()
+interface = ShelfInterface()
 interface.run()

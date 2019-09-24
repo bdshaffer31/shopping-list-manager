@@ -16,8 +16,10 @@ class RecipeInterface:
         while(True):
             action = input('input action for recipe: ')
             if action == 'help':
-                print('-help \n-exit \n-edit name \n-edit meal \n-add ingr', 
+                print('-help \n-exit \n-display \n-edit name \n-edit meal \n-add ingr', 
                 '\n-remove ingr \n-select ingr \n-delete recipe')
+            elif action == 'display':
+                self.display()
             elif action == 'edit name':
                 self.edit_name()
             elif action == 'edit meal':
@@ -35,12 +37,19 @@ class RecipeInterface:
                 break
             else:
                 print('input not recognized, type \'help\' for a list')
+    
+    def display(self):
+        print(' name: ' + self.recipe.name)
+        print(' meal: ' + self.recipe.meal)
+        print(' ingredients:')
+        for ing in self.recipe.ingredients:
+            print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
     def edit_name(self): # needs cleaned up significantly map or list comprehension?
         shelf = self.setup_and_seed('edit recipe name')
 
         old_name = self.recipe.name
-        new_name = input('change name to:')
+        new_name = input('change name to: ')
         shelf.change_rec_name(old_name, new_name)
 
         self.recipe.name = new_name
@@ -49,7 +58,7 @@ class RecipeInterface:
     def edit_meal(self):
         shelf = self.setup_and_seed('edit recipe meal')
 
-        new_meal = input('change meal to:')
+        new_meal = input('change meal to: ')
         shelf.change_rec_meal(self.recipe.name, new_meal)
 
         self.recipe.name = new_meal
@@ -81,7 +90,7 @@ class RecipeInterface:
 
     def remove_ingredient(self):
         shelf = self.setup_and_seed('remove ingredient')
-        ing_name = input('ingredient to remove')
+        ing_name = input('ingredient to remove: ')
         for rec in shelf.master_list.recipes:
             if rec.name == self.recipe.name:
                 rec.ingredients = [ing for ing in rec.ingredients if ing.name != ing_name]
@@ -96,7 +105,7 @@ class RecipeInterface:
 
     def select_ingredient(self):
         shelf = self.setup_and_seed('select ingredient')
-        ing_name = input('select which ingredient:')
+        ing_name = input('select which ingredient: ')
         ingredient = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name ]
         ingredient = ingredient[0]
         print(ingredient.name)

@@ -1,4 +1,4 @@
-# contains the interface for working with a selected recipe
+# contains the interface for working with a selected ingredient
 
 from seeder import Seeder
 from book_shelf import BookShelf
@@ -39,7 +39,7 @@ class IngredientInterface:
         shelf = self.setup_and_seed('edit ingredient name')
 
         old_name = self.ingredient.name
-        new_name = input('change name to:')
+        new_name = input('change name to: ')
         shelf.change_ingr_name(old_name, new_name)
 
         self.ingredient.name = new_name
@@ -48,7 +48,7 @@ class IngredientInterface:
     def edit_cost(self):
         shelf = self.setup_and_seed('edit ingredient cost')
 
-        new_cost = input('change cost to:')
+        new_cost = input('change cost to: ')
         shelf.change_ingr_cost(self.ingredient.name, new_cost)
 
         self.ingredient.cost = new_cost
@@ -57,7 +57,7 @@ class IngredientInterface:
     def edit_location(self):
         shelf = self.setup_and_seed('edit ingredient location')
 
-        new_location = input('change location to:')
+        new_location = input('change location to: ')
         shelf.change_ingr_location(self.ingredient.name, new_location)
 
         self.ingredient.location = new_location

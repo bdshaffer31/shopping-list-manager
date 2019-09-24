@@ -1,22 +1,20 @@
--make it so there can't be tomato and tomatoes
+-make it so there can't be tomato and tomatoes (or warning)
 -add tags to recipes such as healthy, gluten free...
 -add ability to delete and edit recipes, ingredients, books
 -add ability to create recipe books (menus)
 -add ability to change selected book
 -naming of first recipe book is being lost
--web scrape ingredients?
+-web scrape ingredients? API?
 -email / text today's menu?
 -intelligent refresh seed (not re-updating unchanged)
 -multiple meals per recipe
--set list of meals availble
--split up interfaces for ingredients, recipes, books etc
--recipes should own ingredients not just strings with names xd
-    - or should they point to a common ingredient (currently is strange with edits)
 -add 'servings' to ingredients (or maybe cost per serving instead)
     -maybe recipes should roughly say how many servings they will take to keep inventory
 -cast handeling of inputs
+-set list of meals availbles
 -codify locations
 -use inheritance for interfaces (should all be based from generic class) 
 -select recipe should catch the misses
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
--delete confirm lmao
+-make confirm using *arg so that if there is a message it will, if not it wont
+-delete ingredient / recipe needs to go through all recipes / recipe books too

@@ -2,6 +2,7 @@ from seeder import Seeder
 from book_shelf import BookShelf
 from ingredient import Ingredient
 from recipe_interface import RecipeInterface
+from ingredient_interface import IngredientInterface
 from confirm import confirm
 
 class Interface:
@@ -13,21 +14,21 @@ class Interface:
         while(True):
             action = input('input action: ')
             if action == 'help':
-                print('-help \n-exit \n-display_recipes \n-create_recipe \n-display_meal',
-                '\n-add_daily_menu \n-display_recipe_costs \n-edit_ingredient')
-            elif action == 'display_recipes':
+                print('-help \n-exit \n-display recipes \n-create recipe \n-display meal',
+                '\n-add daily menu \n-display recipe costs \n-edit ingr')
+            elif action == 'display recipes':
                 self.display_recipes()
-            elif action == 'create_recipe':
+            elif action == 'create recipe':
                 self.create_recipe()
-            elif action == 'display_meal':
+            elif action == 'display meal':
                 self.display_meal()
-            elif action == 'add_daily_menu':
+            elif action == 'add daily menu':
                 self.add_random_daily_menu()
-            elif action == 'display_recipe_costs':
+            elif action == 'display recipe costs':
                 self.display_recipe_costs()
-            elif action == 'select_recipe':
+            elif action == 'select recipe':
                 self.select_recipe()
-            elif action == 'select_ingredient':
+            elif action == 'select ingr':
                 self.select_ingredient()
             elif action == 'exit':
                 break
@@ -81,23 +82,23 @@ class Interface:
         shelf.recipe_books.append(daily_menu)
         self.seeder.update_seed(shelf)
 
-    def edit_recipe(self):
-        pass
-
-    def edit_ingredient(self):
-        pass
-
     def select_recipe(self):
         shelf = self.setup_and_seed('select recipe')
         recipe_name = input('select which recipe:')
-        recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name ]
+        recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name]
         recipe = recipe[0]
         print(recipe.name)
         rec_interface = RecipeInterface(recipe)
         rec_interface.run()
 
     def select_ingredient(self):
-        pass
+        shelf = self.setup_and_seed('select ingredient')
+        ing_name = input('select which ingredient:')
+        ing = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name]
+        ing = ing[0]
+        print(ing.name)
+        ing_interface = IngredientInterface(ing)
+        ing_interface.run()
 
     def print_costs(self, rec_list):
         for rec in rec_list:

@@ -1,5 +1,4 @@
 # contains the interface for working with a selected recipe
-#CURRENTLY JUST CARBON COPY OF RECIPE INTERFACE
 
 from seeder import Seeder
 from book_shelf import BookShelf
@@ -14,43 +13,60 @@ class IngredientInterface:
 
     def run(self):
         while(True):
-            action = input('input action: ')
+            action = input('input action for ingr: ')
             if action == 'help':
-                print('help \nexit \nedit_name \nedit_meal \nadd_ingredients', 
-                '\nremove_ingredient \nselect_ingredient \n delete_recipe')
-            elif action == 'edit_name':
+                print('help \nexit \nedit name \nedit cost \nedit location', 
+                '\ndelete ingr \nrecipes containing \ndelete recipe')
+            elif action == 'edit name':
                 self.edit_name()
-            elif action == 'edit_meal':
-                self.edit_meal()
-            elif action == 'add_ingredients':
-                self.add_ingredients()
-            elif action == 'remove_ingredient':
-                self.remove_ingredient()
-            elif action == 'select_ingredient':
-                self.select_ingredient()
+            elif action == 'edit cost':
+                self.edit_cost()
+            elif action == 'edit location':
+                self.edit_location()
+            elif action == 'delete ingr':
+                self.delete_ingredient()
+            elif action == 'recipes containing':
+                self.recipes_containing()
             elif action == 'delete recipe':
-                self.delete_recipe()
+                pass
+                #self.delete_recipe()
             elif action == 'exit':
                 break
             else:
                 print('input not recognized, type \'help\' for a list')
 
     def edit_name(self):
+        shelf = self.setup_and_seed('edit ingredient name')
+
+        old_name = self.ingredient.name
+        new_name = input('change name to:')
+        shelf.change_ingr_name(old_name, new_name)
+
+        self.ingredient.name = new_name
+        self.seeder.update_seed(shelf)
+
+    def edit_cost(self):
+        shelf = self.setup_and_seed('edit ingredient cost')
+
+        new_cost = input('change cost to:')
+        shelf.change_ingr_cost(self.ingredient.name, new_cost)
+
+        self.ingredient.cost = new_cost
+        self.seeder.update_seed(shelf)
+
+    def edit_location(self):
+        shelf = self.setup_and_seed('edit ingredient location')
+
+        new_location = input('change location to:')
+        shelf.change_ingr_location(self.ingredient.name, new_location)
+
+        self.ingredient.location = new_location
+        self.seeder.update_seed(shelf)
+
+    def delete_ingredient(self):
         pass
 
-    def edit_meal(self):
-        pass
-
-    def add_ingredients(self):
-        pass
-
-    def remove_ingredient(self):
-        pass
-
-    def select_ingredient(self):
-        pass
-
-    def delete_recipe(self):
+    def recipes_containing(self):
         pass
 
     def setup_and_seed(self, confirm_message):

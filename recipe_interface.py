@@ -16,20 +16,21 @@ class RecipeInterface:
         while(True):
             action = input('input action for recipe: ')
             if action == 'help':
-                print('-help \n-exit \n-edit_name \n-edit_meal \n-add_ingredient', 
-                '\n-remove_ingredient \n-select_ingredient \n-delete_recipe')
-            elif action == 'edit_name':
+                print('-help \n-exit \n-edit name \n-edit meal \n-add ingr', 
+                '\n-remove ingr \n-select ingr \n-delete recipe')
+            elif action == 'edit name':
                 self.edit_name()
-            elif action == 'edit_meal':
+            elif action == 'edit meal':
                 self.edit_meal()
-            elif action == 'add_ingredient':
+            elif action == 'add ingr':
                 self.add_ingredient()
-            elif action == 'remove_ingredient':
+            elif action == 'remove ingr':
                 self.remove_ingredient()
-            elif action == 'select_ingredient':
+            elif action == 'select ingr':
                 self.select_ingredient()
             elif action == 'delete recipe':
                 self.delete_recipe()
+                break
             elif action == 'exit':
                 break
             else:
@@ -48,7 +49,7 @@ class RecipeInterface:
     def edit_meal(self):
         shelf = self.setup_and_seed('edit recipe meal')
 
-        new_meal = input('change name to:')
+        new_meal = input('change meal to:')
         shelf.change_rec_meal(self.recipe.name, new_meal)
 
         self.recipe.name = new_meal
@@ -88,7 +89,10 @@ class RecipeInterface:
         self.seeder.update_seed(shelf)
 
     def delete_recipe(self):
-        pass
+        shelf = self.setup_and_seed('delete recipe')
+        shelf.delete_recipe(self.recipe.name)
+
+        self.seeder.update_seed(shelf)
 
     def select_ingredient(self):
         shelf = self.setup_and_seed('select ingredient')

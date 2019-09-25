@@ -3,7 +3,7 @@ from book_shelf import BookShelf
 from ingredient import Ingredient
 from recipe_interface import RecipeInterface
 from ingredient_interface import IngredientInterface
-from recipe_book_interface import RecipeBookInterface
+from book_interface import BookInterface
 from confirm import confirm
 
 class ShelfInterface:
@@ -15,29 +15,25 @@ class ShelfInterface:
         while(True):
             action = input('input action: ')
             if action == 'help':
-                print('-help \n-exit \n-display recipes \n-display \n-create recipe \n-display meal',
-                '\n-add daily menu \n-display recipe costs \n-edit ingr \n-add menu',
-                '\n-remove menu \n-select menu')
+                print('-help \n-exit \n-display recipes \n-display \n-create recipe ',
+                '\n-select ingr \n-select recipe \n-create recipe \n-add book',
+                '\n-remove book \n-select book')
             elif action == 'display recipes':
                 self.display_recipes()
             elif action == 'display':
                 self.display()
             elif action == 'create recipe':
                 self.create_recipe()
-            elif action == 'display meal':
-                self.display_meal()
-            elif action == 'display recipe costs':
-                self.display_recipe_costs()
             elif action == 'select recipe':
                 self.input_select_recipe()
             elif action == 'select ingr':
                 self.input_select_ingredient()
-            elif action == 'add menu':
-                self.add_recipe_book()
-            elif action == 'remove menu': #maybe this should be called delete for continuity
-                self.remove_recipe_book()
-            elif action == 'select menu':
-                self.input_select_recipe_book()
+            elif action == 'add book':
+                self.add_book()
+            elif action == 'remove book': #maybe this should be called delete for continuity
+                self.remove_book()
+            elif action == 'select book':
+                self.input_select_book()
             elif action == 'exit':
                 break
             else:
@@ -52,12 +48,6 @@ class ShelfInterface:
         shelf.master_list.add_recipe(name, meal, [])
         self.seeder.update_seed(shelf)
         self.select_recipe(name)
-    
-    def display_meal(self):
-        shelf = self.setup_and_seed('view recipe book contents')
-        meal = input('display all recipes for which meal:')
-        rec_list = shelf.master_list.find_recipes_by_meal(meal)
-        self.print_recipes(rec_list)
 
     def display_recipes(self):
         shelf = self.setup_and_seed('view recipe book contents')
@@ -65,32 +55,28 @@ class ShelfInterface:
 
     def display(self):
         shelf = self.setup_and_seed('view recipe book contents')
-        for book in shelf.recipe_books:
+        for book in shelf.books:
             print(book.name)
 
-    def display_recipe_costs(self):
-        shelf = self.setup_and_seed('view recipe book contents')
-        self.print_costs(shelf.master_list.recipes)
-
-    def add_recipe_book(self):
+    def add_book(self):
         shelf = self.setup_and_seed('create new recipe book')
         name = input('recipe book name:')
-        shelf.add_recipe_book(name, [])
+        shelf.add_book(name, [])
         self.seeder.update_seed(shelf)
-        self.select_recipe_book(name)
+        self.select_book(name)
 
-    def remove_recipe_book(self):
+    def remove_book(self):
         pass
 
-    def input_select_recipe_book(self):
+    def input_select_book(self):
         name = input('select which recipe book:')
-        self.select_recipe_book(name)
+        self.select_book(name)
 
-    def select_recipe_book(self, name):
+    def select_book(self, name):
         shelf = self.setup_and_seed('select recipe book')
-        book = [book for book in shelf.recipe_books if book.name == name]
+        book = [book for book in shelf.books if book.name == name]
         book = book[0]
-        recb_interface = RecipeBookInterface(book)
+        recb_interface = BookInterface(book)
         recb_interface.run()
 
     def input_select_recipe(self):
@@ -99,11 +85,16 @@ class ShelfInterface:
 
     def select_recipe(self, recipe_name):
         shelf = self.setup_and_seed('select recipe')
-        recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name]
+        try:
+            recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name]
+        except:
+            print('recipe with name \'' + recipe_name + '\' not found')
+            return
+
         recipe = recipe[0]
         rec_interface = RecipeInterface(recipe)
         rec_interface.run()
-
+        
     def input_select_ingredient(self):
         ingr_name = input('select which ingredient:')
         self.select_recipe(ingr_name)
@@ -133,3 +124,13 @@ class ShelfInterface:
         self.seeder.refresh_seed()
         shelf = self.seeder.populate_bookshelf()
         return shelf
+
+    def display_meal(self): #no longer and option from input
+        shelf = self.setup_and_seed('view recipe book contents')
+        meal = input('display all recipes for which meal:')
+        rec_list = shelf.master_list.find_recipes_by_meal(meal)
+        self.print_recipes(rec_list)
+
+    def display_recipe_costs(self): # no longer and option from input
+        shelf = self.setup_and_seed('view recipe book contents')
+        self.print_costs(shelf.master_list.recipes)

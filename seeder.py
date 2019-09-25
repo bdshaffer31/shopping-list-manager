@@ -1,5 +1,5 @@
 from book_shelf import BookShelf
-from recipe_book import RecipeBook
+from book import Book
 from master_db import MasterDB
 
 class Seeder:
@@ -13,7 +13,7 @@ class Seeder:
     def populate_bookshelf(self):
         book_shelf = BookShelf()
         book_shelf = self.populate_master(book_shelf)
-        book_shelf = self.populate_recipe_books(book_shelf)
+        book_shelf = self.populate_books(book_shelf)
         return book_shelf
 
     def populate_master(self, book_shelf):
@@ -38,11 +38,11 @@ class Seeder:
                     book_shelf.master_list.add_recipe(comps[0].strip(), comps[1].strip(), ingredient_list)
         return book_shelf
 
-    def populate_recipe_books(self, book_shelf):
-        active_book = RecipeBook("",[])
+    def populate_books(self, book_shelf):
+        active_book = Book("",[])
         for aline in self.seed_file:
             if aline[0] == '*':
-                book_shelf.add_recipe_book(active_book.name, active_book.recipes)
+                book_shelf.add_book(active_book.name, active_book.recipes)
                 comps = aline.split("****")
                 active_book.name = comps[1].strip()
                 active_book.recipes = []
@@ -60,7 +60,7 @@ class Seeder:
 
         self.write_master_to_seed(book_shelf.master_list, seed_file)
 
-        for book in book_shelf.recipe_books:
+        for book in book_shelf.books:
             seed_file.writelines('**** ' + book.name + ' **** \n')
             #write the ingredients first
             self.write_book_to_seed(book, seed_file)
@@ -77,7 +77,7 @@ class Seeder:
             seed_file.writelines(item.name + ' | ' + item.meal + ' | ') 
             for ingr in item.ingredients: 
                 seed_file.writelines(ingr.name + ', ')
-            seed_file.writelines('| \n')
+            seed_file.writelines(' | \n')
 
     def write_book_to_seed(self, book, seed_file):
         seed_file.writelines("===== Recipes =====\n")

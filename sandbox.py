@@ -1,5 +1,6 @@
 from seeder import Seeder
 from book_shelf import BookShelf
+from book import Book
 from confirm import confirm
 import random
 import datetime
@@ -18,12 +19,13 @@ print('Current Timestamp : ', timestamp)
 
 breakfast = random.choice(shelf.master_list.find_recipes_by_meal('breakfast'))
 print(breakfast.name)
-daily_menu = shelf.create_ran_daily_rb()
-for recipe in daily_menu.recipes:
-    print(recipe.name)
-    for ing in recipe.ingredients:
-        print(ing.name)
-for ing in daily_menu.ingredients:
-    print(ing.name)
+
+print('------')
+book1 = Book('test_book', ['pb&j', 'oatmeal', 'lasagna'])
+ingr_list = shelf.book_ingr_list(book1)
+#print(*ingr_list, sep = ', ')
+ingr_list = shelf.shopping_list(ingr_list)
+for ingr in ingr_list:
+    print(ingr.name)
 
 seeder.update_seed(shelf)

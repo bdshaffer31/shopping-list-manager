@@ -48,22 +48,33 @@ sourdough bread | 2.50 | bread |
 pumpkin | 2.00 | canned | 
 cinnamon | 2.00 | spices | 
 pumpkin seeds | 2.90 | nuts | 
+linguine | 1.50 | pasta | 
+coconut milk | 1.50 | dairy | 
+sage | 3.00 | spices | 
+brown rice | 2.50 | rice | 
+black beans | 0.80 | canned | 
+salsa | 2.50 | mexican | 
+canned corn | 0.70 | canned | 
+tempeh | 1.70 | protiens | 
+hot sauce | 2.70 | mexican | 
 ===== Recipes =====
-oatmeal | breakfast | oats, brown sugar, date, walnuts, | 
-pb&j | lunch | bread, peanut butter, jelly, | 
-ramen | lunch | noodles, broth, green onion, bean sprouts, | 
-grilled cheese | lunch | bread, cheese, butter, | 
-lentil soup | dinner | lentils, broth, | 
-bbq jackfruit | lunch | jackfruit, bbq sauce, buns, | 
-veggie burgers | lunch | veggie burger, lettuce, buns, tomato, | 
-White bean pasta | dinner | white beans, bowtie pasta, garlic, tomato, | 
-peanut butter bagel | breakfast | bagel, peanut butter, | 
-seitan wrap | lunch | wrap, seitan, tomato, lettuce, mustard, cucumber, | 
-pizza | lunch | pizza crust, cheese, spinach, basil, | 
-lasagna | dinner | lasagna noodle, red sauce, mozzarella, zuchini, tofu, | 
-chili | dinner | kidney beans, white beans, crushed tomatoes, diced tomatoes, chili seasoning packet, soy crumbles, | 
-cereal | breakfast | cereal, almond milk, banana, | 
-pumpkin toast | lunch | pumpkin, cinnamon, spinach, almond milk, pumpkin seeds, | 
+oatmeal | breakfast | oats, brown sugar, date, walnuts,  | 
+pb&j | lunch | bread, peanut butter, jelly,  | 
+ramen | lunch | noodles, broth, green onion, bean sprouts,  | 
+grilled cheese | lunch | bread, cheese, butter,  | 
+lentil soup | dinner | lentils, broth,  | 
+bbq jackfruit | lunch | jackfruit, bbq sauce, buns,  | 
+veggie burgers | lunch | veggie burger, lettuce, buns, tomato,  | 
+White bean pasta | dinner | white beans, bowtie pasta, garlic, tomato,  | 
+peanut butter bagel | breakfast | bagel, peanut butter,  | 
+seitan wrap | lunch | wrap, seitan, tomato, lettuce, mustard, cucumber,  | 
+pizza | lunch | pizza crust, cheese, spinach, basil,  | 
+lasagna | dinner | lasagna noodle, red sauce, mozzarella, zuchini, tofu,  | 
+chili | dinner | kidney beans, white beans, crushed tomatoes, diced tomatoes, chili seasoning packet, soy crumbles,  | 
+cereal | breakfast | cereal, almond milk, banana,  | 
+pumpkin toast | lunch | pumpkin, cinnamon, spinach, almond milk, pumpkin seeds,  | 
+pumpkin pasta | dinner | linguine, pumpkin, coconut milk, pumpkin seeds, sage,  | 
+burrito bowl | lunch | brown rice, black beans, lettuce, salsa, canned corn, tempeh, hot sauce,  | 
 ****  **** 
 ===== Recipes =====
 oatmeal
@@ -73,6 +84,4 @@ pb&j
 oatmeal
 grilled
 chili
-**** light lunches **** 
-===== Recipes =====
 ******** 

@@ -1,4 +1,4 @@
-from recipe_book import RecipeBook
+from book import Book
 from master_db import MasterDB
 import random
 import datetime
@@ -7,16 +7,29 @@ class BookShelf:
 
     def __init__(self):
         self.master_list = MasterDB([], [])
-        self.recipe_books = []
+        self.books = []
               
-    def add_recipe_book(self, name, recipes): #TODO add check if recipe already exists
-        self.recipe_books.append(RecipeBook(name, recipes)) 
+    def add_book(self, name, recipes): #TODO add check if recipe already exists
+        self.books.append(Book(name, recipes)) 
+
+    def book_ingr_list(self, book):
+        ingredients = []
+        for rec in book.recipes:
+            for mrec in self.master_list.recipes:
+                if mrec.name == rec:
+                    for ingr in mrec.ingredients:
+                        ingredients.append(ingr)
+        return ingredients
+
+    def shopping_list(self, ingr_list):
+        ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )
+        return ingr_list
 
     def change_rec_name(self, old_name, new_name): # shorten using map or list comprehension
         for rec in self.master_list.recipes:
             if rec.name == old_name:
                 rec.name = new_name
-        for rec_book in self.recipe_books:
+        for rec_book in self.books:
             rec_list=[]
             for rec in rec_book.recipes:
                 if rec == old_name:
@@ -28,6 +41,11 @@ class BookShelf:
         for ingr in self.master_list.ingredients:
             if ingr.name == old_name:
                 ingr.name = new_name
+
+    def change_book_name(self, old_name, new_name): # shorten using map or list comprehension
+        for book in self.books:
+            if book.name == old_name:
+                book.name = new_name
 
     def change_rec_meal(self, name, new_meal):
         for rec in self.master_list.recipes:
@@ -57,5 +75,5 @@ class BookShelf:
         recipe_names = [breakfast_recipe.name, lunch_recipe.name, dinner_recipe.name]
         d = datetime.datetime.today()
         timestamp = d.strftime("%d-%b-%Y (%H:%M:%S)") #.%f
-        recipe_book = RecipeBook(timestamp, recipe_names)
-        return recipe_book
+        book = Book(timestamp, recipe_names)
+        return book

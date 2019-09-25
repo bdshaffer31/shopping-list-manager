@@ -7,7 +7,7 @@ from ingredient import Ingredient
 from confirm import confirm
 from ingredient_interface import IngredientInterface
 
-class RecipeBookInterface:
+class BookInterface:
 
     def __init__(self, book):
         self.seeder = Seeder()
@@ -17,8 +17,8 @@ class RecipeBookInterface:
         while(True):
             action = input('input action for recipe book: ')
             if action == 'help':
-                print('-help \n-exit \n-display \n-edit name \n-edit meal \n-add recipes', 
-                '\n-remove recipe \n-elete recipe book')
+                print('-help \n-exit \n-display \n-edit name \n-add recipes', 
+                '\n-remove recipe \n-delete book')
             elif action == 'display':
                 self.display()
             elif action == 'edit name':
@@ -27,8 +27,8 @@ class RecipeBookInterface:
                 self.add_recipes()
             elif action == 'remove recipe':
                 self.remove_recipe()
-            elif action == 'delete recipe book':
-                self.delete_recipe_book()
+            elif action == 'delete book':
+                self.delete_book()
                 break
             elif action == 'exit':
                 break
@@ -46,7 +46,7 @@ class RecipeBookInterface:
         daily_menu = shelf.create_ran_daily_rb()
         for recipe_name in daily_menu.recipes:
             print(' - ' + recipe_name)
-        shelf.recipe_books.append(daily_menu)
+        shelf.books.append(daily_menu)
         self.seeder.update_seed(shelf)
 
     def edit_name(self): # needs cleaned up significantly map or list comprehension?
@@ -74,16 +74,23 @@ class RecipeBookInterface:
             else:
                 self.book.recipes.append(found.name)
 
-        for book in shelf.recipe_books:
+        for book in shelf.books:
             if book.name == self.book.name:
                 book.recipes = self.book.recipes
 
         self.seeder.update_seed(shelf)
 
     def remove_recipe(self):
-        pass
+        shelf = self.setup_and_seed('remove recipes')
+        recipe_name = input('enter recipe to remove: ').strip()
 
-    def delete_recipe_book(self):
+        for book in shelf.books:
+            if book.name == self.book.name:
+                book.recipes = [rec for rec in book.recipes if rec != recipe_name]
+        
+        self.seeder.update_seed(shelf)
+
+    def delete_book(self):
         pass
 
     def setup_and_seed(self, confirm_message):

@@ -21,4 +21,14 @@
     -only happens if selecting straight from creation and then adding...
     -crashing on write
     -something to do with empty ingredient lists
--change RecipeBook to Book :/ thats going to take a lot
+-add delete feature to book and ingredient
+-have shopping list write to seperate txt file
+-should shopping list be its own class?
+-make it more clear where you are in hierarchy in inputs
+-clean up seeder >_<*
+-using **kwargs for anything that may be none?
+
+v 2.0
+-bar code scan
+-web based 
+-GUI

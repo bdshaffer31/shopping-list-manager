@@ -27,7 +27,7 @@ class IngredientInterface:
                 self.delete_ingredient()
             elif action == 'recipes containing':
                 self.recipes_containing()
-            elif action == 'delete recipe':
+            elif action == 'delete ingredient':
                 pass
                 #self.delete_recipe()
             elif action == 'exit':
@@ -36,7 +36,7 @@ class IngredientInterface:
                 print('input not recognized, type \'help\' for a list')
 
     def edit_name(self):
-        shelf = self.setup_and_seed('edit ingredient name')
+        shelf = self.setup_and_seed(msg = 'edit ingredient name')
 
         old_name = self.ingredient.name
         new_name = input('change name to: ')
@@ -46,7 +46,7 @@ class IngredientInterface:
         self.seeder.update_seed(shelf)
 
     def edit_cost(self):
-        shelf = self.setup_and_seed('edit ingredient cost')
+        shelf = self.setup_and_seed(msg = 'edit ingredient cost')
 
         new_cost = input('change cost to: ')
         shelf.change_ingr_cost(self.ingredient.name, new_cost)
@@ -55,7 +55,7 @@ class IngredientInterface:
         self.seeder.update_seed(shelf)
 
     def edit_location(self):
-        shelf = self.setup_and_seed('edit ingredient location')
+        shelf = self.setup_and_seed(msg = 'edit ingredient location')
 
         new_location = input('change location to: ')
         shelf.change_ingr_location(self.ingredient.name, new_location)
@@ -69,10 +69,12 @@ class IngredientInterface:
     def recipes_containing(self):
         pass
 
-    def setup_and_seed(self, confirm_message):
-        #use function confirm() from confirm.py to check if user wants to proceed
-        if confirm(confirm_message)==False: 
-            exit()
+    def setup_and_seed(self, **kwargs):
+        confirm_message = kwargs.get('msg', None)
+        if confirm_message != None:
+            #use function confirm() from confirm.py to check if user wants to proceed
+            if confirm(confirm_message)==False: 
+                exit()
         self.seeder.refresh_seed()
         shelf = self.seeder.populate_bookshelf()
         return shelf

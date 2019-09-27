@@ -18,7 +18,7 @@ class BookInterface:
             action = input('input action for recipe book: ')
             if action == 'help':
                 print('-help \n-exit \n-display \n-edit name \n-add recipes', 
-                '\n-remove recipe \n-delete book')
+                '\n-remove recipe \n-delete book \n-shopping list')
             elif action == 'display':
                 self.display()
             elif action == 'edit name':
@@ -30,6 +30,8 @@ class BookInterface:
             elif action == 'delete book':
                 self.delete_book()
                 break
+            elif action == 'shopping list':
+                self.gen_shopping_list()
             elif action == 'exit':
                 break
             else:
@@ -42,7 +44,7 @@ class BookInterface:
             print('    ' + rec)
             
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
-        shelf = self.setup_and_seed('create random daily menu')
+        shelf = self.setup_and_seed(msg = 'create random daily menu')
         daily_menu = shelf.create_ran_daily_rb()
         for recipe_name in daily_menu.recipes:
             print(' - ' + recipe_name)
@@ -50,7 +52,7 @@ class BookInterface:
         self.seeder.update_seed(shelf)
 
     def edit_name(self): # needs cleaned up significantly map or list comprehension?
-        shelf = self.setup_and_seed('edit book name')
+        shelf = self.setup_and_seed(msg = 'edit book name')
 
         old_name = self.book.name
         new_name = input('change name to: ')
@@ -60,7 +62,7 @@ class BookInterface:
         self.seeder.update_seed(shelf)
 
     def add_recipes(self):
-        shelf = self.setup_and_seed('add recipes')
+        shelf = self.setup_and_seed()
         recipes = input('enter recipes to add: ')
 
         rec_name_list = recipes.split(', ')
@@ -81,7 +83,7 @@ class BookInterface:
         self.seeder.update_seed(shelf)
 
     def remove_recipe(self):
-        shelf = self.setup_and_seed('remove recipes')
+        shelf = self.setup_and_seed(msg = 'remove recipes')
         recipe_name = input('enter recipe to remove: ').strip()
 
         for book in shelf.books:
@@ -93,10 +95,22 @@ class BookInterface:
     def delete_book(self):
         pass
 
-    def setup_and_seed(self, confirm_message):
-        #use function confirm() from confirm.py to check if user wants to proceed
-        if confirm(confirm_message)==False: 
-            exit()
+    def gen_shopping_list(self):
+        shelf = self.setup_and_seed(msg = 'remove recipes')
+
+        ingr_list = shelf.book_ingr_list(self.book)
+        shopping_list = shelf.shopping_list(ingr_list)
+
+        #ADD write to text file
+        for ingr in shopping_list:
+            print(ingr.name)
+
+    def setup_and_seed(self, **kwargs):
+        confirm_message = kwargs.get('msg', None)
+        if confirm_message != None:
+            #use function confirm() from confirm.py to check if user wants to proceed
+            if confirm(confirm_message)==False: 
+                exit()
         self.seeder.refresh_seed()
         shelf = self.seeder.populate_bookshelf()
         return shelf

@@ -18,6 +18,10 @@ class BookShelf:
     def update_db(self):
         seeder = Seeder()
         seeder.write_with_pickle(self)  
+
+    def write_for_humans(self):
+        seeder = Seeder()
+        seeder.write_for_humans(self)
               
     def add_book(self, name, recipes): #TODO add check if recipe already exists
         self.books.append(Book(name, recipes)) 

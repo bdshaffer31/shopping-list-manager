@@ -28,6 +28,7 @@ class ShelfInterface:
             if action in commands:
                 commands[action]()
                 if action in ['exit']:
+                    shelf.write_for_humans()
                     break
             elif action == 'help':
                 print(' -', end ='')

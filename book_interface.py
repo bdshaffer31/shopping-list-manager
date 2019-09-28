@@ -11,26 +11,24 @@ class BookInterface:
         self.book = book
 
     def run(self):
+        commands = { 
+            'display': self.display, 
+            'edit name': self.edit_name,
+            'add recipes': self.add_recipes,
+            'remove recipe': self.remove_recipe,
+            'shopping list': self.gen_shopping_list,
+            'delete book': self.delete_book,
+            'exit': shelf.update_seed
+            }
         while(True):
-            action = input('input action for recipe book: ')
-            if action == 'help':
-                print('-help \n-exit \n-display \n-edit name \n-add recipes', 
-                '\n-remove recipe \n-delete book \n-shopping list')
-            elif action == 'display':
-                self.display()
-            elif action == 'edit name':
-                self.edit_name()
-            elif action == 'add recipes':
-                self.add_recipes()
-            elif action == 'remove recipe':
-                self.remove_recipe()
-            elif action == 'delete book':
-                self.delete_book()
-                break
-            elif action == 'shopping list':
-                self.gen_shopping_list()
-            elif action == 'exit':
-                break
+            action = input('input action for ' + self.book.name + ': ')
+            if action in commands:
+                commands[action]()
+                if action in ['delete book', 'exit']:
+                    break
+            elif action == 'help':
+                print(' -', end ='')
+                print(*commands.keys(), sep = '\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
     
@@ -88,13 +86,3 @@ class BookInterface:
         #ADD write to text file
         for ingr in shopping_list:
             print(ingr.name)
-
-    # def setup_and_seed(self, **kwargs):
-    #     confirm_message = kwargs.get('msg', None)
-    #     if confirm_message != None:
-    #         #use function confirm() from confirm.py to check if user wants to proceed
-    #         if confirm(confirm_message)==False: 
-    #             exit()
-    #     self.seeder.refresh_seed()
-    #     shelf = self.seeder.populate_bookshelf()
-    #     return shelf

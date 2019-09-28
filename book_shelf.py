@@ -4,9 +4,6 @@ from seeder import Seeder
 import random
 import datetime
 
-
-
-
 class BookShelf:
 
     def __init__(self):
@@ -83,6 +80,11 @@ class BookShelf:
             if ingr.name == name:
                 ingr.location = new_location
 
+    def delete_ingredient(self, ingr_name):
+        for ingr in self.master_list.ingredients:
+            if ingr.name == ingr_name:
+                self.master_list.ingredients.remove(ingr)
+
     def create_ran_daily_rb(self): 
         random.seed()
         breakfast_recipe = random.choice(self.master_list.find_recipes_by_meal('breakfast'))
@@ -94,5 +96,6 @@ class BookShelf:
         book = Book(timestamp, recipe_names)
         return book
 
+# make the 'shelf' where whole db will be stored in local memory ofr duration of program
 shelf = BookShelf()
 shelf = shelf.populate_bookshelf()

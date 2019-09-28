@@ -11,31 +11,27 @@ class ShelfInterface:
         pass
 
     def run(self):
+        commands = { 
+            'display recipes': self.display_recipes, 
+            'display': self.display, 
+            'create recipe': self.create_recipe, 
+            'select recipe': self.input_select_recipe, 
+            'select ingr': self.input_select_ingredient, 
+            'create ingr': self.create_ingredient,
+            'add book': self.add_book,
+            'remove book': self.remove_book,
+            'select book': self.input_select_book,
+            'exit': shelf.update_seed
+            }
         while(True):
             action = input('input action: ')
-            if action == 'help':
-                print('-help \n-exit \n-display recipes \n-display \n-create recipe ',
-                '\n-select ingr \n-select recipe \n-create recipe \n-add book',
-                '\n-remove book \n-select book')
-            elif action == 'display recipes':
-                self.display_recipes()
-            elif action == 'display':
-                self.display()
-            elif action == 'create recipe':
-                self.create_recipe()
-            elif action == 'select recipe':
-                self.input_select_recipe()
-            elif action == 'select ingr':
-                self.input_select_ingredient()
-            elif action == 'add book':
-                self.add_book()
-            elif action == 'remove book': #maybe this should be called delete for continuity
-                self.remove_book()
-            elif action == 'select book':
-                self.input_select_book()
-            elif action == 'exit':
-                shelf.update_seed()
-                break
+            if action in commands:
+                commands[action]()
+                if action in ['exit']:
+                    break
+            elif action == 'help':
+                print(' -', end ='')
+                print(*commands.keys(), sep = '\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
 
@@ -46,6 +42,9 @@ class ShelfInterface:
 
         shelf.master_list.add_recipe(name, meal, [])
         self.select_recipe(name)
+
+    def create_ingredient(self):
+        pass
 
     def display_recipes(self):
         self.print_recipes(shelf.master_list.recipes)

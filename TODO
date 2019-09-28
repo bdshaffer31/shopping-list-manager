@@ -13,25 +13,18 @@
 -use inheritance for interfaces (should all be based from generic class) 
 -select recipe / book / ingredient should catch the misses
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
--make confirm using *arg so that if there is a message it will, if not it wont
 -delete ingredient / recipe needs to go through all recipes / recipe books too
 -use *arg to make select recipe have option to go straight to add ingredients
--BUG when adding multiple(?) ingredients to recipe (bool has no attribte name)
-    -same issue with recipe books adding ingredients 
-    -only happens if selecting straight from creation and then adding...
-    -crashing on write
-    -something to do with empty ingredient lists
 -add delete feature to book and ingredient
 -have shopping list write to seperate txt file
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
 -clean up seeder >_<*
 -using **kwargs for anything that may be none?
--no functions in db should open or close db
--only read and write occasionally
 -move all functions that would require reference up in hierarchy
--switch to singelton structure
 -unique id shouldnt be editable :/
+-catch exceptions when finding anything
+-close text file properly
 
 
 v 2.0

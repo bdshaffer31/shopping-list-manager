@@ -5,36 +5,31 @@ from ingredient import Ingredient
 from confirm import confirm
 from ingredient_interface import IngredientInterface
 
-
-
 class RecipeInterface:
 
     def __init__(self, recipe):
         self.recipe = recipe
 
     def run(self):
+        commands = { 
+            'display': self.display, 
+            'edit name': self.edit_name, 
+            'edit meal': self.edit_meal, 
+            'add ingr': self.add_ingredient, 
+            'remove ingr': self.remove_ingredient,
+            'select ingr': self.select_ingredient,
+            'delete recipe': self.delete_recipe,
+            'exit': shelf.update_seed
+            }
         while(True):
-            action = input('input action for recipe: ')
-            if action == 'help':
-                print('-help \n-exit \n-display \n-edit name \n-edit meal \n-add ingr', 
-                '\n-remove ingr \n-select ingr \n-delete recipe')
-            elif action == 'display':
-                self.display()
-            elif action == 'edit name':
-                self.edit_name()
-            elif action == 'edit meal':
-                self.edit_meal()
-            elif action == 'add ingr':
-                self.add_ingredient()
-            elif action == 'remove ingr':
-                self.remove_ingredient()
-            elif action == 'select ingr':
-                self.select_ingredient()
-            elif action == 'delete recipe':
-                self.delete_recipe()
-                break
-            elif action == 'exit':
-                break
+            action = input('input action for ' + self.recipe.name + ': ')
+            if action in commands:
+                commands[action]()
+                if action in ['delete recipe', 'exit']:
+                    break
+            elif action == 'help':
+                print(' -', end ='')
+                print(*commands.keys(), sep = '\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
     

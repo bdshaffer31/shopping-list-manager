@@ -18,7 +18,7 @@ class BookInterface:
             'remove recipe': self.remove_recipe,
             'shopping list': self.gen_shopping_list,
             'delete book': self.delete_book,
-            'exit': shelf.update_seed
+            'exit': shelf.update_db
             }
         while(True):
             action = input('input action for ' + self.book.name + ': ')

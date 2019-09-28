@@ -21,7 +21,7 @@ class ShelfInterface:
             'add book': self.add_book,
             'remove book': self.remove_book,
             'select book': self.input_select_book,
-            'exit': shelf.update_seed
+            'exit': shelf.update_db
             }
         while(True):
             action = input('input action: ')

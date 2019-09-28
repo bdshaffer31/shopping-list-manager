@@ -19,7 +19,7 @@ class RecipeInterface:
             'remove ingr': self.remove_ingredient,
             'select ingr': self.select_ingredient,
             'delete recipe': self.delete_recipe,
-            'exit': shelf.update_seed
+            'exit': shelf.update_db
             }
         while(True):
             action = input('input action for ' + self.recipe.name + ': ')

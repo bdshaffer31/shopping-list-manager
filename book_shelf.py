@@ -12,15 +12,12 @@ class BookShelf:
 
     def populate_bookshelf(self):
         seeder = Seeder()
-        seeder.refresh_seed()
-        book_shelf = BookShelf()
-        book_shelf = seeder.populate_master(book_shelf)
-        book_shelf = seeder.populate_books(book_shelf)
+        book_shelf = seeder.read_with_pickle()
         return book_shelf
-    
-    def update_seed(self):
+
+    def update_db(self):
         seeder = Seeder()
-        seeder.update_seed(self)
+        seeder.write_with_pickle(self)  
               
     def add_book(self, name, recipes): #TODO add check if recipe already exists
         self.books.append(Book(name, recipes)) 
@@ -84,6 +81,9 @@ class BookShelf:
         for ingr in self.master_list.ingredients:
             if ingr.name == ingr_name:
                 self.master_list.ingredients.remove(ingr)
+
+    def recipes_containing(self, ingr_name):
+        pass
 
     def create_ran_daily_rb(self): 
         random.seed()

@@ -4,4 +4,4 @@ class Ingredient:
         self.name = name
         self.cost = cost
         self.location = location
-        self.servings = kwargs.get('servings', None)
+        self.servings = kwargs.get('servings', 1)

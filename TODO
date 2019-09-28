@@ -19,12 +19,16 @@
 -have shopping list write to seperate txt file
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
+    -partially accomplished?
 -clean up seeder >_<*
 -using **kwargs for anything that may be none?
 -move all functions that would require reference up in hierarchy
 -unique id shouldnt be editable :/
 -catch exceptions when finding anything
 -close text file properly
+-fix finding ingredients
+-finish ingredient functions
+-move create ingredient to shelf
 
 
 v 2.0

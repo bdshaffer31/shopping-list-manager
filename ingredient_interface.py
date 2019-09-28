@@ -17,7 +17,7 @@ class IngredientInterface:
             'edit location': self.edit_location,
             'recipes containing': self.recipes_containing,
             'delete ingr': self.delete_ingredient,
-            'exit': shelf.update_seed
+            'exit': shelf.update_db
             }
         while(True):
             action = input('input action for ' + self.ingredient.name + ': ')
@@ -32,7 +32,9 @@ class IngredientInterface:
                 print('input not recognized, type \'help\' for a list')
 
     def display(self):
-        pass
+        print(' name: ' + self.ingredient.name)
+        print(' cost: ' + self.ingredient.cost)
+        print(' location: ' + self.ingredient.lcoation)
 
     def edit_name(self):
         old_name = self.ingredient.name
@@ -54,7 +56,7 @@ class IngredientInterface:
         self.ingredient.location = new_location
 
     def delete_ingredient(self):
-        pass
+        shelf.delete_ingredient(self.ingredient.name)
 
     def recipes_containing(self):
         pass

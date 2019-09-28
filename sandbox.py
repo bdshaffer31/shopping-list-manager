@@ -9,23 +9,22 @@ import datetime
 if confirm("view recipe book contents")==False: 
     exit()
 
-seeder = Seeder()
 shelf = BookShelf() # empty book shelf to fill from seed
-shelf = seeder.populate_bookshelf()
+shelf = shelf.populate_bookshelf()
+shelf.update_pickle()
 
-datetimeObj = datetime.datetime.today()
-timestamp = datetimeObj.strftime("%d-%b-%Y (%H:%M:%S)") #.%f
-print('Current Timestamp : ', timestamp)
+for rec in shelf.master_list.recipes:
+    print(rec.name)
 
-breakfast = random.choice(shelf.master_list.find_recipes_by_meal('breakfast'))
-print(breakfast.name)
 
-print('------')
-book1 = Book('test_book', ['pb&j', 'oatmeal', 'lasagna'])
-ingr_list = shelf.book_ingr_list(book1)
-#print(*ingr_list, sep = ', ')
-ingr_list = shelf.shopping_list(ingr_list)
-for ingr in ingr_list:
-    print(ingr.name)
+print('--------')
 
-seeder.update_seed(shelf)
+pickle_shelf = BookShelf()
+pickle_shelf = pickle_shelf.populate_pickle()
+
+for rec in pickle_shelf.master_list.recipes:
+    print(rec.name)
+
+
+
+shelf.update_seed()

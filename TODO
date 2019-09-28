@@ -16,17 +16,15 @@
 -delete ingredient / recipe needs to go through all recipes / recipe books too
 -use *arg to make select recipe have option to go straight to add ingredients
 -add delete feature to book and ingredient
--have shopping list write to seperate txt file
+-have shopping list write to seperate txt file?
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
     -partially accomplished?
--clean up seeder >_<*
 -using **kwargs for anything that may be none?
 -move all functions that would require reference up in hierarchy
 -unique id shouldnt be editable :/
 -catch exceptions when finding anything
 -close text file properly
--fix finding ingredients
 -finish ingredient functions
 -move create ingredient to shelf
 

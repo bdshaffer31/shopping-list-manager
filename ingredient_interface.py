@@ -15,6 +15,7 @@ class IngredientInterface:
             'edit name': self.edit_name,
             'edit cost': self.edit_cost,
             'edit location': self.edit_location,
+            'edit servings': self.edit_servings,
             'recipes containing': self.recipes_containing,
             'delete ingr': self.delete_ingredient,
             'exit': shelf.update_db
@@ -34,7 +35,8 @@ class IngredientInterface:
     def display(self):
         print(' name: ' + self.ingredient.name)
         print(' cost: ' + self.ingredient.cost)
-        print(' location: ' + self.ingredient.lcoation)
+        print(' location: ' + self.ingredient.location)
+        print(' servings: ' + str(self.ingredient.servings))
 
     def edit_name(self):
         old_name = self.ingredient.name
@@ -54,6 +56,12 @@ class IngredientInterface:
         shelf.change_ingr_location(self.ingredient.name, new_location)
 
         self.ingredient.location = new_location
+
+    def edit_servings(self):
+        new_servings = input('change servings to: ')
+        shelf.change_ingr_servings(self.ingredient.name, new_servings)
+
+        self.ingredient.servings = new_servings
 
     def delete_ingredient(self):
         shelf.delete_ingredient(self.ingredient.name)

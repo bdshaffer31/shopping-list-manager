@@ -81,6 +81,11 @@ class BookShelf:
             if ingr.name == name:
                 ingr.location = new_location
 
+    def change_ingr_servings(self, name, new_servings):
+        for ingr in self.master_list.ingredients:
+            if ingr.name == name:
+                ingr.servings = new_servings
+
     def delete_ingredient(self, ingr_name):
         for ingr in self.master_list.ingredients:
             if ingr.name == ingr_name:

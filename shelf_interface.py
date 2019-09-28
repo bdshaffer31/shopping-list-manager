@@ -89,7 +89,7 @@ class ShelfInterface:
         
     def input_select_ingredient(self):
         ingr_name = input('select which ingredient:')
-        self.select_recipe(ingr_name)
+        self.select_ingredient(ingr_name)
 
     def select_ingredient(self, ingr_name):
         ingr = [ingr for ingr in shelf.master_list.ingredients if ingr.name == ingr_name]

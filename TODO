@@ -27,6 +27,12 @@
 -make it more clear where you are in hierarchy in inputs
 -clean up seeder >_<*
 -using **kwargs for anything that may be none?
+-no functions in db should open or close db
+-only read and write occasionally
+-move all functions that would require reference up in hierarchy
+-switch to singelton structure
+-unique id shouldnt be editable :/
+
 
 v 2.0
 -bar code scan

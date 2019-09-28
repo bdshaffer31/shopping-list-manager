@@ -1,4 +1,3 @@
-from book_shelf import BookShelf
 from book import Book
 from master_db import MasterDB
 
@@ -9,12 +8,6 @@ class Seeder:
 
     def refresh_seed(self):
         self.seed_file = open("C:/Users/Benjamin/Documents/RECIPE_APP/seed_file.tx")
-        
-    def populate_bookshelf(self):
-        book_shelf = BookShelf()
-        book_shelf = self.populate_master(book_shelf)
-        book_shelf = self.populate_books(book_shelf)
-        return book_shelf
 
     def populate_master(self, book_shelf):
         adding_recipes = True

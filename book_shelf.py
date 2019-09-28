@@ -1,13 +1,29 @@
 from book import Book
 from master_db import MasterDB
+from seeder import Seeder
 import random
 import datetime
+
+
+
 
 class BookShelf:
 
     def __init__(self):
         self.master_list = MasterDB([], [])
         self.books = []
+
+    def populate_bookshelf(self):
+        seeder = Seeder()
+        seeder.refresh_seed()
+        book_shelf = BookShelf()
+        book_shelf = seeder.populate_master(book_shelf)
+        book_shelf = seeder.populate_books(book_shelf)
+        return book_shelf
+    
+    def update_seed(self):
+        seeder = Seeder()
+        seeder.update_seed(self)
               
     def add_book(self, name, recipes): #TODO add check if recipe already exists
         self.books.append(Book(name, recipes)) 
@@ -77,3 +93,6 @@ class BookShelf:
         timestamp = d.strftime("%d-%b-%Y (%H:%M:%S)") #.%f
         book = Book(timestamp, recipe_names)
         return book
+
+shelf = BookShelf()
+shelf = shelf.populate_bookshelf()

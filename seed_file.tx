@@ -57,6 +57,8 @@ salsa | 2.50 | mexican |
 canned corn | 0.70 | canned | 
 tempeh | 1.70 | protiens | 
 hot sauce | 2.70 | mexican | 
+fritos | 1.90 | chips | 
+refried beans | 0.88 | canned | 
 ===== Recipes =====
 oatmeal | breakfast | oats, brown sugar, date, walnuts,  | 
 pb&j | lunch | bread, peanut butter, jelly,  | 
@@ -75,6 +77,7 @@ cereal | breakfast | cereal, almond milk, banana,  |
 pumpkin toast | lunch | pumpkin, cinnamon, spinach, almond milk, pumpkin seeds,  | 
 pumpkin pasta | dinner | linguine, pumpkin, coconut milk, pumpkin seeds, sage,  | 
 burrito bowl | lunch | brown rice, black beans, lettuce, salsa, canned corn, tempeh, hot sauce,  | 
+frito pie | dinner | fritos, refried beans, lettuce, cheese, salsa,  | 
 ****  **** 
 ===== Recipes =====
 oatmeal

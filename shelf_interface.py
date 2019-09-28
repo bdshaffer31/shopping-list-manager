@@ -1,5 +1,4 @@
-from seeder import Seeder
-from book_shelf import BookShelf
+from book_shelf import BookShelf, shelf
 from ingredient import Ingredient
 from recipe_interface import RecipeInterface
 from ingredient_interface import IngredientInterface
@@ -9,7 +8,7 @@ from confirm import confirm
 class ShelfInterface:
 
     def __init__(self):
-        self.seeder = Seeder()
+        pass
 
     def run(self):
         while(True):
@@ -35,34 +34,29 @@ class ShelfInterface:
             elif action == 'select book':
                 self.input_select_book()
             elif action == 'exit':
+                shelf.update_seed()
                 break
             else:
                 print('input not recognized, type \'help\' for a list')
 
     def create_recipe(self): 
-        shelf = self.setup_and_seed(msg = 'create new recipe')
 
         name = input('enter recipe name: ')
         meal = input('enter recipe meal: ').lower()
 
         shelf.master_list.add_recipe(name, meal, [])
-        self.seeder.update_seed(shelf)
         self.select_recipe(name)
 
     def display_recipes(self):
-        shelf = self.setup_and_seed()
         self.print_recipes(shelf.master_list.recipes)
 
     def display(self):
-        shelf = self.setup_and_seed()
         for book in shelf.books:
             print(book.name)
 
     def add_book(self):
-        shelf = self.setup_and_seed(msg = 'create new recipe book')
         name = input('recipe book name:')
         shelf.add_book(name, [])
-        self.seeder.update_seed(shelf)
         self.select_book(name)
 
     def remove_book(self):
@@ -73,7 +67,6 @@ class ShelfInterface:
         self.select_book(name)
 
     def select_book(self, name):
-        shelf = self.setup_and_seed(msg = 'select recipe book')
         book = [book for book in shelf.books if book.name == name]
         book = book[0]
         recb_interface = BookInterface(book)
@@ -84,7 +77,6 @@ class ShelfInterface:
         self.select_recipe(recipe_name)
 
     def select_recipe(self, recipe_name):
-        shelf = self.setup_and_seed(msg = 'select recipe')
         try:
             recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name]
         except:
@@ -100,7 +92,6 @@ class ShelfInterface:
         self.select_recipe(ingr_name)
 
     def select_ingredient(self, ingr_name):
-        shelf = self.setup_and_seed(msg = 'select ingredient')
         ingr = [ingr for ingr in shelf.master_list.ingredients if ingr.name == ingr_name]
         ingr = ingr[0]
         ingr_interface = IngredientInterface(ingr)
@@ -117,22 +108,10 @@ class ShelfInterface:
                 print(ing.name + ", ", end = "")
             print()
 
-    def setup_and_seed(self, **kwargs):
-        confirm_message = kwargs.get('msg', None)
-        if confirm_message != None:
-            #use function confirm() from confirm.py to check if user wants to proceed
-            if confirm(confirm_message)==False: 
-                exit()
-        self.seeder.refresh_seed()
-        shelf = self.seeder.populate_bookshelf()
-        return shelf
-
     def display_meal(self): #no longer and option from input
-        shelf = self.setup_and_seed()
         meal = input('display all recipes for which meal:')
         rec_list = shelf.master_list.find_recipes_by_meal(meal)
         self.print_recipes(rec_list)
 
     def display_recipe_costs(self): # no longer and option from input
-        shelf = self.setup_and_seed()
         self.print_costs(shelf.master_list.recipes)

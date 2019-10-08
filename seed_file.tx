@@ -59,6 +59,16 @@ tempeh | 1.70 | protiens |
 hot sauce | 2.70 | mexican | 
 fritos | 1.90 | chips | 
 refried beans | 0.88 | canned | 
+hummus | 3.50 | deli | 
+beets | 0.90 | produce | 
+carrot | 1.00 | produce | 
+bell pepper | 1.90 | produce | 
+chickpeas | 0.90 | canned | 
+vegan mayo | 4.70 | dairy | 
+red onion | 1.50 | produce | 
+dijon mustard | 3.00 | condiments | 
+smokey tempeh | 2.00 | vegan protien | 
+sweet potato | 2.50 | produce | 
 ===== Recipes =====
 oatmeal | breakfast | oats, brown sugar, date, walnuts,  | 
 pb&j | lunch | bread, peanut butter, jelly,  | 
@@ -78,6 +88,10 @@ pumpkin toast | lunch | pumpkin, cinnamon, spinach, almond milk, pumpkin seeds, 
 pumpkin pasta | dinner | linguine, pumpkin, coconut milk, pumpkin seeds, sage,  | 
 burrito bowl | lunch | brown rice, black beans, lettuce, salsa, canned corn, tempeh, hot sauce,  | 
 frito pie | dinner | fritos, refried beans, lettuce, cheese, salsa,  | 
+rainbow veggie sandwich | lunch | bread, hummus, beets, tomato, carrot, bell pepper, spinach, cucumber,  | 
+chicpea salad sandwich | lunch | chickpeas, vegan mayo, red onion, dijon mustard, bread, lettuce,  | 
+tempeh blt | lunch | bread, smokey tempeh, tomato, lettuce, vegan mayo,  | 
+sweet potato burrito | breakfast | sweet potato, wrap, black beans, salsa, red onion,  | 
 **** sample **** 
 ===== Recipes =====
 oatmeal

@@ -15,6 +15,7 @@ class RecipeInterface:
             'display': self.display, 
             'edit name': self.edit_name, 
             'edit meal': self.edit_meal, 
+            'add tags': self.add_tags,
             'add ingr': self.add_ingredient, 
             'remove ingr': self.remove_ingredient,
             'select ingr': self.select_ingredient,
@@ -34,8 +35,11 @@ class RecipeInterface:
                 print('input not recognized, type \'help\' for a list')
     
     def display(self):
+        print(*self.recipe.__dict__) #debug line
         print(' name: ' + self.recipe.name)
         print(' meal: ' + self.recipe.meal)
+        print(' tags: ', end='')
+        print(*self.recipe.tags, sep=', ')
         print(' ingredients:')
         for ing in self.recipe.ingredients:
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
@@ -53,13 +57,13 @@ class RecipeInterface:
 
         self.recipe.meal = new_meal
 
-    def add_ingredient(self):
+    def add_ingredient(self): #TODO move to shelf
         ingrediants = input('enter recipe ingrediants: ')
 
         ingr_name_list = ingrediants.split(', ')
-
-        #check if ingredient sharing name exists
+        
         for ingr in ingr_name_list:
+            #check if ingredient sharing name exists
             found = shelf.master_list.find_ing_by_name(ingr)
             if not found:
                 print('new ingredient ' + ingr + ' enter additional info')
@@ -74,11 +78,16 @@ class RecipeInterface:
             if rec.name == self.recipe.name:
                 rec.ingredients = self.recipe.ingredients
 
-    def remove_ingredient(self):
+    def remove_ingredient(self):#TODO move to shelf
         ing_name = input('ingredient to remove: ')
         for rec in shelf.master_list.recipes:
             if rec.name == self.recipe.name:
                 rec.ingredients = [ing for ing in rec.ingredients if ing.name != ing_name]
+
+    def add_tags(self):
+        tags = input('add tags: ')
+        tags = tags.split(', ')
+        shelf.add_rec_tags(self.recipe.name, tags)
 
     def delete_recipe(self):
         shelf.delete_recipe(self.recipe.name)

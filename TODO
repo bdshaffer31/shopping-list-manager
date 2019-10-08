@@ -1,6 +1,6 @@
 -make it so there can't be tomato and tomatoes (or warning)
 -add tags to recipes such as healthy, gluten free...
--naming of first recipe book is being lost
+-naming of first book is being lost
 -web scrape ingredients? API?
 -email / text today's menu?
 -intelligent refresh seed (not re-updating unchanged)
@@ -27,6 +27,8 @@
 -close text file properly
 -finish ingredient functions
 -move create ingredient to shelf
+-fix adding attributes to existing pickle file
+    -can be done but requires weird re-initialization in sandbox 
 
 
 v 2.0

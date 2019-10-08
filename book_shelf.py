@@ -65,6 +65,11 @@ class BookShelf:
         for rec in self.master_list.recipes:
             if rec.name == name:
                 rec.meal = new_meal
+    
+    def add_rec_tags(self, name, tags):
+        for rec in self.master_list.recipes:
+            if rec.name == name:
+                rec.tags.extend(tags)
 
     def delete_recipe(self, rec_name):
         for rec in self.master_list.recipes:

@@ -18,7 +18,7 @@ class ShelfInterface:
             'select recipe': self.input_select_recipe, 
             'select ingr': self.input_select_ingredient, 
             'create ingr': self.create_ingredient,
-            'add book': self.add_book,
+            'create book': self.create_book,
             'remove book': self.remove_book,
             'select book': self.input_select_book,
             'exit': shelf.update_db
@@ -54,7 +54,7 @@ class ShelfInterface:
         for book in shelf.books:
             print(book.name)
 
-    def add_book(self):
+    def create_book(self):
         name = input('recipe book name:')
         shelf.add_book(name, [])
         self.select_book(name)

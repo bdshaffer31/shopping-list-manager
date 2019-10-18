@@ -26,6 +26,11 @@ class BookShelf:
     def add_book(self, name, recipes): #TODO add check if recipe already exists
         self.books.append(Book(name, recipes)) 
 
+    def delete_book(self, name):
+        for book in self.books:
+            if book.name == name:
+                self.books.remove(book)
+
     def book_ingr_list(self, book):
         ingredients = []
         for rec in book.recipes:
@@ -60,6 +65,11 @@ class BookShelf:
         for book in self.books:
             if book.name == old_name:
                 book.name = new_name
+                
+    def remove_recipe_from_book(self, book_name, recipe_name):
+        for book in self.books:
+            if book.name == book_name:
+                book.recipes = [rec for rec in book.recipes if rec != recipe_name]
 
     def change_rec_meal(self, name, new_meal):
         for rec in self.master_list.recipes:

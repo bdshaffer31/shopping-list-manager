@@ -29,6 +29,9 @@
 -move create ingredient to shelf
 -fix adding attributes to existing pickle file
     -can be done but requires weird re-initialization in sandbox 
+-version control (add field to shelf with version number)
+-shopping list makes a text file for printing
+-shopping list removes redundant ingredients and displays location names
 
 
 v 2.0

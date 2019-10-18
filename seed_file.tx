@@ -69,6 +69,12 @@ red onion | 1.50 | produce |
 dijon mustard | 3.00 | condiments | 
 smokey tempeh | 2.00 | vegan protien | 
 sweet potato | 2.50 | produce | 
+canned potato | 0.80 | canned | 
+diced tomato | 0.70 | canned | 
+white rice | 2.70 | bulk | 
+vanilla | 2.90 | baking | 
+chocolate chips | 1.80 | baking | 
+maple syrup | 3.00 | baking | 
 ===== Recipes =====
 oatmeal | breakfast | oats, brown sugar, date, walnuts,  | 
 pb&j | lunch | bread, peanut butter, jelly,  | 
@@ -89,13 +95,11 @@ pumpkin pasta | dinner | linguine, pumpkin, coconut milk, pumpkin seeds, sage,  
 burrito bowl | lunch | brown rice, black beans, lettuce, salsa, canned corn, tempeh, hot sauce,  | 
 frito pie | dinner | fritos, refried beans, lettuce, cheese, salsa,  | 
 rainbow veggie sandwich | lunch | bread, hummus, beets, tomato, carrot, bell pepper, spinach, cucumber,  | 
-chicpea salad sandwich | lunch | chickpeas, vegan mayo, red onion, dijon mustard, bread, lettuce,  | 
+chickpea salad sandwich | lunch | chickpeas, vegan mayo, red onion, dijon mustard, bread, lettuce,  | 
 tempeh blt | lunch | bread, smokey tempeh, tomato, lettuce, vegan mayo,  | 
 sweet potato burrito | breakfast | sweet potato, wrap, black beans, salsa, red onion,  | 
-**** sample **** 
-===== Recipes =====
-oatmeal
-pb&j
+american curry | dinner | potato, chickpeas, diced tomato, white rice, spinach,  | 
+heap cookie | breakfast | banana, oats, vanilla, peanut butter, choclate chips, maple syrup,  | 
 **** 12-Sep-2019 (15:03:08) **** 
 ===== Recipes =====
 oatmeal
@@ -105,4 +109,9 @@ chili
 ===== Recipes =====
 pumpkin toast
 pumpkin pasta
+**** recipes from my bowl blog **** 
+===== Recipes =====
+rainbow veggie sandwich
+tempeh blt
+sweet potato burrito
 ******** 

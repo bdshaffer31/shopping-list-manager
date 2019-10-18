@@ -44,14 +44,14 @@ class BookInterface:
             print(' - ' + recipe_name)
         shelf.books.append(daily_menu)
 
-    def edit_name(self): # needs cleaned up significantly map or list comprehension?
+    def edit_name(self): 
         old_name = self.book.name
         new_name = input('change name to: ')
         shelf.change_book_name(old_name, new_name)
 
         self.book.name = new_name
 
-    def add_recipes(self):
+    def add_recipes(self): #needs to be moved up?
         recipes = input('enter recipes to add: ')
 
         rec_name_list = recipes.split(', ')
@@ -71,18 +71,14 @@ class BookInterface:
 
     def remove_recipe(self):
         recipe_name = input('enter recipe to remove: ').strip()
-
-        for book in shelf.books:
-            if book.name == self.book.name:
-                book.recipes = [rec for rec in book.recipes if rec != recipe_name]
+        shelf.remove_recipe_from_book(self.book.name, recipe_name)
 
     def delete_book(self):
-        pass
+        shelf.delete_book(self.book.name)
 
     def gen_shopping_list(self):
-        ingr_list = shelf.book_ingr_list(self.book)
-        shopping_list = shelf.shopping_list(ingr_list)
+        shopping_list = shelf.shopping_list(shelf.book_ingr_list(self.book))
 
         #ADD write to text file
         for ingr in shopping_list:
-            print(ingr.name)
+            print(' - ' + ingr.name)

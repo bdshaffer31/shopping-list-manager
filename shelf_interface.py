@@ -52,7 +52,7 @@ class ShelfInterface:
 
     def display(self):
         for book in shelf.books:
-            print(book.name)
+            print(' - ' + book.name)
 
     def create_book(self):
         name = input('recipe book name:')

@@ -56,10 +56,10 @@ class BookShelf:
                 rec_list.append(rec)
             rec_book.recipes = rec_list
 
-    def change_ingr_name(self, old_name, new_name): # shorten using map or list comprehension
-        for ingr in self.master_list.ingredients:
-            if ingr.name == old_name:
-                ingr.name = new_name
+    def remove_ingr_from_recipe(self, recipe_name, ingr_name):
+        for rec in self.master_list.recipes:
+            if rec.name == recipe_name:
+                rec.ingredients = [ingr for ingr in rec.ingredients if ingr.name != ingr_name]
 
     def change_book_name(self, old_name, new_name): # shorten using map or list comprehension
         for book in self.books:
@@ -76,7 +76,7 @@ class BookShelf:
             if rec.name == name:
                 rec.meal = new_meal
     
-    def add_rec_tags(self, name, tags):
+    def add_rec_tags(self, name, tags): #wait why would this be in shelf? => recipe?
         for rec in self.master_list.recipes:
             if rec.name == name:
                 rec.tags.extend(tags)
@@ -85,26 +85,27 @@ class BookShelf:
         for rec in self.master_list.recipes:
             if rec.name == rec_name:
                 self.master_list.recipes.remove(rec)
+        for book in self.books:
+            self.remove_recipe_from_book(book.name, rec_name)
 
-    def change_ingr_cost(self, name, new_cost):
-        for ingr in self.master_list.ingredients:
-            if ingr.name == name:
-                ingr.cost = new_cost
+    def edit_book_attr(self, list, name, attribute, new_value):
+        list = [x for x in self.books if x.name == name]
+        setattr(list[0] , attribute, new_value)
 
-    def change_ingr_location(self, name, new_location):
-        for ingr in self.master_list.ingredients:
-            if ingr.name == name:
-                ingr.location = new_location
+    def edit_recipe_attr(self, list, name, attribute, new_value):
+        list = [x for x in self.master_list.recipes if x.name == name]
+        setattr(list[0] , attribute, new_value)
 
-    def change_ingr_servings(self, name, new_servings):
-        for ingr in self.master_list.ingredients:
-            if ingr.name == name:
-                ingr.servings = new_servings
+    def edit_ingr_attr(self, list, name, attribute, new_value):
+        list = [x for x in self.master_list.ingredients if x.name == name]
+        setattr(list[0] , attribute, new_value)
 
     def delete_ingredient(self, ingr_name):
         for ingr in self.master_list.ingredients:
             if ingr.name == ingr_name:
                 self.master_list.ingredients.remove(ingr)
+        for rec in self.master_list.recipes:
+            self.remove_ingr_from_recipe(rec.name, ingr_name)
 
     def recipes_containing(self, ingr_name):
         pass

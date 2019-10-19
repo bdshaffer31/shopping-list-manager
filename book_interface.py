@@ -45,9 +45,8 @@ class BookInterface:
         shelf.books.append(daily_menu)
 
     def edit_name(self): 
-        old_name = self.book.name
         new_name = input('change name to: ')
-        shelf.change_book_name(old_name, new_name)
+        shelf.edit_book_attr(self.book.name, 'name', new_name)
 
         self.book.name = new_name
 

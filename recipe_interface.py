@@ -35,7 +35,6 @@ class RecipeInterface:
                 print('input not recognized, type \'help\' for a list')
     
     def display(self):
-        print(*self.recipe.__dict__) #debug line
         print(' name: ' + self.recipe.name)
         print(' meal: ' + self.recipe.meal)
         print(' tags: ', end='')
@@ -44,7 +43,7 @@ class RecipeInterface:
         for ing in self.recipe.ingredients:
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
-    def edit_name(self): # needs cleaned up significantly map or list comprehension?
+    def edit_name(self):
         old_name = self.recipe.name
         new_name = input('change name to: ')
         shelf.change_rec_name(old_name, new_name)
@@ -53,7 +52,7 @@ class RecipeInterface:
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.change_rec_meal(self.recipe.name, new_meal)
+        shelf.edit_recipe_attr(self.recipe.name, 'meal', new_meal)
 
         self.recipe.meal = new_meal
 
@@ -78,11 +77,9 @@ class RecipeInterface:
             if rec.name == self.recipe.name:
                 rec.ingredients = self.recipe.ingredients
 
-    def remove_ingredient(self):#TODO move to shelf
-        ing_name = input('ingredient to remove: ')
-        for rec in shelf.master_list.recipes:
-            if rec.name == self.recipe.name:
-                rec.ingredients = [ing for ing in rec.ingredients if ing.name != ing_name]
+    def remove_ingredient(self):
+        ingr_name = input('ingredient to remove: ')
+        shelf.remove_ingr_from_recipe(self.recipe.name, ingr_name)
 
     def add_tags(self):
         tags = input('add tags: ')

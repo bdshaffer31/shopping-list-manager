@@ -1,9 +1,6 @@
 -make it so there can't be tomato and tomatoes (or warning)
--add tags to recipes such as healthy, gluten free...
--naming of first book is being lost
 -web scrape ingredients? API?
 -email / text today's menu?
--intelligent refresh seed (not re-updating unchanged)
 -multiple meals per recipe
 -add 'servings' to ingredients (or maybe cost per serving instead)
     -maybe recipes should roughly say how many servings they will take to keep inventory
@@ -13,14 +10,12 @@
 -use inheritance for interfaces (should all be based from generic class) 
 -select recipe / book / ingredient should catch the misses
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
--delete ingredient / recipe needs to go through all recipes / recipe books too
 -use *arg to make select recipe have option to go straight to add ingredients
--add delete feature to book and ingredient
 -have shopping list write to seperate txt file?
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
     -partially accomplished?
--using **kwargs for anything that may be none?
+-re-assess use of **kwargs
 -move all functions that would require reference up in hierarchy
 -unique id shouldnt be editable :/
 -catch exceptions when finding anything
@@ -32,7 +27,10 @@
 -version control (add field to shelf with version number)
 -shopping list makes a text file for printing
 -shopping list removes redundant ingredients and displays location names
-
+-switch to using with: as: for opening files properly
+-seperate functions in shelf by ingr / recipe / book 
+-actually utilize tags / increase ability to edit
+-wait are the ingredients in recipes real???? wtf
 
 v 2.0
 -bar code scan

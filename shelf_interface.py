@@ -19,7 +19,6 @@ class ShelfInterface:
             'select ingr': self.input_select_ingredient, 
             'create ingr': self.create_ingredient,
             'create book': self.create_book,
-            'remove book': self.remove_book,
             'select book': self.input_select_book,
             'exit': shelf.update_db
             }
@@ -55,15 +54,12 @@ class ShelfInterface:
             print(' - ' + book.name)
 
     def create_book(self):
-        name = input('recipe book name:')
+        name = input('recipe book name: ')
         shelf.add_book(name, [])
         self.select_book(name)
 
-    def remove_book(self):
-        pass
-
     def input_select_book(self):
-        name = input('select which recipe book:')
+        name = input('select which recipe book: ')
         self.select_book(name)
 
     def select_book(self, name):
@@ -73,7 +69,7 @@ class ShelfInterface:
         recb_interface.run()
 
     def input_select_recipe(self):
-        recipe_name = input('select which recipe:')
+        recipe_name = input('select which recipe: ')
         self.select_recipe(recipe_name)
 
     def select_recipe(self, recipe_name):
@@ -88,7 +84,7 @@ class ShelfInterface:
         rec_interface.run()
         
     def input_select_ingredient(self):
-        ingr_name = input('select which ingredient:')
+        ingr_name = input('select which ingredient: ')
         self.select_ingredient(ingr_name)
 
     def select_ingredient(self, ingr_name):
@@ -109,7 +105,7 @@ class ShelfInterface:
             print()
 
     def display_meal(self): #no longer and option from input
-        meal = input('display all recipes for which meal:')
+        meal = input('display all recipes for which meal: ')
         rec_list = shelf.master_list.find_recipes_by_meal(meal)
         self.print_recipes(rec_list)
 

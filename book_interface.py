@@ -46,7 +46,7 @@ class BookInterface:
 
     def edit_name(self): 
         new_name = input('change name to: ')
-        shelf.edit_book_attr(self.book.name, 'name', new_name)
+        shelf.edit_book_attr(shelf.books, self.book.name, 'name', new_name)
 
         self.book.name = new_name
 

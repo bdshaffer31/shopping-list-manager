@@ -52,7 +52,7 @@ class RecipeInterface:
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.edit_recipe_attr(self.recipe.name, 'meal', new_meal)
+        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.name, 'meal', new_meal)
 
         self.recipe.meal = new_meal
 

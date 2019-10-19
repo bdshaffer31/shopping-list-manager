@@ -89,15 +89,15 @@ class BookShelf:
             self.remove_recipe_from_book(book.name, rec_name)
 
     def edit_book_attr(self, list, name, attribute, new_value):
-        list = [x for x in self.books if x.name == name]
+        list = [x for x in list if x.name == name]
         setattr(list[0] , attribute, new_value)
 
     def edit_recipe_attr(self, list, name, attribute, new_value):
-        list = [x for x in self.master_list.recipes if x.name == name]
+        list = [x for x in list if x.name == name]
         setattr(list[0] , attribute, new_value)
 
     def edit_ingr_attr(self, list, name, attribute, new_value):
-        list = [x for x in self.master_list.ingredients if x.name == name]
+        list = [x for x in list if x.name == name]
         setattr(list[0] , attribute, new_value)
 
     def delete_ingredient(self, ingr_name):

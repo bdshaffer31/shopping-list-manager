@@ -31,16 +31,25 @@ class MasterDB:
     def rec_total_cost(self, rec):
         return sum(ingr.cost for ingr in self.get_ingrs_from_ids(rec.ingredients))
 
-    def edit_recipe_attr(self, list, rec_id, attribute, new_value):
-        list = [x for x in list if x.id == rec_id]
+    def edit_recipe_attr(self, rec_id, attribute, new_value):
+        self.edit_attr(self.recipes, rec_id, attribute, new_value)
+
+    def edit_ingr_attr(self, ingr_id, attribute, new_value):
+        self.edit_attr(self.ingredients, ingr_id, attribute, new_value)
+
+    def edit_attr(self, list, an_id, attribute, new_value):
+        list = [x for x in list if x.id == an_id]
         setattr(list[0] , attribute, new_value)
 
-    def edit_ingr_attr(self, list, ingr_id, attribute, new_value):
-        list = [x for x in list if x.id == ingr_id]
-        setattr(list[0] , attribute, new_value)
 
-    def recipes_containing(self, list, ingr_name):
+    def all_recs_containing(self, ingr_id):
+        self.recipes_containing(self.recipes, ingr_id)
+
+    def recipes_containing(self, list, ingr_id):
         pass
+
+    def all_recs_with_tag(self, tag):
+        self.recipes_with_tag(self.recipes, tag)
 
     def recipes_with_tag(self, list, tag):
         pass   

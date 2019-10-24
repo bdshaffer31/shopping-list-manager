@@ -45,13 +45,13 @@ class RecipeInterface:
 
     def edit_name(self):
         new_name = input('change name to: ')
-        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'name', new_name)
+        shelf.master_list.edit_recipe_attr(self.recipe.id, 'name', new_name)
 
         self.recipe.name = new_name
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'meal', new_meal)
+        shelf.master_list.edit_recipe_attr(self.recipe.id, 'meal', new_meal)
 
         self.recipe.meal = new_meal
 
@@ -82,7 +82,7 @@ class RecipeInterface:
 
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
-        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'tags', tags)
+        shelf.master_list.edit_recipe_attr(self.recipe.id, 'tags', tags)
 
     def delete_recipe(self):
         shelf.master_list.delete_recipe(self.recipe.id)

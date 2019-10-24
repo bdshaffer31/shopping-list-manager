@@ -26,6 +26,8 @@
 -migrate adding id field to book
 -make write for humans more robust
 -fix create recipe / move up hierarchy
+-is interfaces owning a clone more confusion then its worth?
+    -no, interfaces should only have ids
 -unit tests!!
 
 v 2.0

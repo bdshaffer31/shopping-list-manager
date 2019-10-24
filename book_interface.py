@@ -17,6 +17,7 @@ class BookInterface:
             'add recipes': self.add_recipes,
             'remove recipe': self.remove_recipe,
             'shopping list': self.gen_shopping_list,
+            'add days': self.add_days,
             'delete book': self.delete_book,
             'exit': shelf.update_db
             }
@@ -35,8 +36,8 @@ class BookInterface:
     def display(self):
         print(' name: ' + self.book.name)
         print(' recipes:')
-        for rec in self.book.recipes:
-            print('    ' + rec)
+        for rec in shelf.get_book(self.book.id).recipes:
+            print('    ' + str(rec))
             
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
         daily_menu = shelf.create_ran_daily_rb()
@@ -46,7 +47,7 @@ class BookInterface:
 
     def edit_name(self): 
         new_name = input('change name to: ')
-        shelf.edit_book_attr(shelf.books, self.book.id, 'name', new_name)
+        shelf.edit_book_attr(self.book.id, 'name', new_name)
 
         self.book.name = new_name
 
@@ -64,20 +65,22 @@ class BookInterface:
             else:
                 self.book.recipes.append(found.name)
 
-        for book in shelf.books:
-            if book.name == self.book.name:
-                book.recipes = self.book.recipes
+        shelf.edit_book_attr(self.book.id, 'recipes', self.book.recipes)
 
     def remove_recipe(self):
         recipe_name = input('enter recipe to remove: ').strip()
         shelf.remove_recipe_from_book(self.book.name, recipe_name)
 
     def delete_book(self):
-        shelf.delete_book(self.book.name)
+        shelf.delete_book(self.book.id)
 
     def gen_shopping_list(self):
-        shopping_list = shelf.shopping_list(shelf.book_ingr_list(self.book))
+        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.book))
 
         #ADD write to text file
         for ingr in shopping_list:
             print(' - ' + ingr.name)
+
+    def add_days(self):
+        days = int(input('how many random days to add: '))
+        shelf.add_ran_daily_plans(self.book.id, days)

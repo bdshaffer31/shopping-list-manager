@@ -36,11 +36,8 @@ class BookShelf:
 
     def book_ingr_list(self, book):
         ingredients = []
-        for rec in book.recipes:
-            for mrec in self.master_list.recipes:
-                if mrec.id == rec:
-                    for ingr in self.master_list.get_ingrs_from_ids(mrec.ingredients):
-                        ingredients.append(ingr)
+        for rec in self.master_list.get(self.master_list.recipes, book.recipes):
+            ingredients.extend(self.master_list.get(self.master_list.ingredients, rec.ingredients))
         return ingredients
 
     def sorted_shopping_list(self, ingr_list):

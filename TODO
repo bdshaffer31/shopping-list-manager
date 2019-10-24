@@ -23,11 +23,10 @@
 -seperate functions in shelf by ingr / recipe / book to improve legibility
 -actually utilize tags / increase ability to edit
 -ingredient collections that can be used in place of ingredients
--migrate adding id field to book
 -make write for humans more robust
 -fix create recipe / move up hierarchy
--is interfaces owning a clone more confusion then its worth?
-    -no, interfaces should only have ids
+-fix bug where after create recipe, oatmeal is selected indifferently
+    -seems like an id error
 -unit tests!!
 
 v 2.0

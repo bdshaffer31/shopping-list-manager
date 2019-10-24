@@ -27,7 +27,7 @@ class ShelfInterface:
             if action in commands:
                 commands[action]()
                 if action in ['exit']:
-                    shelf.write_for_humans()
+                    #shelf.write_for_humans()
                     break
             elif action == 'help':
                 print(' -', end ='')
@@ -39,8 +39,9 @@ class ShelfInterface:
 
         name = input('enter recipe name: ')
         meal = input('enter recipe meal: ').lower()
+        tags = input('enter recipe tags: ').split(', ')
 
-        shelf.master_list.add_recipe(name, meal, [])
+        shelf.master_list.add_recipe(name, meal, [], tags)
         self.select_recipe(name)
 
     def create_ingredient(self):

@@ -7,6 +7,12 @@ class MasterDB:
         self.recipes = recipes
         self.ingredients = ingredients
 
+    def add_recipe(self, name, meal, ingrs, tags):
+        self.recipes.append(Recipe(name, meal, ingrs, tags))
+
+    def add_ingr(self, name, cost, location, servings):
+        self.ingredients.append(Ingredient(name, cost, location, servings))
+
     def get(self, list, id_list):
         return [x for x in list if x.id in id_list]
 
@@ -41,17 +47,17 @@ class MasterDB:
         setattr(self.get(list, [an_id])[0] , attribute, new_value)
 
 
-    def all_recs_containing(self, ingr_id):
-        self.recipes_containing(self.recipes, ingr_id)
+    # def all_recs_containing(self, ingr_id):
+    #     return self.recipes_containing(self.recipes, ingr_id)
 
     def recipes_containing(self, list, ingr_id):
-        pass
+        return [rec for rec in list if ingr_id in rec.ingredients]
 
-    def all_recs_with_tag(self, tag):
-        self.recipes_with_tag(self.recipes, tag)
+    # def all_recs_with_tag(self, tag):
+    #     self.recipes_with_tag(self.recipes, tag)
 
     def recipes_with_tag(self, list, tag):
-        pass   
+        return [rec for rec in list if tag in rec.tags]   
 
     def remove_ingr_from_recipe(self, rec_id, ingr_id):
         for rec in self.recipes:

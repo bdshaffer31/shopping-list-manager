@@ -40,6 +40,7 @@ class RecipeInterface:
     def display(self):
         print(' name: ' + self.get_rec().name)
         print(' meal: ' + self.get_rec().meal)
+        print(' cost per serving: ' + str(round(shelf.master_list.rec_cost_per_serving(self.get_rec()),2)))
         print(' tags: ', end='')
         print(*self.get_rec().tags, sep=', ')
         print(' ingredients:')
@@ -86,5 +87,5 @@ class RecipeInterface:
         ing_name = input('select which ingredient: ')
         ingredient = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name][0]
         print('-' + ingredient.name)
-        ing_interface = IngredientInterface(ingredient)
+        ing_interface = IngredientInterface(ingredient.id)
         ing_interface.run()

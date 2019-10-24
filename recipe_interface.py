@@ -35,7 +35,7 @@ class RecipeInterface:
                 print('input not recognized, type \'help\' for a list')
     
     def get_rec(self):
-        return shelf.master_list.get_rec(self.id)
+        return shelf.master_list.get(shelf.master_list.recipes, [self.id])[0]
 
     def display(self):
         print(' name: ' + self.get_rec().name)
@@ -43,7 +43,7 @@ class RecipeInterface:
         print(' tags: ', end='')
         print(*self.get_rec().tags, sep=', ')
         print(' ingredients:')
-        for ing in shelf.master_list.get_ingrs_from_ids(self.get_rec().ingredients):
+        for ing in shelf.master_list.get(shelf.master_list.ingredients, self.get_rec().ingredients):
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
     def edit_name(self):
@@ -67,13 +67,9 @@ class RecipeInterface:
                 location = input('enter ingrediant location: ')
                 servings = input('enter ingrediant servings: ')
                 shelf.master_list.add_ingredient(ingr, cost, location)
-                self.recipe.ingredients.append(Ingredient(ingr, cost, location, servings))
+                self.get_rec().ingredients.append(Ingredient(ingr, cost, location, servings))
             else:
-                self.recipe.ingredients.append(found)
-
-        for rec in shelf.master_list.recipes:
-            if rec.name == self.recipe.name:
-                rec.ingredients = self.recipe.ingredients
+                self.get_rec().ingredients.append(found)
 
     def remove_ingredient(self):
         ingr_name = input('ingredient to remove: ')

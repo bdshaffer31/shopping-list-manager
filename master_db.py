@@ -7,14 +7,8 @@ class MasterDB:
         self.recipes = recipes
         self.ingredients = ingredients
 
-    def get_ingr(self, ingr_id):
-        return self.get(self.ingredients, ingr_id)
-
-    def get_rec(self, rec_id):
-        return self.get(self.recipes, rec_id)
-
-    def get(self, list, an_id):
-        return [x for x in list if x.id == an_id][0]
+    def get(self, list, id_list):
+        return [x for x in list if x.id in id_list]
 
     def find_ing_by_name(self, ingredient_name): # this was changed and that broke some things 
         for ing in self.ingredients:
@@ -30,15 +24,12 @@ class MasterDB:
         recipe_list = [x for x in self.recipes if x.meal == meal]
         return recipe_list
 
-    def get_ingrs_from_ids(self, ingr_ids):
-        ingredients = [x for x in self.ingredients if x.id in ingr_ids]
-        return ingredients  
-
     def rec_cost_per_serving(self, rec):
-        return sum(ingr.cost_per_serving() for ingr in self.get_ingrs_from_ids(rec.ingredients))
+        return sum(ingr.cost_per_serving() for ingr in self.get(self.ingredients, rec.ingredients))
 
     def rec_total_cost(self, rec):
-        return sum(ingr.cost for ingr in self.get_ingrs_from_ids(rec.ingredients))
+        return sum(ingr.cost for ingr in self.get(self.ingredients, rec.ingredients))
+
 
     def edit_recipe_attr(self, rec_id, attribute, new_value):
         self.edit_attr(self.recipes, rec_id, attribute, new_value)
@@ -47,7 +38,7 @@ class MasterDB:
         self.edit_attr(self.ingredients, ingr_id, attribute, new_value)
 
     def edit_attr(self, list, an_id, attribute, new_value):
-        setattr(self.get(list, an_id) , attribute, new_value)
+        setattr(self.get(list, [an_id])[0] , attribute, new_value)
 
 
     def all_recs_containing(self, ingr_id):

@@ -33,7 +33,7 @@ class IngredientInterface:
                 print('input not recognized, type \'help\' for a list')
                 
     def get_ingr(self):
-        return shelf.master_list.get_ingr(self.id)
+        return shelf.master_list.get(shelf.master_list.ingredients, [self.id])[0]
 
     def display(self):
         print(' name: ' + self.get_ingr().name)
@@ -51,11 +51,11 @@ class IngredientInterface:
 
     def edit_location(self):
         new_location = input('change location to: ')
-        shelf.master_list.edit_ingr_attr(self.id, 'cost', new_location)
+        shelf.master_list.edit_ingr_attr(self.id, 'location', new_location)
 
     def edit_servings(self):
         new_servings = input('change servings to: ')
-        shelf.master_list.edit_ingr_attr(self.id, 'cost', new_servings)
+        shelf.master_list.edit_ingr_attr(self.id, 'servings', new_servings)
 
     def delete_ingredient(self):
         shelf.master_list.delete_ingredient(self.id)

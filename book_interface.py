@@ -22,7 +22,7 @@ class BookInterface:
             'exit': shelf.update_db
             }
         while(True):
-            action = input('input action for ' + self.book.name + ': ')
+            action = input('input action for ' + self.get_book().name + ': ')
             if action in commands:
                 commands[action]()
                 if action in ['delete book', 'exit']:
@@ -39,8 +39,8 @@ class BookInterface:
     def display(self):
         print(' name: ' + self.get_book().name)
         print(' recipes:')
-        for rec in self.get_book().recipes:
-            print('    ' + str(rec))
+        for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
+            print('    ' + rec.name)
             
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
         daily_menu = shelf.create_ran_daily_rb()
@@ -64,9 +64,8 @@ class BookInterface:
                 pass
                 # won't create recipes that don't exist yet :/
             else:
-                self.book.recipes.append(found.name)
+                self.get_book().recipes.append(found.id)
 
-        shelf.edit_book_attr(self.id, 'recipes', self.book.recipes)
 
     def remove_recipe(self):
         recipe_name = input('enter recipe to remove: ').strip()

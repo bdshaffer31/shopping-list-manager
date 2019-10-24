@@ -2,8 +2,7 @@
 -web scrape ingredients? API?
 -email / text today's menu?
 -multiple meals per recipe
--add 'servings' to ingredients (or maybe cost per serving instead)
-    -maybe recipes should roughly say how many servings they will take to keep inventory
+-recipes should roughly say how many servings they will take to keep inventory?
 -cast handeling of inputs
 -set list of meals availbles
 -codify locations
@@ -11,26 +10,22 @@
 -select recipe / book / ingredient should catch the misses
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
 -use *arg to make select recipe have option to go straight to add ingredients
--have shopping list write to seperate txt file?
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
     -partially accomplished?
--re-assess use of **kwargs
--move all functions that would require reference up in hierarchy
--unique id shouldnt be editable :/
--catch exceptions when finding anything
 -close text file properly
 -finish ingredient functions
 -move create ingredient to shelf
--fix adding attributes to existing pickle file
-    -can be done but requires weird re-initialization in sandbox 
 -version control (add field to shelf with version number)
 -shopping list makes a text file for printing
 -shopping list removes redundant ingredients and displays location names
 -switch to using with: as: for opening files properly
--seperate functions in shelf by ingr / recipe / book 
+-seperate functions in shelf by ingr / recipe / book to improve legibility
 -actually utilize tags / increase ability to edit
--wait are the ingredients in recipes real???? wtf
+-ingredient collections that can be used in place of ingredients
+-migrate adding id field to book
+-make write for humans more robust
+-unit tests!!
 
 v 2.0
 -bar code scan

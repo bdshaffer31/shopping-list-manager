@@ -63,8 +63,12 @@ class ShelfInterface:
         self.select_book(name)
 
     def select_book(self, name):
-        book = [book for book in shelf.books if book.name == name]
-        book = book[0]
+        try:
+            book = [book for book in shelf.books if book.name == name][0]
+        except IndexError:
+            print('book with name \'' + name + '\' not found')
+            return
+        
         recb_interface = BookInterface(book)
         recb_interface.run()
 
@@ -72,14 +76,13 @@ class ShelfInterface:
         recipe_name = input('select which recipe: ')
         self.select_recipe(recipe_name)
 
-    def select_recipe(self, recipe_name):
+    def select_recipe(self, name):
         try:
-            recipe = [rec for rec in shelf.master_list.recipes if rec.name == recipe_name]
-        except:
-            print('recipe with name \'' + recipe_name + '\' not found')
+            recipe = [rec for rec in shelf.master_list.recipes if rec.name == name][0]
+        except IndexError:
+            print('recipe with name \'' + name + '\' not found')
             return
 
-        recipe = recipe[0]
         rec_interface = RecipeInterface(recipe)
         rec_interface.run()
         
@@ -87,9 +90,13 @@ class ShelfInterface:
         ingr_name = input('select which ingredient: ')
         self.select_ingredient(ingr_name)
 
-    def select_ingredient(self, ingr_name):
-        ingr = [ingr for ingr in shelf.master_list.ingredients if ingr.name == ingr_name]
-        ingr = ingr[0]
+    def select_ingredient(self, name):
+        try:
+            ingr = [ingr for ingr in shelf.master_list.ingredients if ingr.name == name][0]
+        except IndexError:
+            print('ingredient with name \'' + name + '\' not found')
+            return
+        
         ingr_interface = IngredientInterface(ingr)
         ingr_interface.run()
 
@@ -100,7 +107,7 @@ class ShelfInterface:
     def print_recipes(self, rec_list):
         for rec in rec_list:
             print("- " + rec.name + " - ", end = "")
-            for ing in rec.ingredients:
+            for ing in shelf.get_ingredients_from_ids(rec.ingredients):
                 print(ing.name + ", ", end = "")
             print()
 

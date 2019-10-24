@@ -1,10 +1,14 @@
-class Ingredient:
+import itertools
 
-    def __init__(self, name, cost, location, **kwargs):
+class Ingredient:
+    newid = itertools.count().__next__
+
+    def __init__(self, name, cost, location, servings):
+        self.id = Ingredient.newid()
         self.name = name
         self.cost = cost
         self.location = location
-        self.servings = kwargs.get('servings', 1)
+        self.servings = servings
 
     def cost_per_serving(self):
         return float(self.cost) / float(self.servings)

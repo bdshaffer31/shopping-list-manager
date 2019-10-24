@@ -40,23 +40,23 @@ class RecipeInterface:
         print(' tags: ', end='')
         print(*self.recipe.tags, sep=', ')
         print(' ingredients:')
-        for ing in self.recipe.ingredients:
+        for ing in shelf.get_ingredients_from_ids(self.recipe.ingredients):
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
     def edit_name(self):
-        old_name = self.recipe.name
+        rec_id = self.recipe.id
         new_name = input('change name to: ')
-        shelf.change_rec_name(old_name, new_name)
+        shelf.change_rec_name(rec_id, new_name)
 
         self.recipe.name = new_name
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.name, 'meal', new_meal)
+        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'meal', new_meal)
 
         self.recipe.meal = new_meal
 
-    def add_ingredient(self): #TODO move to shelf
+    def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
         ingrediants = input('enter recipe ingrediants: ')
 
         ingr_name_list = ingrediants.split(', ')
@@ -68,8 +68,9 @@ class RecipeInterface:
                 print('new ingredient ' + ingr + ' enter additional info')
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
+                servings = input('enter ingrediant servings: ')
                 shelf.master_list.add_ingredient(ingr, cost, location)
-                self.recipe.ingredients.append(Ingredient(ingr, cost, location))
+                self.recipe.ingredients.append(Ingredient(ingr, cost, location, servings))
             else:
                 self.recipe.ingredients.append(found)
 
@@ -82,17 +83,15 @@ class RecipeInterface:
         shelf.remove_ingr_from_recipe(self.recipe.name, ingr_name)
 
     def add_tags(self):
-        tags = input('add tags: ')
-        tags = tags.split(', ')
-        shelf.add_rec_tags(self.recipe.name, tags)
+        tags = input('add tags: ').split(', ') #TODO add default value option
+        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'tags', tags)
 
     def delete_recipe(self):
-        shelf.delete_recipe(self.recipe.name)
+        shelf.delete_recipe(self.recipe.id)
 
     def select_ingredient(self):
         ing_name = input('select which ingredient: ')
-        ingredient = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name ]
-        ingredient = ingredient[0]
-        print(ingredient.name)
+        ingredient = [ing for ing in shelf.master_list.ingredients if ing.name == ing_name][0]
+        print('-' + ingredient.name)
         ing_interface = IngredientInterface(ingredient)
         ing_interface.run()

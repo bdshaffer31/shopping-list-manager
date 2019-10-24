@@ -40,25 +40,25 @@ class IngredientInterface:
 
     def edit_name(self):
         new_name = input('change name to: ')
-        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.name, 'name', new_name)
+        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.id, 'name', new_name)
 
         self.ingredient.name = new_name
 
     def edit_cost(self):
         new_cost = input('change cost to: ')
-        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.name, 'cost', new_cost)
+        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.id, 'cost', new_cost)
 
         self.ingredient.cost = new_cost
 
     def edit_location(self):
         new_location = input('change location to: ')
-        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.name, 'cost', new_location)
+        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.id, 'cost', new_location)
 
         self.ingredient.location = new_location
 
     def edit_servings(self):
         new_servings = input('change servings to: ')
-        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.name, 'cost', new_servings)
+        shelf.edit_ingr_attr(shelf.master_list.ingredients, self.ingredient.id, 'cost', new_servings)
 
         self.ingredient.servings = new_servings
 

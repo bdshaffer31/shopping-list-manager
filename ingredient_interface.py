@@ -61,4 +61,6 @@ class IngredientInterface:
         shelf.master_list.delete_ingredient(self.id)
 
     def recipes_containing(self):
-        pass
+        recs = shelf.master_list.recipes_containing(shelf.master_list.recipes, self.id)
+        for rec in recs:
+            print(' - ' + rec.name)

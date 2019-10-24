@@ -8,7 +8,8 @@ class MasterDB:
         self.ingredients = ingredients
 
     def add_recipe(self, name, meal, ingrs, tags):
-        self.recipes.append(Recipe(name, meal, ingrs, tags))
+        rec = Recipe(name, meal, ingrs, tags)
+        self.recipes.append(rec)
 
     def add_ingr(self, name, cost, location, servings):
         self.ingredients.append(Ingredient(name, cost, location, servings))

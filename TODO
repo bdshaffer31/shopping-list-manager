@@ -25,6 +25,7 @@
 -ingredient collections that can be used in place of ingredients
 -migrate adding id field to book
 -make write for humans more robust
+-nutrition facts
 -unit tests!!
 
 v 2.0

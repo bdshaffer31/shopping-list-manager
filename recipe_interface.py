@@ -15,7 +15,7 @@ class RecipeInterface:
             'display': self.display, 
             'edit name': self.edit_name, 
             'edit meal': self.edit_meal, 
-            'add tags': self.add_tags,
+            'edit tags': self.edit_tags,
             'add ingr': self.add_ingredient, 
             'remove ingr': self.remove_ingredient,
             'select ingr': self.select_ingredient,
@@ -82,7 +82,7 @@ class RecipeInterface:
         ingr_name = input('ingredient to remove: ')
         shelf.remove_ingr_from_recipe(self.recipe.name, ingr_name)
 
-    def add_tags(self):
+    def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
         shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'tags', tags)
 

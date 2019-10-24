@@ -25,10 +25,11 @@
 -ingredient collections that can be used in place of ingredients
 -migrate adding id field to book
 -make write for humans more robust
--nutrition facts
+-fix create recipe / move up hierarchy
 -unit tests!!
 
 v 2.0
+-nutrition facts
 -bar code scan
 -web based 
 -GUI

@@ -107,7 +107,7 @@ class ShelfInterface:
     def print_recipes(self, rec_list):
         for rec in rec_list:
             print("- " + rec.name + " - ", end = "")
-            for ing in shelf.get_ingredients_from_ids(rec.ingredients):
+            for ing in shelf.master_list.get_ingrs_from_ids(rec.ingredients):
                 print(ing.name + ", ", end = "")
             print()
 

@@ -40,26 +40,24 @@ class RecipeInterface:
         print(' tags: ', end='')
         print(*self.recipe.tags, sep=', ')
         print(' ingredients:')
-        for ing in shelf.get_ingredients_from_ids(self.recipe.ingredients):
+        for ing in shelf.master_list.get_ingrs_from_ids(self.recipe.ingredients):
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
     def edit_name(self):
-        rec_id = self.recipe.id
         new_name = input('change name to: ')
-        shelf.change_rec_name(rec_id, new_name)
+        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'name', new_name)
 
         self.recipe.name = new_name
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'meal', new_meal)
+        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'meal', new_meal)
 
         self.recipe.meal = new_meal
 
     def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
-        ingrediants = input('enter recipe ingrediants: ')
-
-        ingr_name_list = ingrediants.split(', ')
+        ingredients = input('enter recipe ingrediants: ')
+        ingr_name_list = ingredients.split(', ')
         
         for ingr in ingr_name_list:
             #check if ingredient sharing name exists
@@ -80,14 +78,14 @@ class RecipeInterface:
 
     def remove_ingredient(self):
         ingr_name = input('ingredient to remove: ')
-        shelf.remove_ingr_from_recipe(self.recipe.name, ingr_name)
+        shelf.master_list.remove_ingr_from_recipe(self.recipe.name, ingr_name)
 
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
-        shelf.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'tags', tags)
+        shelf.master_list.edit_recipe_attr(shelf.master_list.recipes, self.recipe.id, 'tags', tags)
 
     def delete_recipe(self):
-        shelf.delete_recipe(self.recipe.id)
+        shelf.master_list.delete_recipe(self.recipe.id)
 
     def select_ingredient(self):
         ing_name = input('select which ingredient: ')

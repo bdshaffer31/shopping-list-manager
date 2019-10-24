@@ -40,24 +40,9 @@ class BookShelf:
                         ingredients.append(ingr)
         return ingredients
 
-    def shopping_list(self, ingr_list):
+    def sorted_shopping_list(self, ingr_list):
         ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )
         return ingr_list
-
-    def change_rec_name(self, rec_id, new_name): # shorten using map or list comprehension
-        for rec in self.master_list.recipes:
-            if rec.id == rec_id:
-                rec.name = new_name
-
-    def remove_ingr_from_recipe(self, rec_id, ingr_id):
-        for rec in self.master_list.recipes:
-            if rec.id == rec_id:
-                rec.ingredients = [ingr for ingr in rec.ingredients if ingr.id != ingr_id]
-
-    def change_book_name(self, book_id, new_name): # shorten using map or list comprehension
-        for book in self.books:
-            if book.id == book_id:
-                book.name = new_name
                 
     def remove_recipe_from_book(self, book_id, rec_id):
         for book in self.books:
@@ -75,31 +60,6 @@ class BookShelf:
         list = [x for x in list if x.id == book_id]
         setattr(list[0] , attribute, new_value)
 
-    def edit_recipe_attr(self, list, rec_id, attribute, new_value):
-        list = [x for x in list if x.id == rec_id]
-        setattr(list[0] , attribute, new_value)
-
-    def edit_ingr_attr(self, list, ingr_id, attribute, new_value):
-        list = [x for x in list if x.id == ingr_id]
-        setattr(list[0] , attribute, new_value)
-
-    def delete_ingredient(self, ingr_id):
-        for ingr in self.master_list.ingredients:
-            if ingr.id == ingr_id:
-                self.master_list.ingredients.remove(ingr)
-        for rec in self.master_list.recipes:
-            self.remove_ingr_from_recipe(rec.id, ingr_id)
-
-    def recipes_containing(self, list, ingr_name):
-        pass
-
-    def recipes_with_tag(self, list, tag):
-        pass
-
-    def get_ingredients_from_ids(self, ingr_ids):
-        ingredients = [x for x in self.master_list.ingredients if x.id in ingr_ids]
-        return ingredients     
-
     def add_ran_daily_plans(self, book, days): 
         recipes = []
         for i in range(days):
@@ -109,8 +69,6 @@ class BookShelf:
             dinner_recipe = random.choice(self.master_list.find_recipes_by_meal('dinner'))
             recipes.extend([breakfast_recipe.name, lunch_recipe.name, dinner_recipe.name])
             i
-        #d = datetime.datetime.today()
-        #timestamp = d.strftime("%d-%b-%Y (%H:%M:%S)") #.%f
         book.recipes.extend(recipes)
         return book
 

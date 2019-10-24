@@ -69,7 +69,7 @@ class ShelfInterface:
             print('book with name \'' + name + '\' not found')
             return
         
-        recb_interface = BookInterface(book)
+        recb_interface = BookInterface(book.id)
         recb_interface.run()
 
     def input_select_recipe(self):
@@ -83,7 +83,7 @@ class ShelfInterface:
             print('recipe with name \'' + name + '\' not found')
             return
 
-        rec_interface = RecipeInterface(recipe)
+        rec_interface = RecipeInterface(recipe.id)
         rec_interface.run()
         
     def input_select_ingredient(self):
@@ -97,7 +97,7 @@ class ShelfInterface:
             print('ingredient with name \'' + name + '\' not found')
             return
         
-        ingr_interface = IngredientInterface(ingr)
+        ingr_interface = IngredientInterface(ingr.id)
         ingr_interface.run()
 
     def print_costs(self, rec_list):

@@ -6,8 +6,8 @@ from confirm import confirm
 
 class IngredientInterface:
 
-    def __init__(self, ingredient):
-        self.ingredient = ingredient
+    def __init__(self, ingredient_id):
+        self.id = ingredient_id
 
     def run(self):
         commands = { 
@@ -21,7 +21,7 @@ class IngredientInterface:
             'exit': shelf.update_db
             }
         while(True):
-            action = input('input action for ' + self.ingredient.name + ': ')
+            action = input('input action for ' + self.get_ingr().name + ': ')
             if action in commands:
                 commands[action]()
                 if action in ['delete ingr', 'exit']:
@@ -31,39 +31,34 @@ class IngredientInterface:
                 print(*commands.keys(), sep = '\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
+                
+    def get_ingr(self):
+        return shelf.master_list.get_ingr(self.id)
 
     def display(self):
-        print(' name: ' + self.ingredient.name)
-        print(' cost: ' + self.ingredient.cost)
-        print(' location: ' + self.ingredient.location)
-        print(' servings: ' + str(self.ingredient.servings))
+        print(' name: ' + self.get_ingr().name)
+        print(' cost: ' + self.get_ingr().cost)
+        print(' location: ' + self.get_ingr().location)
+        print(' servings: ' + str(self.get_ingr().servings))
 
     def edit_name(self):
         new_name = input('change name to: ')
-        shelf.master_list.edit_ingr_attr(self.ingredient.id, 'name', new_name)
-
-        self.ingredient.name = new_name
+        shelf.master_list.edit_ingr_attr(self.id, 'name', new_name)
 
     def edit_cost(self):
         new_cost = input('change cost to: ')
-        shelf.master_list.edit_ingr_attr(self.ingredient.id, 'cost', new_cost)
-
-        self.ingredient.cost = new_cost
+        shelf.master_list.edit_ingr_attr(self.id, 'cost', new_cost)
 
     def edit_location(self):
         new_location = input('change location to: ')
-        shelf.master_list.edit_ingr_attr(self.ingredient.id, 'cost', new_location)
-
-        self.ingredient.location = new_location
+        shelf.master_list.edit_ingr_attr(self.id, 'cost', new_location)
 
     def edit_servings(self):
         new_servings = input('change servings to: ')
-        shelf.master_list.edit_ingr_attr(self.ingredient.id, 'cost', new_servings)
-
-        self.ingredient.servings = new_servings
+        shelf.master_list.edit_ingr_attr(self.id, 'cost', new_servings)
 
     def delete_ingredient(self):
-        shelf.master_list.delete_ingredient(self.ingredient.name)
+        shelf.master_list.delete_ingredient(self.id)
 
     def recipes_containing(self):
         pass

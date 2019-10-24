@@ -7,8 +7,8 @@ from ingredient_interface import IngredientInterface
 
 class BookInterface:
 
-    def __init__(self, book):
-        self.book = book
+    def __init__(self, book_id):
+        self.id = book_id
 
     def run(self):
         commands = { 
@@ -32,11 +32,14 @@ class BookInterface:
                 print(*commands.keys(), sep = '\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
+
+    def get_book(self):
+        return shelf.get_book(self.id)
     
     def display(self):
-        print(' name: ' + self.book.name)
+        print(' name: ' + self.get_book().name)
         print(' recipes:')
-        for rec in shelf.get_book(self.book.id).recipes:
+        for rec in self.get_book().recipes:
             print('    ' + str(rec))
             
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
@@ -47,9 +50,7 @@ class BookInterface:
 
     def edit_name(self): 
         new_name = input('change name to: ')
-        shelf.edit_book_attr(self.book.id, 'name', new_name)
-
-        self.book.name = new_name
+        shelf.edit_book_attr(self.id, 'name', new_name)
 
     def add_recipes(self): #needs to be moved up?
         recipes = input('enter recipes to add: ')
@@ -65,17 +66,17 @@ class BookInterface:
             else:
                 self.book.recipes.append(found.name)
 
-        shelf.edit_book_attr(self.book.id, 'recipes', self.book.recipes)
+        shelf.edit_book_attr(self.id, 'recipes', self.book.recipes)
 
     def remove_recipe(self):
         recipe_name = input('enter recipe to remove: ').strip()
-        shelf.remove_recipe_from_book(self.book.name, recipe_name)
+        shelf.remove_recipe_from_book(self.id, recipe_name)
 
     def delete_book(self):
-        shelf.delete_book(self.book.id)
+        shelf.delete_book(self.id)
 
     def gen_shopping_list(self):
-        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.book))
+        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.get_book()))
 
         #ADD write to text file
         for ingr in shopping_list:
@@ -83,4 +84,4 @@ class BookInterface:
 
     def add_days(self):
         days = int(input('how many random days to add: '))
-        shelf.add_ran_daily_plans(self.book.id, days)
+        shelf.add_ran_daily_plans(self.id, days)

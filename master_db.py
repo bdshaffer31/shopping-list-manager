@@ -7,6 +7,15 @@ class MasterDB:
         self.recipes = recipes
         self.ingredients = ingredients
 
+    def get_ingr(self, ingr_id):
+        return self.get(self.ingredients, ingr_id)
+
+    def get_rec(self, rec_id):
+        return self.get(self.recipes, rec_id)
+
+    def get(self, list, an_id):
+        return [x for x in list if x.id == an_id][0]
+
     def find_ing_by_name(self, ingredient_name): # this was changed and that broke some things 
         for ing in self.ingredients:
             if ingredient_name == ing.name: return ing
@@ -38,8 +47,7 @@ class MasterDB:
         self.edit_attr(self.ingredients, ingr_id, attribute, new_value)
 
     def edit_attr(self, list, an_id, attribute, new_value):
-        list = [x for x in list if x.id == an_id]
-        setattr(list[0] , attribute, new_value)
+        setattr(self.get(list, an_id) , attribute, new_value)
 
 
     def all_recs_containing(self, ingr_id):

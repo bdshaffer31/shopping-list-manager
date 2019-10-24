@@ -7,8 +7,8 @@ from ingredient_interface import IngredientInterface
 
 class RecipeInterface:
 
-    def __init__(self, recipe):
-        self.recipe = recipe
+    def __init__(self, rec_id):
+        self.id = rec_id
 
     def run(self):
         commands = { 
@@ -23,7 +23,7 @@ class RecipeInterface:
             'exit': shelf.update_db
             }
         while(True):
-            action = input('input action for ' + self.recipe.name + ': ')
+            action = input('input action for ' + self.get_rec().name + ': ')
             if action in commands:
                 commands[action]()
                 if action in ['delete recipe', 'exit']:
@@ -34,26 +34,25 @@ class RecipeInterface:
             else:
                 print('input not recognized, type \'help\' for a list')
     
+    def get_rec(self):
+        return shelf.master_list.get_rec(self.id)
+
     def display(self):
-        print(' name: ' + self.recipe.name)
-        print(' meal: ' + self.recipe.meal)
+        print(' name: ' + self.get_rec().name)
+        print(' meal: ' + self.get_rec().meal)
         print(' tags: ', end='')
-        print(*self.recipe.tags, sep=', ')
+        print(*self.get_rec().tags, sep=', ')
         print(' ingredients:')
-        for ing in shelf.master_list.get_ingrs_from_ids(self.recipe.ingredients):
+        for ing in shelf.master_list.get_ingrs_from_ids(self.get_rec().ingredients):
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
 
     def edit_name(self):
         new_name = input('change name to: ')
-        shelf.master_list.edit_recipe_attr(self.recipe.id, 'name', new_name)
-
-        self.recipe.name = new_name
+        shelf.master_list.edit_recipe_attr(self.id, 'name', new_name)
 
     def edit_meal(self):
         new_meal = input('change meal to: ')
-        shelf.master_list.edit_recipe_attr(self.recipe.id, 'meal', new_meal)
-
-        self.recipe.meal = new_meal
+        shelf.master_list.edit_recipe_attr(self.get_rec().id, 'meal', new_meal)
 
     def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
         ingredients = input('enter recipe ingrediants: ')
@@ -78,14 +77,14 @@ class RecipeInterface:
 
     def remove_ingredient(self):
         ingr_name = input('ingredient to remove: ')
-        shelf.master_list.remove_ingr_from_recipe(self.recipe.name, ingr_name)
+        shelf.master_list.remove_ingr_from_recipe(self.id, ingr_name)
 
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
-        shelf.master_list.edit_recipe_attr(self.recipe.id, 'tags', tags)
+        shelf.master_list.edit_recipe_attr(self.id, 'tags', tags)
 
     def delete_recipe(self):
-        shelf.master_list.delete_recipe(self.recipe.id)
+        shelf.master_list.delete_recipe(self.id)
 
     def select_ingredient(self):
         ing_name = input('select which ingredient: ')

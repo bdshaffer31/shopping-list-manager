@@ -10,6 +10,6 @@ import datetime
 shelf = BookShelf()
 shelf = shelf.populate_bookshelf()
 
-shelf.master_list.recipes = [x for x in shelf.master_list.recipes if x.name != 'test']
-
-shelf.update_db()
+print(shelf.books[0].id)
+#shelf.master_list.recipes = [x for x in shelf.master_list.recipes if x.name != 'test']
+#shelf.update_db()

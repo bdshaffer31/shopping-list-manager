@@ -67,10 +67,11 @@ class RecipeInterface:
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
                 servings = input('enter ingrediant servings: ')
-                shelf.master_list.add_ingredient(ingr, cost, location)
-                self.get_rec().ingredients.append(Ingredient(ingr, cost, location, servings))
+                new_ingr = Ingredient(ingr, cost, location, servings)
+                shelf.master_list.ingredients.append(new_ingr)
+                self.get_rec().ingredients.append(new_ingr.id)
             else:
-                self.get_rec().ingredients.append(found)
+                self.get_rec().ingredients.append(found.id)
 
     def remove_ingredient(self):
         ingr_name = input('ingredient to remove: ')
@@ -81,7 +82,7 @@ class RecipeInterface:
         shelf.master_list.edit_recipe_attr(self.id, 'tags', tags)
 
     def delete_recipe(self):
-        shelf.master_list.delete_recipe(self.id)
+        shelf.delete_recipe(self.id)
 
     def select_ingredient(self):
         ing_name = input('select which ingredient: ')

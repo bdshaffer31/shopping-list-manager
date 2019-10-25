@@ -24,12 +24,7 @@
 -actually utilize tags / increase ability to edit
 -ingredient collections that can be used in place of ingredients
 -make write for humans more robust
--fix create recipe / move up hierarchy
--fix bug where after create recipe, oatmeal is selected indifferently
-    -seems like an id error
-    -incrementer only works for increments done in this session, 
-        -need to update it to largest at beginign of session somehow
-    -solution is to use uuid i think, will require slightly compicated migration
+-move create recipe / ingredient up hierarchy
 -unit tests!!
 
 v 2.0

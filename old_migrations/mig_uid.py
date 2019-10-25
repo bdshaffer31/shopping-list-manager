@@ -7,50 +7,66 @@ from recipe import Recipe
 import random
 import datetime
 
-# THIS NEEDS TO BE DONE BUT THIS IS NOT A WORKING MIGRANTION! CAUSED DB CRASH
+ing_id_to_uid = []
+rec_id_to_uid = []
 
 shelf = BookShelf()
 shelf = shelf.populate_bookshelf()
 
-all_books = []
-for book in shelf.books:
-    all_books.append(Book(book.name, book.recipes))
-    #print(book.id)
-
-shelf.books = all_books
 all_ingr = []
-
+print(' --Ingredients-- ')
 for ingr in shelf.master_list.ingredients:
-    old_id = ingr.id
     new_ingr = Ingredient(ingr.name, ingr.cost, ingr.location, ingr.servings)
+    print(ingr.id)
+    print(new_ingr.id)
     all_ingr.append(new_ingr)
-    for recipe in shelf.master_list.recipes:
-        for ingr in recipe.ingredients:
-            if ingr == old_id:
-                ingr = new_ingr.id
-    #print(ingr.id)
-
+    ing_id_to_uid.append((ingr.id, new_ingr.id))
+    
+print(all_ingr)
 shelf.master_list.ingredients = all_ingr
-all_recipe = []
 
+print(ing_id_to_uid)
+
+all_recipe = []
+print(' --Recipes-- ')
 for recipe in shelf.master_list.recipes:
-    old_id = recipe.id
-    new_rec = Recipe(recipe.name, recipe.meal, recipe.ingredients, recipe.tags)
-    all_ingr.append(new_rec)
-    for book in shelf.books:
-        for rec in book.recipes:
-            if rec == old_id:
-                rec = new_rec.id
-    #print(recipe.id)
+    ingrs = []
+    for ingr in recipe.ingredients:
+        for tup in ing_id_to_uid:
+            if tup[0] == ingr:
+                ingrs.append(tup[1])
+    print(recipe.ingredients)
+    print(ingrs)
+    new_rec = Recipe(recipe.name, recipe.meal, ingrs, recipe.tags)
+    print(recipe.id)
+    print(new_rec.id)
+    all_recipe.append(new_rec)
+    rec_id_to_uid.append((recipe.id, new_rec.id))
+
+print(all_recipe)
 shelf.master_list.recipes = all_recipe
 
-print(*shelf.books[2].__dict__)
-print(*shelf.master_list.ingredients[3].__dict__)
+print(rec_id_to_uid)
+
+all_books = []
+print(' --Books-- ')
+for book in shelf.books:
+    recs = []
+    for rec in book.recipes:
+        for tup in rec_id_to_uid:
+            if tup[0] == rec:
+                recs.append(tup[1])
+    print(book.recipes)
+    print(recs)
+    new_book = Book(book.name, recs)
+    print(book.id)
+    print(new_book.id)
+    all_books.append(new_book)
+
+print(all_books)
+shelf.books = all_books
 
 shelf.update_db()
+
 shelf = shelf.populate_bookshelf()
-
-print(*shelf.books[2].__dict__)
-print(*shelf.master_list.ingredients[3].__dict__)
-
 shelf.update_db()

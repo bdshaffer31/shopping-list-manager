@@ -17,19 +17,37 @@ class MasterDB:
     def get(self, list, id_list):
         return [x for x in list if x.id in id_list]
 
-    def find_ing_by_name(self, ingredient_name): # this was changed and that broke some things 
+    def get_by_tags(self, tags):
+        return [x for x in self.recipes if [t for t in x.tags if t in tags]]
+
+    def get_by_meal(self, meals):
+        return [x for x in self.recipes if x.meal in meals]
+
+    def get_by_criteria(self, meal, tags):
+        recs = []
+        if meal and not tags:
+            recs = (self.get_by_meal(meal))
+        elif tags and not meal:
+            recs = (self.get_by_tags(tags))
+        elif meal and tags:
+            list1 = (self.get_by_meal(meal))
+            list2 = (self.get_by_tags(tags))
+            recs = list(set(list1) & set(list2))
+        else:
+            recs = self.recipes
+
+        return recs
+
+
+    def find_ing_by_name(self, ingredient_name):
         for ing in self.ingredients:
             if ingredient_name == ing.name: return ing
         return False #if it hasn't returned the ingredient by now
 
-    def find_rec_by_name(self, rec_name): # this was changed and that broke some things 
+    def find_rec_by_name(self, rec_name): 
         for rec in self.recipes:
             if rec_name == rec.name: return rec
-        return False #if it hasn't returned the ingredient by now
-
-    def find_recipes_by_meal(self, meal): 
-        recipe_list = [x for x in self.recipes if x.meal == meal]
-        return recipe_list
+        return False #if it hasn't returned the recipe by now
 
     def rec_cost_per_serving(self, rec):
         return sum(ingr.cost_per_serving() for ingr in self.get(self.ingredients, rec.ingredients))

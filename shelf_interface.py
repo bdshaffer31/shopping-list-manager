@@ -14,6 +14,7 @@ class ShelfInterface:
         commands = { 
             'display recipes': self.display_recipes, 
             'display': self.display, 
+            'display by criteria': self.display_by_criteria,
             'create recipe': self.create_recipe, 
             'select recipe': self.input_select_recipe, 
             'select ingr': self.input_select_ingredient, 
@@ -35,6 +36,10 @@ class ShelfInterface:
             else:
                 print('input not recognized, type \'help\' for a list')
 
+    def display(self):
+        for book in shelf.books:
+            print(' - ' + book.name)
+
     def create_recipe(self): 
 
         name = input('enter recipe name: ')
@@ -49,10 +54,6 @@ class ShelfInterface:
 
     def display_recipes(self):
         self.print_recipes(shelf.master_list.recipes)
-
-    def display(self):
-        for book in shelf.books:
-            print(' - ' + book.name)
 
     def create_book(self):
         name = input('recipe book name: ')
@@ -111,6 +112,12 @@ class ShelfInterface:
             for ing in shelf.master_list.get(shelf.master_list.ingredients, rec.ingredients):
                 print(ing.name + ", ", end = "")
             print()
+
+    def display_by_criteria(self): # is returning union not intersection
+        meal = input('get recipes for which meal (any if left blank): ')
+        tags = input('get recipes for which tags (any if left blank): ').split(', ')
+        recs = shelf.master_list.get_by_criteria(meal, tags)
+        self.print_recipes(recs)
 
     def display_meal(self): #no longer and option from input
         meal = input('display all recipes for which meal: ')

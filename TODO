@@ -25,6 +25,8 @@
 -ingredient collections that can be used in place of ingredients
 -make write for humans more robust
 -move create recipe / ingredient up hierarchy
+-when select (rec / ingr / book) go striaght to display
+-shoudlnt be able to crate books, recipes, ingr with pre-existing name
 -unit tests!!
 
 v 2.0

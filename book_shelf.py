@@ -59,23 +59,38 @@ class BookShelf:
     def edit_book_attr(self, book_id, attribute, new_value):
         setattr(self.get_book(book_id), attribute, new_value)
 
-    def add_ran_daily_plans(self, book_id, days):
-        rec_list = self.gen_ran_daily_plans(days)
-        rec_ids  = [x.id for x in rec_list]
+    def add_by_criteria(self, book_id, days, meal, tags):
+        new_recipes = self.ran_select_by_criteria(days, meal, tags)
+        for rec in new_recipes: print(' - ' + rec.name)
+        rec_ids  = [x.id for x in new_recipes]
         recs = self.get_book(book_id).recipes
         recs.extend(rec_ids)
         self.edit_book_attr(book_id, 'recipes', recs)
 
-    def gen_ran_daily_plans(self, days): 
-        recipes = []
+    def ran_select_by_criteria(self, days, meal, tags):
+        new_recipes = []
+        selection = self.master_list.get_by_criteria(meal, tags)
         for i in range(days):
             random.seed()
-            breakfast_recipe = random.choice(self.master_list.find_recipes_by_meal('breakfast'))
-            lunch_recipe = random.choice(self.master_list.find_recipes_by_meal('lunch'))
-            dinner_recipe = random.choice(self.master_list.find_recipes_by_meal('dinner'))
-            recipes.extend([breakfast_recipe, lunch_recipe, dinner_recipe])
+            new_recipes.append(random.choice(selection))
             i
-        return recipes
+        return new_recipes
+        
+    def add_ran_daily_plans(self, book_id, days):
+        self.add_by_criteria(book_id, days, 'breakfast', [])
+        self.add_by_criteria(book_id, days, 'lunch', [])
+        self.add_by_criteria(book_id, days, 'dinner', [])
+
+    # def gen_ran_daily_plans(self, days): 
+    #     recipes = []
+    #     for i in range(days):
+    #         random.seed()
+    #         breakfast_recipe = random.choice(self.master_list.get_by_meal('breakfast'))
+    #         lunch_recipe = random.choice(self.master_list.get_by_meal('lunch'))
+    #         dinner_recipe = random.choice(self.master_list.get_by_meal('dinner'))
+    #         recipes.extend([breakfast_recipe, lunch_recipe, dinner_recipe])
+    #         i
+    #     return recipes
 
 # make the 'shelf' where whole db will be stored in local memory for duration of program
 shelf = BookShelf()

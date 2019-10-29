@@ -18,6 +18,7 @@ class BookInterface:
             'remove recipe': self.remove_recipe,
             'shopping list': self.gen_shopping_list,
             'add days': self.add_days,
+            'add by criteria': self.add_by_criteria,
             'delete book': self.delete_book,
             'exit': shelf.update_db
             }
@@ -81,6 +82,12 @@ class BookInterface:
         for ingr in shopping_list:
             print(' - ' + ingr.name)
 
+    def add_by_criteria(self):
+        meal = input('get recipes for which meal (any if blank): ')
+        tags = input('get recipes for which tags (any if blank): ').split(', ')
+        number = int(input('how many recipes to add: '))
+        shelf.add_by_criteria(self.id, number, meal, tags)
+        
     def add_days(self):
         days = int(input('how many random days to add: '))
         shelf.add_ran_daily_plans(self.id, days)

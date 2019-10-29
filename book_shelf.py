@@ -59,18 +59,18 @@ class BookShelf:
     def edit_book_attr(self, book_id, attribute, new_value):
         setattr(self.get_book(book_id), attribute, new_value)
 
-    def add_by_criteria(self, book_id, days, meal, tags):
-        new_recipes = self.ran_select_by_criteria(days, meal, tags)
+    def add_by_criteria(self, book_id, number, meal, tags):
+        new_recipes = self.ran_select_by_criteria(number, meal, tags)
         for rec in new_recipes: print(' - ' + rec.name)
         rec_ids  = [x.id for x in new_recipes]
         recs = self.get_book(book_id).recipes
         recs.extend(rec_ids)
         self.edit_book_attr(book_id, 'recipes', recs)
 
-    def ran_select_by_criteria(self, days, meal, tags):
+    def ran_select_by_criteria(self, number, meal, tags):
         new_recipes = []
         selection = self.master_list.get_by_criteria(meal, tags)
-        for i in range(days):
+        for i in range(number):
             random.seed()
             new_recipes.append(random.choice(selection))
             i

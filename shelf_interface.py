@@ -114,8 +114,8 @@ class ShelfInterface:
             print()
 
     def display_by_criteria(self): # is returning union not intersection
-        meal = input('get recipes for which meal (any if left blank): ')
-        tags = input('get recipes for which tags (any if left blank): ').split(', ')
+        meal = input('get recipes for which meal (any if blank): ')
+        tags = input('get recipes for which tags (any if blank): ').split(', ')
         recs = shelf.master_list.get_by_criteria(meal, tags)
         self.print_recipes(recs)
 

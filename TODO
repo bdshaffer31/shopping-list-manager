@@ -27,6 +27,7 @@
 -move create recipe / ingredient up hierarchy
 -when select (rec / ingr / book) go striaght to display
 -shoudlnt be able to crate books, recipes, ingr with pre-existing name
+-preference for recipes that share ingredients (two meals with bread instead of one with wrap)
 -unit tests!!
 
 v 2.0

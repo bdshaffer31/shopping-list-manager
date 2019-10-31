@@ -4,8 +4,8 @@
 -multiple meals per recipe
 -recipes should roughly say how many servings they will take to keep inventory?
 -cast handeling of inputs
--set list of meals availbles
--codify locations
+-set list of meals availbles?
+-codify locations?
 -use inheritance for interfaces (should all be based from generic class) 
 -select recipe / book / ingredient should catch the misses
 -enums can be ingredients and selection is made later (ex. protien, condiment, topping)
@@ -13,8 +13,6 @@
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
     -partially accomplished?
--close text file properly
--finish ingredient functions
 -move create ingredient to shelf
 -version control (add field to shelf with version number)
 -shopping list makes a text file for printing
@@ -28,6 +26,8 @@
 -when select (rec / ingr / book) go striaght to display
 -shoudlnt be able to crate books, recipes, ingr with pre-existing name
 -preference for recipes that share ingredients (two meals with bread instead of one with wrap)
+-either be able to use recipes as ingredients or be able to use ingredients as recipes :/
+    - rolls -> ingr = rolls, meal = side
 -unit tests!!
 
 v 2.0

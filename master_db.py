@@ -75,7 +75,7 @@ class MasterDB:
     def remove_ingr_from_recipe(self, rec_id, ingr_id):
         for rec in self.recipes:
             if rec.id == rec_id:
-                rec.ingredients = [ingr for ingr in rec.ingredients if ingr.id != ingr_id]
+                rec.ingredients = [ingr for ingr in rec.ingredients if ingr != ingr_id]
 
     def delete_ingredient(self, ingr_id):
         for ingr in self.ingredients:

@@ -12,13 +12,15 @@ class ShelfInterface:
 
     def run(self):
         commands = { 
-            'display recipes': self.display_recipes, 
             'display': self.display, 
+            'detailed display': self.detailed_display,
+            'display recipes': self.display_recipes, 
+            'display ingrs': self.display_ingredients,
             'display by criteria': self.display_by_criteria,
             'create recipe': self.create_recipe, 
             'select recipe': self.input_select_recipe, 
             'select ingr': self.input_select_ingredient, 
-            'create ingr': self.create_ingredient,
+            'create ingr': self.create_ingredients,
             'create book': self.create_book,
             'select book': self.input_select_book,
             'exit': shelf.update_db
@@ -40,6 +42,12 @@ class ShelfInterface:
         for book in shelf.books:
             print(' - ' + book.name)
 
+    def detailed_display(self):
+        for book in shelf.books:
+            print(' - ' + book.name)
+            for rec in shelf.book_ingr_list(book.id):
+                print('    - ' + rec.name)
+
     def create_recipe(self): 
 
         name = input('enter recipe name: ')
@@ -49,11 +57,27 @@ class ShelfInterface:
         shelf.master_list.add_recipe(name, meal, [], tags)
         self.select_recipe(name)
 
-    def create_ingredient(self):
-        pass
+    def create_ingredients(self):
+        ingredients = input('enter recipe ingrediants: ')
+        ingr_name_list = ingredients.split(', ')
+        
+        for ingr in ingr_name_list:
+            #check if ingredient sharing name exists
+            found = shelf.master_list.find_ing_by_name(ingr)
+            if not found:
+                print('new ingredient ' + ingr + ' enter additional info')
+                cost = input('enter ingrediant cost: ')
+                location = input('enter ingrediant location: ')
+                servings = input('enter ingrediant servings: ')
+                new_ingr = Ingredient(ingr, cost, location, servings)
+                shelf.master_list.ingredients.append(new_ingr)
 
     def display_recipes(self):
         self.print_recipes(shelf.master_list.recipes)
+
+    def display_ingredients(self):
+        for ingr in shelf.master_list.ingredients:
+            print(' - ' + ingr.name)
 
     def create_book(self):
         name = input('recipe book name: ')
@@ -115,7 +139,8 @@ class ShelfInterface:
 
     def display_by_criteria(self): # is returning union not intersection
         meal = input('get recipes for which meal (any if blank): ')
-        tags = input('get recipes for which tags (any if blank): ').split(', ')
+        tags = input('get recipes for which tags (any if blank): ')
+        tags = list(filter(None, tags.split('/')))
         recs = shelf.master_list.get_by_criteria(meal, tags)
         self.print_recipes(recs)
 

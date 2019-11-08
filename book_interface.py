@@ -2,6 +2,7 @@
 
 from book_shelf import BookShelf, shelf
 from ingredient import Ingredient
+from recipe import Recipe
 from confirm import confirm
 from ingredient_interface import IngredientInterface
 
@@ -62,8 +63,12 @@ class BookInterface:
         for rec in rec_name_list:
             found = shelf.master_list.find_rec_by_name(rec)
             if not found:
-                pass
-                # won't create recipes that don't exist yet :/
+                meal = input('enter recipe meal: ').lower()
+                tags = input('enter recipe tags: ').split(', ')
+
+                new_rec = Recipe(rec, meal, [], tags)
+                shelf.master_list.recipes.append(new_rec)
+                self.get_book().recipes.append(new_rec.id)
             else:
                 self.get_book().recipes.append(found.id)
 
@@ -84,7 +89,8 @@ class BookInterface:
 
     def add_by_criteria(self):
         meal = input('get recipes for which meal (any if blank): ')
-        tags = input('get recipes for which tags (any if blank): ').split(', ')
+        tags = input('get recipes for which tags (any if blank): ')
+        tags = list(filter(None, tags.split('/')))
         number = int(input('how many recipes to add: '))
         shelf.add_by_criteria(self.id, number, meal, tags)
         

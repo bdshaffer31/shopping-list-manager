@@ -34,11 +34,8 @@ class BookShelf:
             if book.id == book_id:
                 self.books.remove(book)
 
-    def book_ingr_list(self, book):
-        ingredients = []
-        for rec in self.master_list.get(self.master_list.recipes, book.recipes):
-            ingredients.extend(self.master_list.get(self.master_list.ingredients, rec.ingredients))
-        return ingredients
+    def book_ingr_list(self, book_id):
+        return [x for x in self.master_list.recipes if x.id in self.get_book(book_id).recipes]
 
     def sorted_shopping_list(self, ingr_list):
         ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )

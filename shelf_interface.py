@@ -45,8 +45,8 @@ class ShelfInterface:
     def detailed_display(self):
         for book in shelf.books:
             print(' - ' + book.name)
-            for rec in shelf.book_ingr_list(book.id):
-                print('    - ' + rec.name)
+            for rec in shelf.get_book(book.id).recipes:
+                print('    - ' + shelf.master_list.get(shelf.master_list.recipes, [rec])[0].name)
 
     def create_recipe(self): 
 

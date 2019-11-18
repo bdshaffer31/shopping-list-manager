@@ -10,6 +10,7 @@ class IngredientInterface:
         self.id = ingredient_id
 
     def run(self):
+        self.display()
         commands = { 
             'display': self.display, 
             'edit name': self.edit_name,

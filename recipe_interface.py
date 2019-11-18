@@ -11,6 +11,7 @@ class RecipeInterface:
         self.id = rec_id
 
     def run(self):
+        self.display()
         commands = { 
             'display': self.display, 
             'edit name': self.edit_name, 

@@ -24,7 +24,7 @@
 -make write for humans more robust
 -move create recipe / ingredient up hierarchy
 -when select (rec / ingr / book) go striaght to display
--shoudlnt be able to crate books, recipes, ingr with pre-existing name
+-shoudlnt be able to create books, recipes, ingr with pre-existing name
 -preference for recipes that share ingredients (two meals with bread instead of one with wrap)
 -either be able to use recipes as ingredients or be able to use ingredients as recipes :/
     - rolls -> ingr = rolls, meal = side
@@ -34,7 +34,9 @@
 -after adding new rec to book have option to add ingrs
 -prevent looping of recipes (recipe cannot ever be within itself)dangerous as is
 -shared functions between interfaces should be handled better
--fix shopping list funct
+-refine shopping list
+    - display mutliples how?
+    - print location names?
 -unit tests!!
 
 v 2.0

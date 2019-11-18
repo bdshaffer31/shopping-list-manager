@@ -12,6 +12,7 @@ class BookInterface:
         self.id = book_id
 
     def run(self):
+        self.display()
         commands = { 
             'display': self.display, 
             'edit name': self.edit_name,
@@ -74,8 +75,12 @@ class BookInterface:
 
 
     def remove_recipe(self):
-        recipe_name = input('enter recipe to remove: ').strip()
-        shelf.remove_recipe_from_book(self.id, shelf.master_list.find_rec_by_name(recipe_name).id)
+        recipe_name = input('ingredient to remove: ')
+        found = shelf.master_list.find_comp_by_name(recipe_name)
+        if found:
+            shelf.remove_recipe_from_book(self.id, found.id)
+        else:
+            print('recipe with name \'' + recipe_name + '\' not found')
 
     def delete_book(self):
         shelf.delete_book(self.id)

@@ -46,9 +46,8 @@ class BookShelf:
         return ingr_list
                 
     def remove_recipe_from_book(self, book_id, rec_id):
-        for book in self.books:
-            if book.id == book_id:
-                book.recipes = [rec for rec in book.recipes if rec != rec_id]
+        recs = [rec for rec in self.get_book(book_id).recipes if rec != rec_id]
+        self.edit_book_attr(book_id, 'recipes', recs)
 
     def delete_recipe(self, rec_id):
         for rec in self.master_list.recipes:

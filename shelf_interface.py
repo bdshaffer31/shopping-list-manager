@@ -11,6 +11,7 @@ class ShelfInterface:
         pass
 
     def run(self):
+        self.display()
         commands = { 
             'display': self.display, 
             'detailed display': self.detailed_display,

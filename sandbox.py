@@ -10,13 +10,8 @@ import datetime
 shelf = BookShelf()
 shelf = shelf.populate_bookshelf()
 
-print(shelf.books[0].id)
-print('-gf/to-go-')
-for rec in shelf.master_list.get_by_tags(shelf.master_list.recipes, ['gf','to-go']):
-    print(rec.name)
-print('-to-go-')
-for rec in shelf.master_list.get_by_tags(shelf.master_list.recipes, ['to-go']):
-    print(rec.name)
-print('-v-')
-for rec in shelf.master_list.get_by_tags(shelf.master_list.recipes, ['v']):
-    print(rec.name)
+rec = shelf.master_list.find_rec_by_name('test rec')
+ingr_ids = shelf.master_list.rec_ingrs(rec.id)
+ingrs = shelf.master_list.get(shelf.master_list.ingredients, ingr_ids)
+for ingr in ingrs:
+    print(ingr.name)

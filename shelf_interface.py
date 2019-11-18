@@ -135,6 +135,8 @@ class ShelfInterface:
             print("- " + rec.name + " - ", end = "")
             for ing in shelf.master_list.get(shelf.master_list.ingredients, rec.ingredients):
                 print(ing.name + ", ", end = "")
+            for rec in shelf.master_list.get(shelf.master_list.recipes, rec.ingredients):
+                print(rec.name + ", ", end = "")
             print()
 
     def display_by_criteria(self): # is returning union not intersection

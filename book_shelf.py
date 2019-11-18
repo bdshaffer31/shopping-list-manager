@@ -19,7 +19,7 @@ class BookShelf:
         seeder = Seeder()
         seeder.write_with_pickle(self)  
 
-    def write_for_humans(self):
+    def write_for_humans(self): #defunct
         seeder = Seeder()
         seeder.write_for_humans(self)
 
@@ -35,7 +35,11 @@ class BookShelf:
                 self.books.remove(book)
 
     def book_ingr_list(self, book_id):
-        return [x for x in self.master_list.recipes if x.id in self.get_book(book_id).recipes]
+        ingrs = []
+        for rec in self.get_book(book_id).recipes:
+            ingr_ids = shelf.master_list.rec_ingrs(rec)
+            ingrs.extend(shelf.master_list.get(shelf.master_list.ingredients, ingr_ids))
+        return ingrs
 
     def sorted_shopping_list(self, ingr_list):
         ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )

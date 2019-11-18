@@ -40,12 +40,14 @@ class RecipeInterface:
     def display(self):
         print(' name: ' + self.get_rec().name)
         print(' meal: ' + self.get_rec().meal)
-        print(' cost per serving: ' + str(round(shelf.master_list.rec_cost_per_serving(self.get_rec()),2)))
+        print(' cost per serving: ' + str(round(shelf.master_list.cost_per_serving(self.id),2)))
         print(' tags: ', end='')
         print(*self.get_rec().tags, sep=', ')
         print(' ingredients:')
         for ing in shelf.master_list.get(shelf.master_list.ingredients, self.get_rec().ingredients):
             print('    ' + ing.name + ': ' + ing.cost + ', ' + ing.location)
+        for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_rec().ingredients):
+            print('    ' + rec.name + ': ' + str(shelf.master_list.rec_total_cost(rec.id)))
 
     def edit_name(self):
         new_name = input('change name to: ')
@@ -57,25 +59,29 @@ class RecipeInterface:
 
     def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
         ingredients = input('enter recipe ingrediants: ')
-        ingr_name_list = ingredients.split(', ')
+        comp_name_list = ingredients.split(', ')
         
-        for ingr in ingr_name_list:
+        for comp_name in comp_name_list:
             #check if ingredient sharing name exists
-            found = shelf.master_list.find_ing_by_name(ingr)
+            found = shelf.master_list.find_comp_by_name(comp_name)
             if not found:
-                print('new ingredient ' + ingr + ' enter additional info')
+                print('new ingredient ' + comp_name + ' enter additional info')
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
                 servings = input('enter ingrediant servings: ')
-                new_ingr = Ingredient(ingr, cost, location, servings)
+                new_ingr = Ingredient(comp_name, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
                 self.get_rec().ingredients.append(new_ingr.id)
             else:
                 self.get_rec().ingredients.append(found.id)
 
     def remove_ingredient(self):
-        ingr_name = input('ingredient to remove: ')
-        shelf.master_list.remove_ingr_from_recipe(self.id, ingr_name)
+        comp_name = input('ingredient to remove: ')
+        found = shelf.master_list.find_comp_by_name(comp_name)
+        if found:
+            shelf.master_list.remove_ingr_from_recipe(self.id, found.id)
+        else:
+            print('ingredient with name \'' + comp_name + '\' not found')
 
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option

@@ -75,13 +75,13 @@ class BookInterface:
 
     def remove_recipe(self):
         recipe_name = input('enter recipe to remove: ').strip()
-        shelf.remove_recipe_from_book(self.id, recipe_name)
+        shelf.remove_recipe_from_book(self.id, shelf.master_list.find_rec_by_name(recipe_name).id)
 
     def delete_book(self):
         shelf.delete_book(self.id)
 
     def gen_shopping_list(self):
-        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.get_book()))
+        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.id))
 
         #ADD write to text file
         for ingr in shopping_list:

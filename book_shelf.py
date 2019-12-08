@@ -71,10 +71,9 @@ class BookShelf:
     def ran_select_by_criteria(self, number, meal, tags):
         new_recipes = []
         selection = self.master_list.get_by_criteria(meal, tags)
-        for i in range(number):
+        for _ in range(number):
             random.seed()
             new_recipes.append(random.choice(selection))
-            i
         return new_recipes
         
     def add_ran_daily_plans(self, book_id, days):
@@ -84,13 +83,12 @@ class BookShelf:
 
     # def gen_ran_daily_plans(self, days): 
     #     recipes = []
-    #     for i in range(days):
+    #     for _ in range(days):
     #         random.seed()
     #         breakfast_recipe = random.choice(self.master_list.get_by_meal('breakfast'))
     #         lunch_recipe = random.choice(self.master_list.get_by_meal('lunch'))
     #         dinner_recipe = random.choice(self.master_list.get_by_meal('dinner'))
     #         recipes.extend([breakfast_recipe, lunch_recipe, dinner_recipe])
-    #         i
     #     return recipes
 
 # make the 'shelf' where whole db will be stored in local memory for duration of program

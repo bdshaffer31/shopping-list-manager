@@ -84,6 +84,10 @@ class ShelfInterface:
                 servings = input('enter ingrediant servings: ')
                 new_ingr = Ingredient(ingr, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
+            elif found and ingr is not '':
+                print('    ingredient with name \'' + ingr + '\' already exists')
+            else:
+                print('    invalid ingredient name')
 
     def display_recipes(self):
         self.print_recipes(shelf.master_list.recipes)

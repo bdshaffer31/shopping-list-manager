@@ -73,8 +73,12 @@ class RecipeInterface:
                 new_ingr = Ingredient(comp_name, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
                 self.get_rec().ingredients.append(new_ingr.id)
-            else:
+                print('    ' + new_ingr.name + ' added')
+            elif found and comp_name is not '':
                 self.get_rec().ingredients.append(found.id)
+                print('    ' + found.name + ' added')
+            else:
+                print('    \'\' is not valid component name')
 
     def remove_ingredient(self):
         comp_name = input('ingredient to remove: ')

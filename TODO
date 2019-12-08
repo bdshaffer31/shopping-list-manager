@@ -21,7 +21,6 @@
 -shorten shelf and master db
 -make write for humans more robust
 -move create recipe / ingredient up hierarchy
--when select (rec / ingr / book) go striaght to display
 -shoudlnt be able to create books, recipes, ingr with pre-existing name
 -preference for recipes that share ingredients (two meals with bread instead of one with wrap)
 -fix recipes as ingredients in general
@@ -32,11 +31,6 @@
 -option to store links to recipes for detailed instructions
     -or text files for copy paste
 -you should be able to add recipes to books from recipe interface
--store all tags 
-    - tag dict in book shelf
--you should not be able to name things ' '
-    - resolved i think
--recipes as ingredients should be two decimal places
 -refine shopping list
     - display mutliples how?
     - print location names?

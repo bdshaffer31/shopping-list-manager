@@ -12,8 +12,8 @@ class RecipeInterface:
 
     def run(self):
         self.display()
-        commands = { 
-            'display': self.display, 
+        commands = {
+            'display': self.display,
             'edit name': self.edit_name, 
             'edit meal': self.edit_meal, 
             'edit tags': self.edit_tags,
@@ -41,7 +41,7 @@ class RecipeInterface:
     def display(self):
         print(' name: ' + self.get_rec().name)
         print(' meal: ' + self.get_rec().meal)
-        print(' cost per serving: ' + str(round(shelf.master_list.cost_per_serving(self.id),2)))
+        print(' cost per serving: ' + str(shelf.master_list.cost_per_serving(self.id)))
         print(' tags: ', end='')
         print(*self.get_rec().tags, sep=', ')
         print(' ingredients:')
@@ -65,7 +65,7 @@ class RecipeInterface:
         for comp_name in comp_name_list:
             #check if ingredient sharing name exists
             found = shelf.master_list.find_comp_by_name(comp_name)
-            if not found:
+            if not found and comp_name is not '':
                 print('new ingredient ' + comp_name + ' enter additional info')
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
@@ -87,6 +87,10 @@ class RecipeInterface:
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
         shelf.master_list.edit_recipe_attr(self.id, 'tags', tags)
+        for tag in tags:
+            if tag not in shelf.tag_dict.keys():
+                des = input('    ' + tag + ' description: ')
+                shelf.tag_dict.update({tag: des})
 
     def delete_recipe(self):
         shelf.delete_recipe(self.id)

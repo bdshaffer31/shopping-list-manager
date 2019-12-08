@@ -65,10 +65,12 @@ class MasterDB:
         return False #if it hasn't returned either by now
 
     def cost_per_serving(self, rec_id):
-        return sum(ingr.cost_per_serving() for ingr in self.get(self.ingredients, self.get(self.recipes, [rec_id])[0].ingredients))
+        total = sum(ingr.cost_per_serving() for ingr in self.get(self.ingredients, self.get(self.recipes, [rec_id])[0].ingredients))
+        return round(total, 2)
 
     def rec_total_cost(self, rec_id):
-        return sum(float(ingr.cost) for ingr in self.get(self.ingredients, self.get(self.recipes, [rec_id])[0].ingredients))
+        total = sum(float(ingr.cost) for ingr in self.get(self.ingredients, self.get(self.recipes, [rec_id])[0].ingredients))
+        return round(total, 2)
 
     def edit_recipe_attr(self, rec_id, attribute, new_value):
         self.edit_attr(self.recipes, rec_id, attribute, new_value)

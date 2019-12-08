@@ -29,6 +29,14 @@
 -after adding new rec to book have option to add ingrs
 -prevent looping of recipes (recipe cannot ever be within itself)dangerous as is
 -shared functions between interfaces should be handled better
+-option to store links to recipes for detailed instructions
+    -or text files for copy paste
+-you should be able to add recipes to books from recipe interface
+-store all tags 
+    - tag dict in book shelf
+-you should not be able to name things ' '
+    - resolved i think
+-recipes as ingredients should be two decimal places
 -refine shopping list
     - display mutliples how?
     - print location names?

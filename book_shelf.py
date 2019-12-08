@@ -9,6 +9,7 @@ class BookShelf:
     def __init__(self):
         self.master_list = MasterDB([], [])
         self.books = []
+        self.tag_dict = {}
 
     def populate_bookshelf(self):
         seeder = Seeder()

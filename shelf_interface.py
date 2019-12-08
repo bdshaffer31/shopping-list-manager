@@ -24,6 +24,7 @@ class ShelfInterface:
             'create ingr': self.create_ingredients,
             'create book': self.create_book,
             'select book': self.input_select_book,
+            'tag dict': self.display_tags,
             'exit': shelf.update_db
             }
         while(True):
@@ -49,14 +50,25 @@ class ShelfInterface:
             for rec in shelf.get_book(book.id).recipes:
                 print('    - ' + shelf.master_list.get(shelf.master_list.recipes, [rec])[0].name)
 
+    def display_tags(self):
+        for key, value in shelf.tag_dict.items():
+            print('    ' + key + ' - ' + value)
+
     def create_recipe(self): 
 
-        name = input('enter recipe name: ')
-        meal = input('enter recipe meal: ').lower()
-        tags = input('enter recipe tags: ').split(', ')
+        name = input('enter recipe name: ').strip()
+        found = shelf.master_list.find_rec_by_name(name)
+        if not found and name is not '':
+            meal = input('enter recipe meal: ').lower().strip()
+            tags = input('enter recipe tags: ').split(', ')
+            shelf.master_list.add_recipe(name, meal, [], tags)
+            self.select_recipe(name)
+        elif found:
+            print('    recipe with name \'' + name + '\' already exists')
+            return
+        else:
+            print('    invalid recipe name')
 
-        shelf.master_list.add_recipe(name, meal, [], tags)
-        self.select_recipe(name)
 
     def create_ingredients(self):
         ingredients = input('enter recipe ingrediants: ')
@@ -65,8 +77,8 @@ class ShelfInterface:
         for ingr in ingr_name_list:
             #check if ingredient sharing name exists
             found = shelf.master_list.find_ing_by_name(ingr)
-            if not found:
-                print('new ingredient ' + ingr + ' enter additional info')
+            if not found and ingr is not '':
+                print('new ingredient \'' + ingr + '\' enter additional info')
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
                 servings = input('enter ingrediant servings: ')

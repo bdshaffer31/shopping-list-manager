@@ -11,8 +11,8 @@ class IngredientInterface:
 
     def run(self):
         self.display()
-        commands = { 
-            'display': self.display, 
+        commands = {
+            'display': self.display,
             'edit name': self.edit_name,
             'edit cost': self.edit_cost,
             'edit location': self.edit_location,

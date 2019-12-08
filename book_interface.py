@@ -13,8 +13,8 @@ class BookInterface:
 
     def run(self):
         self.display()
-        commands = { 
-            'display': self.display, 
+        commands = {
+            'display': self.display,
             'edit name': self.edit_name,
             'add recipes': self.add_recipes,
             'remove recipe': self.remove_recipe,
@@ -24,34 +24,34 @@ class BookInterface:
             'delete book': self.delete_book,
             'exit': shelf.update_db
             }
-        while(True):
+        while True:
             action = input('input action for ' + self.get_book().name + ': ')
             if action in commands:
                 commands[action]()
                 if action in ['delete book', 'exit']:
                     break
             elif action == 'help':
-                print(' -', end ='')
-                print(*commands.keys(), sep = '\n -')
+                print(' -', end='')
+                print(*commands.keys(), sep='\n -')
             else:
                 print('input not recognized, type \'help\' for a list')
 
     def get_book(self):
         return shelf.get_book(self.id)
-    
+
     def display(self):
         print(' name: ' + self.get_book().name)
         print(' recipes:')
         for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
             print('    ' + rec.name)
-            
+
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
         daily_menu = shelf.create_ran_daily_rb()
         for recipe_name in daily_menu.recipes:
             print(' - ' + recipe_name)
         shelf.books.append(daily_menu)
 
-    def edit_name(self): 
+    def edit_name(self):
         new_name = input('change name to: ')
         shelf.edit_book_attr(self.id, 'name', new_name)
 
@@ -63,15 +63,18 @@ class BookInterface:
         #check if ingredient sharing name exists
         for rec in rec_name_list:
             found = shelf.master_list.find_rec_by_name(rec)
-            if not found:
-                meal = input('enter recipe meal: ').lower()
+            if not found and rec is not '':
+                meal = input('enter recipe meal: ').lower().strip()
                 tags = input('enter recipe tags: ').split(', ')
 
                 new_rec = Recipe(rec, meal, [], tags)
                 shelf.master_list.recipes.append(new_rec)
                 self.get_book().recipes.append(new_rec.id)
-            else:
+            elif found and rec is not '':
                 self.get_book().recipes.append(found.id)
+                print('    ' + found.name + ' added')
+            else:
+                print('    invalid recipe name')
 
 
     def remove_recipe(self):
@@ -98,7 +101,7 @@ class BookInterface:
         tags = list(filter(None, tags.split('/')))
         number = int(input('how many recipes to add: '))
         shelf.add_by_criteria(self.id, number, meal, tags)
-        
+
     def add_days(self):
         days = int(input('how many random days to add: '))
         shelf.add_ran_daily_plans(self.id, days)

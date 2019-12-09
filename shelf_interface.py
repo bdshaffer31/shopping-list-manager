@@ -28,7 +28,7 @@ class ShelfInterface:
             'exit': shelf.update_db
             }
         while True:
-            action = input('input action: ')
+            action = input('input action: ').strip()
             if action in commands:
                 commands[action]()
                 if action in ['exit']:

@@ -22,7 +22,7 @@ class IngredientInterface:
             'exit': shelf.update_db
             }
         while True:
-            action = input('input action for ' + self.get_ingr().name + ': ')
+            action = input('input action for ' + self.get_ingr().name + ': ').strip()
             if action in commands:
                 commands[action]()
                 if action in ['delete ingr', 'exit']:

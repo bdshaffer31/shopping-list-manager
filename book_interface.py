@@ -18,6 +18,7 @@ class BookInterface:
             'display': self.display,
             'edit name': self.edit_name,
             'add recipes': self.add_recipes,
+            'add recipe': self.add_recipe,
             'remove recipe': self.remove_recipe,
             'shopping list': self.gen_shopping_list,
             'add days': self.add_days,
@@ -27,7 +28,7 @@ class BookInterface:
             'exit': shelf.update_db
             }
         while True:
-            action = input('input action for ' + self.get_book().name + ': ')
+            action = input('input action for ' + self.get_book().name + ': ').strip()
             if action in commands:
                 commands[action]()
                 if action in ['delete book', 'exit']:
@@ -57,7 +58,7 @@ class BookInterface:
         new_name = input('change name to: ')
         shelf.edit_book_attr(self.id, 'name', new_name)
 
-    def add_recipes(self): #needs to be moved up?
+    def add_recipes(self):
         recipes = input('enter recipes to add: ')
 
         rec_name_list = recipes.split(', ')
@@ -80,6 +81,23 @@ class BookInterface:
             else:
                 print('    invalid recipe name')
 
+    def add_recipe(self): 
+        name = input('enter recipe name: ').strip()
+        found = shelf.master_list.find_rec_by_name(name)
+        if not found and name is not '':
+            meal = input('enter recipe meal: ').lower().strip()
+            tags = input('enter recipe tags: ').split(', ')
+
+            new_rec = Recipe(name, meal, [], tags)
+            shelf.master_list.recipes.append(new_rec)
+            self.get_book().recipes.append(new_rec.id)
+            self.select_recipe(name)
+        elif found:
+            self.get_book().recipes.append(found.id)
+            print('    ' + found.name + ' added')
+            return
+        else:
+            print('    invalid recipe name')
 
     def remove_recipe(self):
         recipe_name = input('ingredient to remove: ')

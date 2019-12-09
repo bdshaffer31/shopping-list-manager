@@ -23,7 +23,7 @@ class RecipeInterface:
             'delete recipe': self.delete_recipe,
             'exit': shelf.update_db
             }
-        while(True):
+        while True:
             action = input('input action for ' + self.get_rec().name + ': ')
             if action in commands:
                 commands[action]()
@@ -59,7 +59,7 @@ class RecipeInterface:
         shelf.master_list.edit_recipe_attr(self.get_rec().id, 'meal', new_meal)
 
     def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
-        ingredients = input('enter recipe ingrediants: ')
+        ingredients = input('enter recipe ingredients: ')
         comp_name_list = ingredients.split(', ')
         
         for comp_name in comp_name_list:
@@ -68,8 +68,8 @@ class RecipeInterface:
             if not found and comp_name is not '':
                 print('new ingredient ' + comp_name + ' enter additional info')
                 cost = input('enter ingrediant cost: ')
-                location = input('enter ingrediant location: ')
-                servings = input('enter ingrediant servings: ')
+                location = input('enter ingredient location: ')
+                servings = input('enter ingredient servings: ')
                 new_ingr = Ingredient(comp_name, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
                 self.get_rec().ingredients.append(new_ingr.id)

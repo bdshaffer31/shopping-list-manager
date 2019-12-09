@@ -5,6 +5,7 @@ from ingredient import Ingredient
 from recipe import Recipe
 from confirm import confirm
 from ingredient_interface import IngredientInterface
+from recipe_interface import RecipeInterface
 
 class BookInterface:
 
@@ -22,6 +23,7 @@ class BookInterface:
             'add days': self.add_days,
             'add by criteria': self.add_by_criteria,
             'delete book': self.delete_book,
+            'select recipe': self.input_select_recipe,
             'exit': shelf.update_db
             }
         while True:
@@ -64,12 +66,14 @@ class BookInterface:
         for rec in rec_name_list:
             found = shelf.master_list.find_rec_by_name(rec)
             if not found and rec is not '':
-                meal = input('enter recipe meal: ').lower().strip()
-                tags = input('enter recipe tags: ').split(', ')
+                print('    new recipe, input details')
+                meal = input('    enter recipe meal: ').lower().strip()
+                tags = input('    enter recipe tags: ').split(', ')
 
                 new_rec = Recipe(rec, meal, [], tags)
                 shelf.master_list.recipes.append(new_rec)
                 self.get_book().recipes.append(new_rec.id)
+                print('    ' + rec + ' added')
             elif found and rec is not '':
                 self.get_book().recipes.append(found.id)
                 print('    ' + found.name + ' added')
@@ -105,3 +109,17 @@ class BookInterface:
     def add_days(self):
         days = int(input('how many random days to add: '))
         shelf.add_ran_daily_plans(self.id, days)
+
+    def input_select_recipe(self):
+        recipe_name = input('select which recipe: ')
+        self.select_recipe(recipe_name)
+
+    def select_recipe(self, name):
+        try:
+            recipe = [rec for rec in shelf.master_list.recipes if rec.name == name][0]
+        except IndexError:
+            print('recipe with name \'' + name + '\' not found')
+            return
+
+        rec_interface = RecipeInterface(recipe.id)
+        rec_interface.run()

@@ -27,7 +27,7 @@ class ShelfInterface:
             'tag dict': self.display_tags,
             'exit': shelf.update_db
             }
-        while(True):
+        while True:
             action = input('input action: ')
             if action in commands:
                 commands[action]()

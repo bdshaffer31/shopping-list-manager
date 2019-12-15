@@ -45,7 +45,19 @@ class BookShelf:
     def sorted_shopping_list(self, ingr_list):
         ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )
         return ingr_list
-                
+
+    def shopping_dict(self, ingr_list):
+        ingr_dict = {}
+        loc_list = [ingr.location for ingr in ingr_list]
+        # remove duplicates
+        loc_list = list(dict.fromkeys(loc_list))
+        
+        for location in loc_list:
+            ingrs_in = [ingr for ingr in ingr_list if ingr.location == location]
+            ingr_dict.update({location: ingrs_in})
+
+        return ingr_dict
+
     def remove_recipe_from_book(self, book_id, rec_id):
         recs = [rec for rec in self.get_book(book_id).recipes if rec != rec_id]
         self.edit_book_attr(book_id, 'recipes', recs)

@@ -6,6 +6,7 @@ from recipe import Recipe
 from confirm import confirm
 from ingredient_interface import IngredientInterface
 from recipe_interface import RecipeInterface
+import mailer
 
 class BookInterface:
 
@@ -111,11 +112,23 @@ class BookInterface:
         shelf.delete_book(self.id)
 
     def gen_shopping_list(self):
+        # this is wasteful, looping unneccesary times to sort
         shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.id))
-
+        shopping_dict = shelf.shopping_dict(shopping_list)
         #ADD write to text file
-        for ingr in shopping_list:
-            print(' - ' + ingr.name)
+        for key, value in shopping_dict.items():
+            print('    ' + key + ':')
+            for ingr in value:
+                print('        -' + ingr.name)
+        
+        self.mail_shop_dict(shopping_dict)
+
+    def mail_shop_dict(self, shopping_dict):
+        email_text = mailer.shop_dict_to_string(shopping_dict)
+        print(email_text)
+        reciever_email = input('send shopping list to: ')
+        mailer.send_email(email_text, reciever_email)
+        
 
     def add_by_criteria(self):
         meal = input('get recipes for which meal (any if blank): ')

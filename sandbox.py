@@ -6,12 +6,9 @@ from confirm import confirm
 from recipe import Recipe
 import random
 import datetime
+import mailer
 
-shelf = BookShelf()
-shelf = shelf.populate_bookshelf()
 
-rec = shelf.master_list.find_rec_by_name('test rec')
-ingr_ids = shelf.master_list.rec_ingrs(rec.id)
-ingrs = shelf.master_list.get(shelf.master_list.ingredients, ingr_ids)
-for ingr in ingrs:
-    print(ingr.name)
+message = 'hello ben'
+rec = input('send list to what email? ')
+mailer.send_email(message, rec)

@@ -1,6 +1,6 @@
 from book import Book
 from master_db import MasterDB
-from seeder import Seeder
+import seeder
 import random
 import datetime
 
@@ -12,16 +12,13 @@ class BookShelf:
         self.tag_dict = {}
 
     def populate_bookshelf(self):
-        seeder = Seeder()
         book_shelf = seeder.read_with_pickle()
         return book_shelf
 
     def update_db(self):
-        seeder = Seeder()
         seeder.write_with_pickle(self)  
 
     def write_for_humans(self): #defunct
-        seeder = Seeder()
         seeder.write_for_humans(self)
 
     def get_book(self, book_id):

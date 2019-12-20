@@ -121,7 +121,9 @@ class BookInterface:
             for ingr in value:
                 print('        -' + ingr.name)
         
-        self.mail_shop_dict(shopping_dict)
+        send_mail_bool = input('send email (y/n): ')
+        if send_mail_bool == 'y':
+            self.mail_shop_dict(shopping_dict)
 
     def mail_shop_dict(self, shopping_dict):
         email_text = mailer.shop_dict_to_string(shopping_dict)

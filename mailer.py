@@ -10,7 +10,7 @@ def send_email(message, receiver_email):
 
     msg = EmailMessage()
     msg.set_content(message)
-    msg['Subject'] = 'Subject'
+    msg['Subject'] = 'Shopping List'
     msg['From'] = sender_email
     msg['To'] = receiver_email
 
@@ -25,10 +25,10 @@ def send_email(message, receiver_email):
     print(' -sent- ')
 
 def shop_dict_to_string(shopping_dict):
-    email_text = 'Subject: shopping list \n \n'
+    email_text = ''
     for key, value in shopping_dict.items():
-            email_text = email_text + '    ' + key + ': \n'
+            email_text = email_text + key + ': \n'
             for ingr in value:
-                email_text = email_text + '        -' + ingr.name + '\n'
+                email_text = email_text + '    -' + ingr.name + '\n'
 
     return email_text

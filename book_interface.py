@@ -17,6 +17,7 @@ class BookInterface:
         self.display()
         commands = {
             'display': self.display,
+            'detailed display': self.detailed_display,
             'edit name': self.edit_name,
             'add recipes': self.add_recipes,
             'add recipe': self.add_recipe,
@@ -48,6 +49,14 @@ class BookInterface:
         print(' recipes:')
         for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
             print('    ' + rec.name)
+
+    def detailed_display(self):
+        print(' name: ' + self.get_book().name)
+        print(' recipes:')
+        for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
+            print('    ' + rec.name)
+            for ing in shelf.master_list.get(shelf.master_list.ingredients, rec.ingredients):
+                print('       - '   + ing.name)
 
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
         daily_menu = shelf.create_ran_daily_rb()
@@ -112,9 +121,7 @@ class BookInterface:
         shelf.delete_book(self.id)
 
     def gen_shopping_list(self):
-        # this is wasteful, looping unneccesary times to sort
-        shopping_list = shelf.sorted_shopping_list(shelf.book_ingr_list(self.id))
-        shopping_dict = shelf.shopping_dict(shopping_list)
+        shopping_dict = shelf.shopping_dict(shelf.book_ingr_list(self.id))
         #ADD write to text file
         for key, value in shopping_dict.items():
             print('    ' + key + ':')
@@ -127,7 +134,9 @@ class BookInterface:
 
     def mail_shop_dict(self, shopping_dict):
         email_text = mailer.shop_dict_to_string(shopping_dict)
-        print(email_text)
+        detailed_send = input('send email (y/n): ')
+        if detailed_send == 'y':
+            email_text = email_text + mailer.book_content_to_string(self.get_book())
         reciever_email = input('send shopping list to: ')
         mailer.send_email(email_text, reciever_email)
         

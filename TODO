@@ -13,10 +13,8 @@
 -should shopping list be its own class?
 -make it more clear where you are in hierarchy in inputs
     -partially accomplished?
--move create ingredient to shelf
 -version control (add field to shelf with version number)
 -shopping list makes a text file for printing
--shopping list removes redundant ingredients and displays location names
 -switch to using with: as: for opening files properly
 -shorten shelf and master db
 -make write for humans more robust
@@ -31,6 +29,8 @@
 -option to store links to recipes for detailed instructions
     -or text files for copy paste
 -you should be able to add recipes to books from recipe interface
+-count multiples of ingredients
+-shared functions for create ingr etc
 -refine shopping list
     - display mutliples how?
     - print location names?

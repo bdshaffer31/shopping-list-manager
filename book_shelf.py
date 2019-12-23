@@ -18,9 +18,6 @@ class BookShelf:
     def update_db(self):
         seeder.write_with_pickle(self)  
 
-    def write_for_humans(self): #defunct
-        seeder.write_for_humans(self)
-
     def get_book(self, book_id):
         return [x for x in self.books if x.id == book_id][0]
               
@@ -38,10 +35,6 @@ class BookShelf:
             ingr_ids = shelf.master_list.rec_ingrs(rec)
             ingrs.extend(shelf.master_list.get(shelf.master_list.ingredients, ingr_ids))
         return ingrs
-
-    def sorted_shopping_list(self, ingr_list):
-        ingr_list = sorted(ingr_list, key=lambda ingr: ingr.location )
-        return ingr_list
 
     def shopping_dict(self, ingr_list):
         ingr_dict = {}

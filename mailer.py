@@ -1,5 +1,6 @@
 import smtplib, ssl
 from email.message import EmailMessage
+from book_shelf import shelf
 
 
 
@@ -30,5 +31,12 @@ def shop_dict_to_string(shopping_dict):
             email_text = email_text + key + ': \n'
             for ingr in value:
                 email_text = email_text + '    -' + ingr.name + '\n'
+    return email_text
 
+def book_content_to_string(book):
+    email_text = book.name + ': \n'
+    for rec in shelf.master_list.get(shelf.master_list.recipes, book.recipes):
+        email_text = email_text + '    ' + rec.name + '\n'
+        for ing in shelf.master_list.get(shelf.master_list.ingredients, rec.ingredients):
+            email_text = email_text + '       - '   + ing.name + '\n'
     return email_text

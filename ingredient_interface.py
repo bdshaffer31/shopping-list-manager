@@ -31,7 +31,7 @@ class IngredientInterface:
                 print(' -', end ='')
                 print(*commands.keys(), sep = '\n -')
             else:
-                print('input not recognized, type \'help\' for a list')
+                print(' -- input not recognized, type \'help\' for a list')
                 
     def get_ingr(self):
         return shelf.master_list.get(shelf.master_list.ingredients, [self.id])[0]
@@ -65,3 +65,4 @@ class IngredientInterface:
         recs = shelf.master_list.recipes_containing(shelf.master_list.recipes, self.id)
         for rec in recs:
             print(' - ' + rec.name)
+

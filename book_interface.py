@@ -30,7 +30,7 @@ class BookInterface:
             'exit': shelf.update_db
             }
         while True:
-            action = input('input action for ' + self.get_book().name + ': ').strip()
+            action = input(f'input action for {self.get_book().name}: ').strip()
             if action in commands:
                 commands[action]()
                 if action in ['delete book', 'exit']:
@@ -39,24 +39,24 @@ class BookInterface:
                 print(' -', end='')
                 print(*commands.keys(), sep='\n -')
             else:
-                print('input not recognized, type \'help\' for a list')
+                print(' -- input not recognized, type \'help\' for a list')
 
     def get_book(self):
         return shelf.get_book(self.id)
 
     def display(self):
-        print(' name: ' + self.get_book().name)
+        print(f' name: {self.get_book().name}')
         print(' recipes:')
         for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
             print('    ' + rec.name)
 
     def detailed_display(self):
-        print(' name: ' + self.get_book().name)
+        print(f' name: {self.get_book().name}')
         print(' recipes:')
         for rec in shelf.master_list.get(shelf.master_list.recipes, self.get_book().recipes):
-            print('    ' + rec.name)
+            print(f'    {rec.name}')
             for ing in shelf.master_list.get(shelf.master_list.ingredients, rec.ingredients):
-                print('       - '   + ing.name)
+                print(f'       - {ing.name}')
 
     def add_random_daily_menu(self): # going to add entirely new menu (needs fixed)
         daily_menu = shelf.create_ran_daily_rb()
@@ -79,15 +79,15 @@ class BookInterface:
             if not found and rec is not '':
                 print('    new recipe, input details')
                 meal = input('    enter recipe meal: ').lower().strip()
-                tags = input('    enter recipe tags: ').split(', ')
+                tags = input('    enter recipe tags: ').lower().split(', ')
 
                 new_rec = Recipe(rec, meal, [], tags)
                 shelf.master_list.recipes.append(new_rec)
                 self.get_book().recipes.append(new_rec.id)
-                print('    ' + rec + ' added')
+                print(f'    {rec} added')
             elif found and rec is not '':
                 self.get_book().recipes.append(found.id)
-                print('    ' + found.name + ' added')
+                print(f'    {found.name} added')
             else:
                 print('    invalid recipe name')
 
@@ -104,7 +104,7 @@ class BookInterface:
             self.select_recipe(name)
         elif found:
             self.get_book().recipes.append(found.id)
-            print('    ' + found.name + ' added')
+            print(f'    {found.name} added')
             return
         else:
             print('    invalid recipe name')
@@ -115,7 +115,7 @@ class BookInterface:
         if found:
             shelf.remove_recipe_from_book(self.id, found.id)
         else:
-            print('recipe with name \'' + recipe_name + '\' not found')
+            print(f'recipe with name \'{recipe_name}\' not found')
 
     def delete_book(self):
         shelf.delete_book(self.id)
@@ -124,7 +124,7 @@ class BookInterface:
         shopping_dict = shelf.shopping_dict(shelf.book_ingr_list(self.id))
         #ADD write to text file
         for key, value in shopping_dict.items():
-            print('    ' + key + ':')
+            print(f'    {key}:')
             for ingr in value:
                 print('        -' + ingr.name)
         
@@ -140,7 +140,6 @@ class BookInterface:
         reciever_email = input('send shopping list to: ')
         mailer.send_email(email_text, reciever_email)
         
-
     def add_by_criteria(self):
         meal = input('get recipes for which meal (any if blank): ')
         tags = input('get recipes for which tags (any if blank): ')
@@ -160,7 +159,7 @@ class BookInterface:
         try:
             recipe = [rec for rec in shelf.master_list.recipes if rec.name == name][0]
         except IndexError:
-            print('recipe with name \'' + name + '\' not found')
+            print(f'recipe with name \'{name}\' not found')
             return
 
         rec_interface = RecipeInterface(recipe.id)

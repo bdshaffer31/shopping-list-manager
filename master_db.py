@@ -91,7 +91,6 @@ class MasterDB:
         ingrs = [ingr for ingr in self.get(self.recipes, [rec_id])[0].ingredients if ingr != ingr_id]
         self.edit_attr(self.recipes, rec_id, 'ingredients', ingrs)
             
-
     def delete_ingredient(self, ingr_id):
         for ingr in self.ingredients:
             if ingr.id == ingr_id:

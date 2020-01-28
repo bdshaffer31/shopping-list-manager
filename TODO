@@ -34,6 +34,12 @@
 -refine shopping list
     - display mutliples how?
     - print location names?
+-condense functions (redundant)
+-reduce foo.bar.list.items etc
+-paginate large prints
+-auto complete
+-names lower and costs 
+-switch to f strings
 -unit tests!!
 
 v 2.0

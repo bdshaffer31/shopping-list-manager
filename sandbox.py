@@ -1,4 +1,3 @@
-from seeder import Seeder
 from book_shelf import BookShelf
 from book import Book
 from ingredient import Ingredient

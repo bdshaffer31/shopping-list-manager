@@ -38,33 +38,33 @@ class ShelfInterface:
                 print(' -', end ='')
                 print(*commands.keys(), sep = '\n -')
             else:
-                print('input not recognized, type \'help\' for a list')
+                print(' -- input not recognized, type \'help\' for a list')
 
     def display(self):
         for book in shelf.books:
-            print(' - ' + book.name)
+            print(f' - {book.name}')
 
     def detailed_display(self):
         for book in shelf.books:
-            print(' - ' + book.name)
+            print(' - {book.name}')
             for rec in shelf.get_book(book.id).recipes:
-                print('    - ' + shelf.master_list.get(shelf.master_list.recipes, [rec])[0].name)
+                print(f'    - {shelf.master_list.get(shelf.master_list.recipes, [rec])[0].name}')
 
     def display_tags(self):
         for key, value in shelf.tag_dict.items():
-            print('    ' + key + ' - ' + value)
+            print(f'    {key} - {value}')
 
     def create_recipe(self): 
 
-        name = input('enter recipe name: ').strip()
+        name = input('enter recipe name: ').lower().strip()
         found = shelf.master_list.find_rec_by_name(name)
         if not found and name is not '':
             meal = input('enter recipe meal: ').lower().strip()
-            tags = input('enter recipe tags: ').split(', ')
+            tags = input('enter recipe tags: ').lower().split(', ')
             shelf.master_list.add_recipe(name, meal, [], tags)
             self.select_recipe(name)
         elif found:
-            print('    recipe with name \'' + name + '\' already exists')
+            print(f'    recipe with name \'{name}\' already exists')
             return
         else:
             print('    invalid recipe name')
@@ -78,14 +78,14 @@ class ShelfInterface:
             #check if ingredient sharing name exists
             found = shelf.master_list.find_ing_by_name(ingr)
             if not found and ingr is not '':
-                print('new ingredient \'' + ingr + '\' enter additional info')
+                print(f'new ingredient \'{ingr}\' enter additional info')
                 cost = input('enter ingrediant cost: ')
                 location = input('enter ingrediant location: ')
                 servings = input('enter ingrediant servings: ')
                 new_ingr = Ingredient(ingr, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
             elif found and ingr is not '':
-                print('    ingredient with name \'' + ingr + '\' already exists')
+                print(f'    ingredient with name \'{ingr}\' already exists')
             else:
                 print('    invalid ingredient name')
 
@@ -109,7 +109,7 @@ class ShelfInterface:
         try:
             book = [book for book in shelf.books if book.name == name][0]
         except IndexError:
-            print('book with name \'' + name + '\' not found')
+            print(f'book with name \'{name}\' not found')
             return
         
         recb_interface = BookInterface(book.id)
@@ -123,7 +123,7 @@ class ShelfInterface:
         try:
             recipe = [rec for rec in shelf.master_list.recipes if rec.name == name][0]
         except IndexError:
-            print('recipe with name \'' + name + '\' not found')
+            print(f'recipe with name \'{name}\' not found')
             return
 
         rec_interface = RecipeInterface(recipe.id)
@@ -137,7 +137,7 @@ class ShelfInterface:
         try:
             ingr = [ingr for ingr in shelf.master_list.ingredients if ingr.name == name][0]
         except IndexError:
-            print('ingredient with name \'' + name + '\' not found')
+            print(f'ingredient with name \'{name}\' not found')
             return
         
         ingr_interface = IngredientInterface(ingr.id)

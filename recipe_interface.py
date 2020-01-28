@@ -33,7 +33,7 @@ class RecipeInterface:
                 print(' -', end ='')
                 print(*commands.keys(), sep = '\n -')
             else:
-                print('input not recognized, type \'help\' for a list')
+                print(' -- input not recognized, type \'help\' for a list')
     
     def get_rec(self):
         return shelf.master_list.get(shelf.master_list.recipes, [self.id])[0]
@@ -59,24 +59,25 @@ class RecipeInterface:
         shelf.master_list.edit_recipe_attr(self.get_rec().id, 'meal', new_meal)
 
     def add_ingredient(self): #TODO broken! needs to add ingredient to shelf and add id to recipe
+        # dont think this is broken any more...
         ingredients = input('enter recipe ingredients: ')
-        comp_name_list = ingredients.split(', ')
+        comp_name_list = ingredients.split(', ').lower()
         
         for comp_name in comp_name_list:
             #check if ingredient sharing name exists
             found = shelf.master_list.find_comp_by_name(comp_name)
             if not found and comp_name is not '':
-                print('new ingredient ' + comp_name + ' enter additional info')
-                cost = input('enter ingrediant cost: ')
-                location = input('enter ingredient location: ')
+                print(f'new ingredient {comp_name} enter additional info')
+                cost = input('enter ingredient cost: ')
+                location = input('enter ingredient location: ').lower()
                 servings = input('enter ingredient servings: ')
                 new_ingr = Ingredient(comp_name, cost, location, servings)
                 shelf.master_list.ingredients.append(new_ingr)
                 self.get_rec().ingredients.append(new_ingr.id)
-                print('    ' + new_ingr.name + ' added')
+                print(f'    {new_ingr.name} added')
             elif found and comp_name is not '':
                 self.get_rec().ingredients.append(found.id)
-                print('    ' + found.name + ' added')
+                print(f'    {found.name} added')
             else:
                 print('    \'\' is not valid component name')
 
@@ -86,14 +87,14 @@ class RecipeInterface:
         if found:
             shelf.master_list.remove_ingr_from_recipe(self.id, found.id)
         else:
-            print('ingredient with name \'' + comp_name + '\' not found')
+            print(f'ingredient with name \'{comp_name }\' not found')
 
     def edit_tags(self):
         tags = input('add tags: ').split(', ') #TODO add default value option
         shelf.master_list.edit_recipe_attr(self.id, 'tags', tags)
         for tag in tags:
             if tag not in shelf.tag_dict.keys():
-                des = input('    ' + tag + ' description: ')
+                des = input(f'    {tag} description: ')
                 shelf.tag_dict.update({tag: des})
 
     def delete_recipe(self):
@@ -105,3 +106,4 @@ class RecipeInterface:
         print('-' + ingredient.name)
         ing_interface = IngredientInterface(ingredient.id)
         ing_interface.run()
+

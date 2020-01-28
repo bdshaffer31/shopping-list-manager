@@ -1,4 +1,5 @@
 from shelf_interface import ShelfInterface
 
-interface = ShelfInterface()
-interface.run()
+INTERFACE = ShelfInterface()
+INTERFACE.run()
+
